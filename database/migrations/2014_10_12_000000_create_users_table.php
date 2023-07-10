@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->enum('role', ['admin', 'superadmin'])->default('admin');
             $table->boolean('is_password_changed')->default(false);
+            $table->boolean('is_active')->default(true);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

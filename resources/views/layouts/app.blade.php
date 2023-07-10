@@ -56,7 +56,7 @@
                 </x-slot>
             </x-li-nav-item>
 
-            <x-li-nav-item label="Tables" href="../template/build/pages/tables.html" >
+            <x-li-nav-item label="Product" href="../template/build/pages/tables.html" >
                 <x-slot name="icon">
                     <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <title>office</title>
@@ -74,7 +74,7 @@
                 </x-slot>
             </x-li-nav-item>
 
-            <x-li-nav-item label="Billing" href="../template/build/pages/billing.html" >
+            <x-li-nav-item label="Stock Flow" href="../template/build/pages/billing.html" >
                 <x-slot name="icon">
                     <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <title>credit-card</title>
