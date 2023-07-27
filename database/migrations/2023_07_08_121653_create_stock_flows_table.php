@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\StockFlow;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +14,11 @@ return new class extends Migration
     {
         Schema::create('stock_flows', function (Blueprint $table) {
             $table->id();
+            $table->string('product_id');
+            $table->enum('type', StockFlow::TYPE_FLOW);
+            $table->timestamp('date');
+            $table->bigInteger('qty');
+            $table->integer('procurement_id');
             $table->timestamps();
         });
     }

@@ -1,8 +1,10 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 return new class extends Migration
 {
@@ -13,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_barang')->default('IA' . strtoupper(Str::random(5)));
             $table->string('name');
-            $table->enum('unit', ['pcs', 'box']);
-            $table->string('category');
+            $table->enum('unit', Product::UNIT);
             $table->text('description');
-            $table->timestamp('deleted_at');
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

@@ -5,17 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
     private function saveProduct($productToSave, $request)
     {
-        $productToSave->name = $request->name;
-        $productToSave->unit = $request->unit;
-        $productToSave->category = $request->category;
-        $productToSave->description = $request->description;
+        if ($request->has('is_change_other_product')) {
+            Product::where('name', $productToSave->name)->update([
+                'kode_barang' => 'IA' . Str::random(5),
+                'name' => $request->name,
+                'unit' => $request->unit,
+                'description' => $request->description,
+            ]);
+        } else {
+            $productToSave->kode_barang = 'IA' . Str::random(5);
+            $productToSave->name = $request->name;
+            $productToSave->unit = $request->unit;
+            $productToSave->description = $request->description;
 
-        $productToSave->save();
+            $productToSave->save();
+        }
     }
 
     public function stockFlow()
@@ -32,7 +42,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('pages.product.index');
+        $ths = ['Kode barang', 'Nama barang', 'Unit', 'Peramalan Selanjutnya'];
+        $products = Product::whereNull('deleted_at')->get();
+        $units = Product::UNIT;
+
+        return view('pages.product.index', ['ths' => $ths, 'products' => $products, 'units' => $units]);
     }
 
     /**
@@ -40,8 +54,10 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $product = new Product;
-        $this->saveProduct($product, $request);
+        for ($i = 0; $i < (int)$request->qty; $i++) {
+            $product = new Product;
+            $this->saveProduct($product, $request);
+        }
 
         return redirect()->back()->with(
             'success',
@@ -77,5 +93,7 @@ class ProductController extends Controller
     {
         $product->deleted_at = Carbon::now();
         $product->save();
+
+        return redirect()->back()->with('success', "Berhasil menghapus produk $product->name");
     }
 }

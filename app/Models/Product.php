@@ -10,9 +10,11 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
+        'kode_barang',
         'name',
         'unit',
-        'category',
         'description'
     ];
+
+    public const UNIT = ['pcs', 'box'];
 }

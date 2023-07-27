@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class StockFlow extends Model
 {
     use HasFactory;
+
+    public const TYPE_FLOW = ['masuk', 'keluar'];
 }

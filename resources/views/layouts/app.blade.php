@@ -8,269 +8,134 @@
     <link href="{{ asset('img/favicon.png') }} " rel="icon" type="image/png" />
     <title>{{ $titleApp }}</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-
-    <link href="{{ asset('template/build/assets/css/nucleo-icons.css') }}" rel="stylesheet" />
-    <link href="{{ asset('template/build/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
-
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
-
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 </head>
 
-<body class="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-50 text-slate-500">
-    <!-- sidenav  -->
-    <aside
-        class="max-w-62.5 ease-nav-brand z-990 fixed inset-y-0 my-4 ml-4 block w-full -translate-x-full flex-wrap items-center justify-between overflow-y-auto rounded-2xl border-0 bg-white p-0 antialiased shadow-none transition-transform duration-200 xl:left-0 xl:translate-x-0 xl:bg-transparent">
-        <div class="h-19.5">
-            <i class="absolute top-0 right-0 hidden p-4 opacity-50 cursor-pointer fas fa-times text-slate-400 xl:hidden"
-                sidenav-close></i>
-            <a class="block px-8 py-6 m-0 text-sm whitespace-nowrap text-slate-700" href="javascript:;" target="_blank">
-                <img alt="main_logo" class="inline h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8"
-                    src="{{ asset('img/logo-ct.png') }}" />
-                <span class="ml-1 font-semibold transition-all duration-200 ease-nav-brand">{{ env('APP_NAME') }}</span>
+<body>
+
+    <button aria-controls="logo-sidebar"
+        class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" type="button">
+        <span class="sr-only">Open sidebar</span>
+        <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg">
+            <path clip-rule="evenodd"
+                d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+                fill-rule="evenodd"></path>
+        </svg>
+    </button>
+
+    <aside aria-label="Sidebar"
+        class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+        id="logo-sidebar">
+        <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+            <a class="flex items-center pl-2.5 mb-5" href="https://flowbite.com/">
+                <img alt="Flowbite Logo" class="h-6 mr-3 sm:h-7" src="https://flowbite.com/docs/images/logo.svg" />
+                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
             </a>
-        </div>
-
-        <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent" />
-
-        <div class="items-center block w-auto h-screen overflow-auto grow basis-full">
-            <ul class="flex flex-col pl-0 mb-0">
-                <x-li-nav-item :active="true" href="{{ route('products.index') }}" label="Products">
-                    <x-slot name="icon">
-                        <svg height="12px" version="1.1" viewBox="0 0 45 40" width="12px"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                            <title>shop</title>
-                            <g fill-rule="evenodd" fill="none" stroke-width="1" stroke="none">
-                                <g fill-rule="nonzero" fill="#FFFFFF" transform="translate(-1716.000000, -439.000000)">
-                                    <g transform="translate(1716.000000, 291.000000)">
-                                        <g transform="translate(0.000000, 148.000000)">
-                                            <path class="fill-slate-800 opacity-60"
-                                                d="M46.7199583,10.7414583 L40.8449583,0.949791667 C40.4909749,0.360605034 39.8540131,0 39.1666667,0 L7.83333333,0 C7.1459869,0 6.50902508,0.360605034 6.15504167,0.949791667 L0.280041667,10.7414583 C0.0969176761,11.0460037 -1.23209662e-05,11.3946378 -1.23209662e-05,11.75 C-0.00758042603,16.0663731 3.48367543,19.5725301 7.80004167,19.5833333 L7.81570833,19.5833333 C9.75003686,19.5882688 11.6168794,18.8726691 13.0522917,17.5760417 C16.0171492,20.2556967 20.5292675,20.2556967 23.494125,17.5760417 C26.4604562,20.2616016 30.9794188,20.2616016 33.94575,17.5760417 C36.2421905,19.6477597 39.5441143,20.1708521 42.3684437,18.9103691 C45.1927731,17.649886 47.0084685,14.8428276 47.0000295,11.75 C47.0000295,11.3946378 46.9030823,11.0460037 46.7199583,10.7414583 Z">
-                                            </path>
-                                            <path class="fill-slate-800"
-                                                d="M39.198,22.4912623 C37.3776246,22.4928106 35.5817531,22.0149171 33.951625,21.0951667 L33.92225,21.1107282 C31.1430221,22.6838032 27.9255001,22.9318916 24.9844167,21.7998837 C24.4750389,21.605469 23.9777983,21.3722567 23.4960833,21.1018359 L23.4745417,21.1129513 C20.6961809,22.6871153 17.4786145,22.9344611 14.5386667,21.7998837 C14.029926,21.6054643 13.533337,21.3722507 13.0522917,21.1018359 C11.4250962,22.0190609 9.63246555,22.4947009 7.81570833,22.4912623 C7.16510551,22.4842162 6.51607673,22.4173045 5.875,22.2911849 L5.875,44.7220845 C5.875,45.9498589 6.7517757,46.9451667 7.83333333,46.9451667 L19.5833333,46.9451667 L19.5833333,33.6066734 L27.4166667,33.6066734 L27.4166667,46.9451667 L39.1666667,46.9451667 C40.2482243,46.9451667 41.125,45.9498589 41.125,44.7220845 L41.125,22.2822926 C40.4887822,22.4116582 39.8442868,22.4815492 39.198,22.4912623 Z">
-                                            </path>
-                                        </g>
-                                    </g>
-                                </g>
-                            </g>
+            <ul class="space-y-2 font-medium">
+                <li>
+                    <a class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                        href="#">
+                        <svg aria-hidden="true"
+                            class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                            fill="currentColor" viewBox="0 0 22 21" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
+                            <path
+                                d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
                         </svg>
-                    </x-slot>
-                </x-li-nav-item>
-
-                <x-li-nav-item href="{{ route('procurement.index') }}" label="Pengadaan">
-                    <x-slot name="icon">
-                        <svg height="12px" version="1.1" viewBox="0 0 42 42" width="12px"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                            <title>office</title>
-                            <g fill-rule="evenodd" fill="none" stroke-width="1" stroke="none">
-                                <g fill-rule="nonzero" fill="#FFFFFF" transform="translate(-1869.000000, -293.000000)">
-                                    <g transform="translate(1716.000000, 291.000000)">
-                                        <g transform="translate(153.000000, 2.000000)">
-                                            <path class="fill-slate-800 opacity-60"
-                                                d="M12.25,17.5 L8.75,17.5 L8.75,1.75 C8.75,0.78225 9.53225,0 10.5,0 L31.5,0 C32.46775,0 33.25,0.78225 33.25,1.75 L33.25,12.25 L29.75,12.25 L29.75,3.5 L12.25,3.5 L12.25,17.5 Z">
-                                            </path>
-                                            <path class="fill-slate-800"
-                                                d="M40.25,14 L24.5,14 C23.53225,14 22.75,14.78225 22.75,15.75 L22.75,38.5 L19.25,38.5 L19.25,22.75 C19.25,21.78225 18.46775,21 17.5,21 L1.75,21 C0.78225,21 0,21.78225 0,22.75 L0,40.25 C0,41.21775 0.78225,42 1.75,42 L40.25,42 C41.21775,42 42,41.21775 42,40.25 L42,15.75 C42,14.78225 41.21775,14 40.25,14 Z M12.25,36.75 L7,36.75 L7,33.25 L12.25,33.25 L12.25,36.75 Z M12.25,29.75 L7,29.75 L7,26.25 L12.25,26.25 L12.25,29.75 Z M35,36.75 L29.75,36.75 L29.75,33.25 L35,33.25 L35,36.75 Z M35,29.75 L29.75,29.75 L29.75,26.25 L35,26.25 L35,29.75 Z M35,22.75 L29.75,22.75 L29.75,19.25 L35,19.25 L35,22.75 Z">
-                                            </path>
-                                        </g>
-                                    </g>
-                                </g>
-                            </g>
+                        <span class="ml-3">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                        href="#">
+                        <svg aria-hidden="true"
+                            class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                            fill="currentColor" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z" />
                         </svg>
-                    </x-slot>
-                </x-li-nav-item>
-
-                <x-li-nav-item href="{{ route('products.stock-flow') }}" label="Stock Flow">
-                    <x-slot name="icon">
-                        <svg height="12px" version="1.1" viewBox="0 0 43 36" width="12px"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                            <title>credit-card</title>
-                            <g fill-rule="evenodd" fill="none" stroke-width="1" stroke="none">
-                                <g fill-rule="nonzero" fill="#FFFFFF" transform="translate(-2169.000000, -745.000000)">
-                                    <g transform="translate(1716.000000, 291.000000)">
-                                        <g transform="translate(453.000000, 454.000000)">
-                                            <path class="fill-slate-800 opacity-60"
-                                                d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z">
-                                            </path>
-                                            <path class="fill-slate-800"
-                                                d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z">
-                                            </path>
-                                        </g>
-                                    </g>
-                                </g>
-                            </g>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Kanban</span>
+                        <span
+                            class="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                        href="#">
+                        <svg aria-hidden="true"
+                            class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z" />
                         </svg>
-                    </x-slot>
-                </x-li-nav-item>
-
-                <x-li-nav-item href="../template/build/pages/virtual-reality.html" label="Procurement">
-                    <x-slot name="icon">
-                        <svg height="12px" version="1.1" viewBox="0 0 42 42" width="12px"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                            <title>box-3d-50</title>
-                            <g fill-rule="evenodd" fill="none" stroke-width="1" stroke="none">
-                                <g fill-rule="nonzero" fill="#FFFFFF"
-                                    transform="translate(-2319.000000, -291.000000)">
-                                    <g transform="translate(1716.000000, 291.000000)">
-                                        <g transform="translate(603.000000, 0.000000)">
-                                            <path class="fill-slate-800"
-                                                d="M22.7597136,19.3090182 L38.8987031,11.2395234 C39.3926816,10.9925342 39.592906,10.3918611 39.3459167,9.89788265 C39.249157,9.70436312 39.0922432,9.5474453 38.8987261,9.45068056 L20.2741875,0.1378125 L20.2741875,0.1378125 C19.905375,-0.04725 19.469625,-0.04725 19.0995,0.1378125 L3.1011696,8.13815822 C2.60720568,8.38517662 2.40701679,8.98586148 2.6540352,9.4798254 C2.75080129,9.67332903 2.90771305,9.83023153 3.10122239,9.9269862 L21.8652864,19.3090182 C22.1468139,19.4497819 22.4781861,19.4497819 22.7597136,19.3090182 Z">
-                                            </path>
-                                            <path class="fill-slate-800 opacity-60"
-                                                d="M23.625,22.429159 L23.625,39.8805372 C23.625,40.4328219 24.0727153,40.8805372 24.625,40.8805372 C24.7802551,40.8805372 24.9333778,40.8443874 25.0722402,40.7749511 L41.2741875,32.673375 L41.2741875,32.673375 C41.719125,32.4515625 42,31.9974375 42,31.5 L42,14.241659 C42,13.6893742 41.5522847,13.241659 41,13.241659 C40.8447549,13.241659 40.6916418,13.2778041 40.5527864,13.3472318 L24.1777864,21.5347318 C23.8390024,21.7041238 23.625,22.0503869 23.625,22.429159 Z">
-                                            </path>
-                                            <path class="fill-slate-800 opacity-60"
-                                                d="M20.4472136,21.5347318 L1.4472136,12.0347318 C0.953235098,11.7877425 0.352562058,11.9879669 0.105572809,12.4819454 C0.0361450918,12.6208008 6.47121774e-16,12.7739139 0,12.929159 L0,30.1875 L0,30.1875 C0,30.6849375 0.280875,31.1390625 0.7258125,31.3621875 L19.5528096,40.7750766 C20.0467945,41.0220531 20.6474623,40.8218132 20.8944388,40.3278283 C20.963859,40.1889789 21,40.0358742 21,39.8806379 L21,22.429159 C21,22.0503869 20.7859976,21.7041238 20.4472136,21.5347318 Z">
-                                            </path>
-                                        </g>
-                                    </g>
-                                </g>
-                            </g>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Inbox</span>
+                        <span
+                            class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                        href="#">
+                        <svg aria-hidden="true"
+                            class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                            fill="currentColor" viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
                         </svg>
-                    </x-slot>
-                </x-li-nav-item>
-
-                <x-li-nav-item href="{{ route('contract-supplier.index') }}" label="Contract Supplier">
-                    <x-slot name="icon">
-                        <svg height="12px" version="1.1" viewBox="0 0 40 40" width="12px"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                            <title>settings</title>
-                            <g fill-rule="evenodd" fill="none" stroke-width="1" stroke="none">
-                                <g fill-rule="nonzero" fill="#FFFFFF"
-                                    transform="translate(-2020.000000, -442.000000)">
-                                    <g transform="translate(1716.000000, 291.000000)">
-                                        <g transform="translate(304.000000, 151.000000)">
-                                            <polygon class="fill-slate-800 opacity-60"
-                                                points="18.0883333 15.7316667 11.1783333 8.82166667 13.3333333 6.66666667 6.66666667 0 0 6.66666667 6.66666667 13.3333333 8.82166667 11.1783333 15.315 17.6716667">
-                                            </polygon>
-                                            <path class="fill-slate-800 opacity-60"
-                                                d="M31.5666667,23.2333333 C31.0516667,23.2933333 30.53,23.3333333 30,23.3333333 C29.4916667,23.3333333 28.9866667,23.3033333 28.48,23.245 L22.4116667,30.7433333 L29.9416667,38.2733333 C32.2433333,40.575 35.9733333,40.575 38.275,38.2733333 L38.275,38.2733333 C40.5766667,35.9716667 40.5766667,32.2416667 38.275,29.94 L31.5666667,23.2333333 Z">
-                                            </path>
-                                            <path class="fill-slate-800"
-                                                d="M33.785,11.285 L28.715,6.215 L34.0616667,0.868333333 C32.82,0.315 31.4483333,0 30,0 C24.4766667,0 20,4.47666667 20,10 C20,10.99 20.1483333,11.9433333 20.4166667,12.8466667 L2.435,27.3966667 C0.95,28.7083333 0.0633333333,30.595 0.00333333333,32.5733333 C-0.0583333333,34.5533333 0.71,36.4916667 2.11,37.89 C3.47,39.2516667 5.27833333,40 7.20166667,40 C9.26666667,40 11.2366667,39.1133333 12.6033333,37.565 L27.1533333,19.5833333 C28.0566667,19.8516667 29.01,20 30,20 C35.5233333,20 40,15.5233333 40,10 C40,8.55166667 39.685,7.18 39.1316667,5.93666667 L33.785,11.285 Z">
-                                            </path>
-                                        </g>
-                                    </g>
-                                </g>
-                            </g>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Users</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                        href="#">
+                        <svg aria-hidden="true"
+                            class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                            fill="currentColor" viewBox="0 0 18 20" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z" />
                         </svg>
-                    </x-slot>
-                </x-li-nav-item>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Products</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                        href="#">
+                        <svg aria-hidden="true"
+                            class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                            fill="none" viewBox="0 0 18 16" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" />
+                        </svg>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Sign In</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                        href="#">
+                        <svg aria-hidden="true"
+                            class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z" />
+                            <path
+                                d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z" />
+                            <path
+                                d="M8.961 16a.93.93 0 0 0 .189-.019l3.4-.679a.961.961 0 0 0 .49-.263l6.118-6.117a2.884 2.884 0 0 0-4.079-4.078l-6.117 6.117a.96.96 0 0 0-.263.491l-.679 3.4A.961.961 0 0 0 8.961 16Zm7.477-9.8a.958.958 0 0 1 .68-.281.961.961 0 0 1 .682 1.644l-.315.315-1.36-1.36.313-.318Zm-5.911 5.911 4.236-4.236 1.359 1.359-4.236 4.237-1.7.339.341-1.699Z" />
+                        </svg>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Sign Up</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </aside>
 
-    <!-- end sidenav -->
+    <div class="p-4 sm:ml-64">
+        {{ $slot }}
+    </div>
 
-    <main class="ease-soft-in-out xl:ml-68.5 relative h-full max-h-screen rounded-xl transition-all duration-200">
-        <!-- Navbar -->
-        <nav class="relative flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all shadow-none duration-250 ease-soft-in rounded-2xl lg:flex-nowrap lg:justify-start"
-            navbar-main navbar-scroll="true">
-            <div class="flex items-center justify-between w-full px-4 py-1 mx-auto flex-wrap-inherit">
-                <x-breadcrumb />
-
-                <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
-                    <div class="flex items-center md:ml-auto md:pr-4">
-                        <x-search-input />
-                    </div>
-                    <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
-                        <li class="flex items-center">
-                            <a class="block px-0 py-2 font-semibold transition-all ease-nav-brand text-sm text-slate-500"
-                                href="../template/build/pages/sign-in.html">
-                                <i class="fa fa-user sm:mr-1"></i>
-                                <span class="hidden sm:inline">Sign In</span>
-                            </a>
-                        </li>
-                        <li class="flex items-center pl-4 xl:hidden">
-                            <a class="block p-0 transition-all ease-nav-brand text-sm text-slate-500"
-                                href="javascript:;" sidenav-trigger>
-                                <div class="w-4.5 overflow-hidden">
-                                    <i
-                                        class="ease-soft mb-0.75 relative block h-0.5 rounded-sm bg-slate-500 transition-all"></i>
-                                    <i
-                                        class="ease-soft mb-0.75 relative block h-0.5 rounded-sm bg-slate-500 transition-all"></i>
-                                    <i
-                                        class="ease-soft relative block h-0.5 rounded-sm bg-slate-500 transition-all"></i>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="flex items-center px-4">
-                            <a class="p-0 transition-all text-sm ease-nav-brand text-slate-500" href="javascript:;">
-                                <i class="cursor-pointer fa fa-cog" fixed-plugin-button-nav></i>
-                                <!-- fixed-plugin-button-nav  -->
-                            </a>
-                        </li>
-                        <li class="relative flex items-center pr-2">
-                            <p class="hidden transform-dropdown-show"></p>
-
-                            <a aria-expanded="false"
-                                class="block p-0 transition-all text-sm ease-nav-brand text-slate-500" dropdown-trigger
-                                href="javascript:;">
-                                <i class="cursor-pointer fa fa-bell"></i>
-                            </a>
-
-                            <ul class="text-sm transform-dropdown before:font-awesome before:leading-default before:duration-350 before:ease-soft lg:shadow-soft-3xl duration-250 min-w-44 before:sm:right-7.5 before:text-5.5 pointer-events-none absolute right-0 top-0 z-50 origin-top list-none rounded-lg border-0 border-solid border-transparent bg-white bg-clip-padding px-2 py-4 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:top-0 before:z-50 before:inline-block before:font-normal before:text-white before:antialiased before:transition-all before:content-['\f0d8'] sm:-mr-6 lg:absolute lg:right-0 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer"
-                                dropdown-menu>
-                                <!-- add show class on dropdown open js -->
-                                @for ($i = 0; $i < 3; $i++)
-                                    <li class="relative mb-2">
-                                        <a class="ease-soft py-1.2 clear-both block w-full whitespace-nowrap rounded-lg bg-transparent px-4 duration-300 hover:bg-gray-200 hover:text-slate-700 lg:transition-colors"
-                                            href="javascript:;">
-                                            <div class="flex py-1">
-                                                <div class="my-auto">
-                                                    <img class="inline-flex items-center justify-center mr-4
-                                        text-white text-sm h-9 w-9 max-w-none rounded-xl"
-                                                        src="{{ asset('img/team-2.jpg') }}" />
-                                                </div>
-                                                <div class="flex flex-col justify-center">
-                                                    <h6 class="mb-1 font-normal leading-normal text-sm">
-                                                        <span class="font-semibold">New message</span> from Laur
-                                                    </h6>
-                                                    <p class="mb-0 leading-tight text-xs text-slate-400">
-                                                        <i class="mr-1 fa fa-clock"></i>
-                                                        13 minutes ago
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                @endfor
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <div class="w-full px-6 py-6 mx-auto">
-            {{ $slot }}
-
-            <footer class="pt-4">
-                <div class="w-full px-6 mx-auto">
-                    <div class="flex flex-wrap items-center -mx-3 lg:justify-between">
-                        <div class="w-full max-w-full px-3 mt-0 mb-6 shrink-0 lg:mb-0 lg:w-1/2 lg:flex-none">
-                            <div class="leading-normal text-center text-sm text-slate-500 lg:text-left">
-                                &copy; {{ date('Y') }} {{ env('APP_NAME') }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        </div>
-        <!-- end cards -->
-    </main>
 </body>
-<!-- plugin for charts  -->
-<script src="{{ asset('template/build/assets/js/plugins/chartjs.min.js') }}" async></script>
-<!-- plugin for scrollbar  -->
-<script src="{{ asset('template/build/assets/js/plugins/perfect-scrollbar.min.js') }}" async></script>
-<!-- github button -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-<!-- main script file  -->
-<script src="{{ asset('template/build/assets/js/soft-ui-dashboard-tailwind.js') }}" async></script>
 
 </html>

@@ -1,73 +1,120 @@
 <x-app-layout title-app="Products">
-    <div
-        class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
-        <div class="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-            <h6>Products table</h6>
-        </div>
-        <div class="flex-auto px-0 pt-0 pb-2">
-            <div class="p-0 overflow-x-auto">
-                <x-table.index>
-                    <x-slot name="thead">
-                        <tr>
-                            @php
-                                $ths = ['Kode barang', 'Nama barang', 'Qty', 'Unit', 'Peramalan Selanjutnya'];
-                            @endphp
 
-                            @foreach ($ths as $th)
-                                <th
-                                    class="px-6 py-3 font-bold tracking-normal text-left uppercase align-middle bg-transparent border-b letter border-b-solid text-xxs whitespace-nowrap border-b-gray-200 text-slate-400 opacity-70 text-center">
-                                    {{ $th }}
-                                </th>
-                            @endforeach
-                        </tr>
-                    </x-slot>
-
-                    @for ($i = 1; $i <= 10; $i++)
-                        <tr class="text-center">
-                            <td>
-                                {{ Str::random(1) }}
-                            </td>
-                            <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                <p class="mb-0 text-sm font-semibold leading-normal">Sapu {{ $i }}</p>
-                            </td>
-                            <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                <span class="text-xs font-semibold leading-tight">{{ rand(1, 10) }}</span>
-                            </td>
-                            <td class="p-2 text-center align-middle bg-transparent border-b ">
-                                Cm
-                            </td>
-
-                            <td class="relative">
-                                <a class="inline-block px-6 py-3 mb-0 text-xs font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-pro ease-soft-in bg-150 tracking-tight-soft bg-x-25 bg-blue-500 text-white mr-3"
-                                    href="{{ route('products.stock-prediction', $i) }}">
-                                    lihat
-                                </a>
-                                <a aria-expanded="false" class="cursor-pointer" dropdown-trigger="">
-                                    <i aria-hidden="true" class="fa fa-ellipsis-v text-slate-400"></i>
-                                </a>
-                                <ul class="z-100 text-sm shadow-soft-3xl duration-250 before:duration-350 before:font-awesome before:ease-soft min-w-44 -ml-34 before:text-5.5 absolute top-0 m-0 mt-2 list-none rounded-lg border-0 border-solid border-transparent bg-white bg-clip-padding px-2 py-4 text-left text-slate-500 transition-all before:absolute before:top-0 before:right-7 right-0 before:left-auto before:z-40 before:text-white before:transition-all before:content-['\f0d8'] opacity-0 pointer-events-none transform-dropdown"
-                                    dropdown-menu="">
-                                    <li class="relative">
-                                        <a class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap rounded-lg border-0 bg-transparent px-4 text-left font-normal text-slate-500 lg:transition-colors lg:duration-300"
-                                            href="javascript:;">Delete</a>
-                                    </li>
-                                    <li class="relative">
-                                        <a class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap rounded-lg border-0 bg-transparent px-4 text-left font-normal text-slate-500 lg:transition-colors lg:duration-300"
-                                            href="javascript:;">Edit</a>
-                                    </li>
-                                    <li class="relative">
-                                        <a class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap rounded-lg border-0 bg-transparent px-4 text-left font-normal text-slate-500 lg:transition-colors lg:duration-300"
-                                            href="javascript:;">Hapus</a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    @endfor
-
-                </x-table.index>
+    <div class="relative overflow-x-auto shadow-md border sm:rounded-lg">
+        <div class="flex items-center justify-between p-4 bg-white dark:bg-gray-800">
+            <div>
+                <button
+                    class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                    data-dropdown-toggle="dropdownAction" id="dropdownActionButton" type="button">
+                    <span class="sr-only">Action button</span>
+                    Action
+                    <svg aria-hidden="true" class="w-2.5 h-2.5 ml-2.5" fill="none" viewBox="0 0 10 6"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="m1 1 4 4 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            stroke="currentColor" />
+                    </svg>
+                </button>
+                <!-- Dropdown menu -->
+                <div class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+                    id="dropdownAction">
+                    <ul aria-labelledby="dropdownActionButton" class="py-1 text-sm text-gray-700 dark:text-gray-200">
+                        <li>
+                            <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                data-modal-show="addNewProduct" data-modal-target="addNewProduct" href="#">
+                                Tambah baru
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="py-1">
+                        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                            href="#">Delete User</a>
+                    </div>
+                </div>
+            </div>
+            <label class="sr-only" for="table-search">Search</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg aria-hidden="true" class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none"
+                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="2" stroke="currentColor" />
+                    </svg>
+                </div>
+                <input
+                    class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    id="table-search-users" placeholder="Search for users" type="text">
             </div>
         </div>
 
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th class="p-4" scope="col">
+                        <div class="flex items-center">
+                            <input
+                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                id="checkbox-all-search" type="checkbox">
+                            <label class="sr-only" for="checkbox-all-search">checkbox</label>
+                        </div>
+                    </th>
+                    @foreach ($ths as $th)
+                        <th class="px-6 py-3" scope="col">
+                            {{ $th }}
+                        </th>
+                    @endforeach
+                    <th class="px-6 py-3" scope="col">
+                        Aksi
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($products as $product)
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="w-4 p-4">
+                            <div class="flex items-center">
+                                <input
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                    id="checkbox-table-search-1" type="checkbox">
+                                <label class="sr-only" for="checkbox-table-search-1">checkbox</label>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $product->kode_barang }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $product->name }}
+                        </td>
+                        <td class="px-6 py-4">{{ $product->unit }}</td>
+                        <td class="px-6 py-4">
+                            <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                href="">Lihat</a>
+                        </td>
+                        <td class="px-6 py-4">
+                            <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                data-modal-show="editProduct{{ $loop->index }}"
+                                data-modal-target="editProduct{{ $loop->index }}" href="#" type="button">Edit
+                            </a>
+                            <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                data-modal-show="editUserModal" data-modal-target="editUserModal" href="#"
+                                type="button">Detail</a>
+                            <form action="{{ route('products.destroy', $product->id) }}" method="POST"
+                                onsubmit="confirm('are you sure?')">
+                                @csrf @method('DELETE')
+                                <button class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                    type="submit">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+        @include('pages.product.popup-add')
+
+        @foreach ($products as $product)
+            @include('pages.product.popup-edit', ['product' => $product])
+        @endforeach
     </div>
-    <x-primary-button>Tambah</x-primary-button>
+
 </x-app-layout>
