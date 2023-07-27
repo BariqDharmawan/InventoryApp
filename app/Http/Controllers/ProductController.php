@@ -17,6 +17,16 @@ class ProductController extends Controller
 
         $productToSave->save();
     }
+
+    public function stockFlow()
+    {
+        return view('pages.product.stock-flow');
+    }
+
+    public function stockPrediction($id)
+    {
+        return view('pages.product.stock-prediction', ['id' => $id]);
+    }
     /**
      * Display a listing of the resource.
      */

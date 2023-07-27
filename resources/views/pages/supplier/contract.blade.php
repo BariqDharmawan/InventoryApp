@@ -2,15 +2,15 @@
     <div
         class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
         <div class="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-            <h6>Products table</h6>
+            <h6>Contract Supplier</h6>
         </div>
         <div class="flex-auto px-0 pt-0 pb-2">
-            <div class="p-0 overflow-x-auto">
+            <div class="p-0 overflow-auto">
                 <x-table.index>
                     <x-slot name="thead">
                         <tr>
                             @php
-                                $ths = ['Kode barang', 'Nama barang', 'Qty', 'Unit', 'Peramalan Selanjutnya'];
+                                $ths = ['Supplier', 'Value', 'Tanggal Mulai', 'Tanggal Selesai', 'Harga', 'Attachment'];
                             @endphp
 
                             @foreach ($ths as $th)
@@ -22,26 +22,36 @@
                         </tr>
                     </x-slot>
 
-                    @for ($i = 1; $i <= 10; $i++)
+                    @for ($i = 0; $i < 5; $i++)
+                        @php
+                            $startDate = date('Y-m-d H:i', strtotime('+' . $i + rand(1, 5) . ' day'));
+                            $endData = date('Y-m-d H:i', strtotime('+' . $i + rand(1, 5) . ' day', strtotime($startDate)));
+                        @endphp
                         <tr class="text-center">
                             <td>
-                                {{ Str::random(1) }}
+                                Vendor {{ Str::random(3) }}
                             </td>
                             <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                <p class="mb-0 text-sm font-semibold leading-normal">Sapu {{ $i }}</p>
+                                <p class="mb-0 text-sm font-semibold leading-normal">
+                                    Rp. {{ number_format(rand(1000000, 10000000)) }}
+                                </p>
                             </td>
                             <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                <span class="text-xs font-semibold leading-tight">{{ rand(1, 10) }}</span>
+                                <span class="text-xs font-semibold leading-tight">
+                                    {{ $startDate }}
+                                </span>
                             </td>
                             <td class="p-2 text-center align-middle bg-transparent border-b ">
-                                Cm
+                                {{ $endData }}
+                            </td>
+                            <td class="p-2 text-center align-middle bg-transparent border-b ">
+                                Rp. {{ number_format(rand(100000000, 200000000)) }}
+                            </td>
+                            <td class="p-2 text-center align-middle bg-transparent border-b ">
+                                <a class="text-blue-500" href="">Lihat Attachment</a>
                             </td>
 
-                            <td class="relative">
-                                <a class="inline-block px-6 py-3 mb-0 text-xs font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-pro ease-soft-in bg-150 tracking-tight-soft bg-x-25 bg-blue-500 text-white mr-3"
-                                    href="{{ route('products.stock-prediction', $i) }}">
-                                    lihat
-                                </a>
+                            <td class="py-2 px-4 relative">
                                 <a aria-expanded="false" class="cursor-pointer" dropdown-trigger="">
                                     <i aria-hidden="true" class="fa fa-ellipsis-v text-slate-400"></i>
                                 </a>
@@ -49,15 +59,7 @@
                                     dropdown-menu="">
                                     <li class="relative">
                                         <a class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap rounded-lg border-0 bg-transparent px-4 text-left font-normal text-slate-500 lg:transition-colors lg:duration-300"
-                                            href="javascript:;">Delete</a>
-                                    </li>
-                                    <li class="relative">
-                                        <a class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap rounded-lg border-0 bg-transparent px-4 text-left font-normal text-slate-500 lg:transition-colors lg:duration-300"
-                                            href="javascript:;">Edit</a>
-                                    </li>
-                                    <li class="relative">
-                                        <a class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap rounded-lg border-0 bg-transparent px-4 text-left font-normal text-slate-500 lg:transition-colors lg:duration-300"
-                                            href="javascript:;">Hapus</a>
+                                            href="javascript:;">Detail</a>
                                     </li>
                                 </ul>
                             </td>
