@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('address');
             $table->string('telephone');
             $table->string('email');
-            $table->timestamp('deleted_at');
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

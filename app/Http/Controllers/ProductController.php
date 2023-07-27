@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\StockFlow;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -20,7 +21,7 @@ class ProductController extends Controller
             ]);
         } else {
             $productToSave->kode_barang = 'IA' . Str::random(5);
-            $productToSave->name = $request->name;
+            $productToSave->name = strtolower($request->name);
             $productToSave->unit = $request->unit;
             $productToSave->description = $request->description;
 
@@ -30,7 +31,15 @@ class ProductController extends Controller
 
     public function stockFlow()
     {
-        return view('pages.product.stock-flow');
+        $ths = ['Nama Produk', 'Tipe Arus', 'Qty', 'Tanggal', 'Nama Procurement'];
+        $products = Product::whereNull('deleted_at')->get();
+        $flows = StockFlow::all();
+
+        return view('pages.product.stock-flow', [
+            'products' => $products,
+            'flows' => $flows,
+            'ths' => $ths
+        ]);
     }
 
     public function stockPrediction($id)

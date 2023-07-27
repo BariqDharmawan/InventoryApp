@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\StockFlow;
 use Illuminate\Database\Seeder;
 
 class StockFlowSeeder extends Seeder
@@ -12,6 +12,6 @@ class StockFlowSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        StockFlow::factory()->count(50)->create();
     }
 }

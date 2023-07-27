@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Procurement extends Model
 {
     use HasFactory;
+
+    public function stockFlow()
+    {
+        return $this->hasOne(StockFlow::class, 'procurement_id', 'id');
+    }
 }

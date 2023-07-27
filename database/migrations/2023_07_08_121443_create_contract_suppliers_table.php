@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('contract_suppliers', function (Blueprint $table) {
             $table->id();
-            $table->string('contract_value');
+            $table->bigInteger('contract_value');
             $table->string('supplier_id');
             $table->text('description');
             $table->date('start_date');
             $table->date('end_date');
-            $table->string('attachment');
+            $table->string('attachment')->nullable();
             $table->timestamps();
         });
     }

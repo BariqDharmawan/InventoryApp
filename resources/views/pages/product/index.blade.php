@@ -25,10 +25,6 @@
                             </a>
                         </li>
                     </ul>
-                    <div class="py-1">
-                        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                            href="#">Delete User</a>
-                    </div>
                 </div>
             </div>
             <label class="sr-only" for="table-search">Search</label>
@@ -42,7 +38,7 @@
                 </div>
                 <input
                     class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    id="table-search-users" placeholder="Search for users" type="text">
+                    id="table-search-users" placeholder="Cari produk" type="text">
             </div>
         </div>
 
