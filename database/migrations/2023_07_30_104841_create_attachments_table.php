@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contract_suppliers', function (Blueprint $table) {
+        Schema::create('attachments', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('contract_value');
-            $table->string('supplier_id');
-            $table->text('description');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->string('filename')->nullable();
+            $table->string('attachment');
             $table->timestamps();
         });
     }
@@ -28,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contract_suppliers');
+        Schema::dropIfExists('attachments');
     }
 };

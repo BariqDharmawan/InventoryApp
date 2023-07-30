@@ -91,7 +91,10 @@
                             {{ $contract->contract_value }}
                         </td>
                         <td class="px-6 py-4">
-                            <a href="{{ $contract->attachment }}">Lihat attachment</a>
+                            <a href="{{ Storage::url($contract->filename) }}" target="_blank"
+                                class="text-blue-600 hover:underline dark:text-blue-500">
+                                Lihat attachment
+                            </a>
                         </td>
                         <td class="px-6 py-4">
                             <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"

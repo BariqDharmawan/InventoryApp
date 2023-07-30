@@ -16,23 +16,11 @@ class ContractSupplier extends Model
         'description',
         'start_date',
         'end_date',
-        'attachment'
+        'filename'
     ];
 
     public function supplier()
     {
         return $this->belongsTo(Supplier::class, 'supplier_id', 'id');
-    }
-
-    public function addContract($supplierId, Request $request)
-    {
-        return $this->create([
-            'contract_value' => $request->contract_value,
-            'supplier_id' => $supplierId,
-            'description' => $request->description,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-            'attachment' => $request->attachment
-        ]);
     }
 }

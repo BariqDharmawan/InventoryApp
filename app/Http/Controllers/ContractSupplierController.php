@@ -2,12 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attachment;
 use App\Models\ContractSupplier;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class ContractSupplierController extends Controller
 {
+    private function saveContract($contractSupplier, $fileName, $supplierId, $request)
+    {
+        $contractSupplier->contract_value = $request->contract_value;
+        $contractSupplier->start_date = $request->start_date;
+        $contractSupplier->end_date = $request->end_date;
+        if ($fileName !== null) {
+            $contractSupplier->filename = $fileName;
+        }
+        $contractSupplier->description = $request->description;
+        $contractSupplier->supplier_id = $supplierId;
+        $contractSupplier->save();
+    }
     /**
      * Display a listing of the resource.
      */
@@ -38,15 +51,20 @@ class ContractSupplierController extends Controller
      */
     public function store(Request $request)
     {
+        $upload = $request->file('attachment')->store('public/attachments');
+
+        $attachment = new Attachment;
+        $attachment->uploadFile($request);
+
         $contractSupplier = new ContractSupplier;
-        $contractSupplier->create([
-            'contract_value' => $request->contract_value,
-            'supplier_id' => $request->supplier_id,
-            'description' => $request->description,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-            // 'attachment' => $request->attachment
-        ]);
+        $this->saveContract($contractSupplier, $upload, $request->supplier_id, $request);
+
+        $supplier = Supplier::find($contractSupplier->supplier_id);
+
+        return redirect()->back()->with(
+            'success',
+            'Berhasil menambah kontrak untuk supplier ' . $supplier->name
+        );
     }
 
     /**
@@ -70,13 +88,17 @@ class ContractSupplierController extends Controller
      */
     public function update(Request $request, ContractSupplier $contractSupplier)
     {
-        $contractSupplier->start_date = $request->start_date;
-        $contractSupplier->end_date = $request->end_date;
-        $contractSupplier->attachment = $request->attachment;
-        $contractSupplier->description = $request->description;
-        $contractSupplier->save();
-
         $supplierRelated = Supplier::findOrFail($contractSupplier->supplier_id);
+
+        $fileChange = null;
+        if ($request->hasFile('attachment')) {
+            $attachment = new Attachment;
+            $attachment->uploadFile($request);
+
+            $fileChange = $attachment;
+        }
+
+        $this->saveContract($contractSupplier, $fileChange, $contractSupplier->supplier_id, $request);
 
         return redirect()->back()->with(
             'success',

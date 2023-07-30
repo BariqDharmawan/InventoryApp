@@ -8,7 +8,7 @@
 
             <form
                 action="{{ isset($item) ? route('contract-supplier.update', $item) : route('contract-supplier.store') }}"
-                method="POST">
+                method="POST" enctype="multipart/form-data">
                 @csrf
 
                 @isset($item)
@@ -62,9 +62,9 @@
                             class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                             Contract Value
                         </label>
-                        <input type="text" id="contract-value"
+                        <input type="number" id="contract-value"
                             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                            name="contract_value" required>
+                            name="contract_value" value="{{ isset($item) ? $item->contract_value : '' }}" required>
                     </div>
 
                     <div class="mb-6">
@@ -73,17 +73,23 @@
                         </label>
                         <textarea id="description" rows="4"
                             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                            placeholder="Jelaskan detail kontrak disini" name="description" required></textarea>
+                            placeholder="Jelaskan detail kontrak disini" name="description" required>{{ isset($item) ? $item->description : '' }}</textarea>
                     </div>
 
                     <div class="mb-6">
 
                         <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                            for="attachment">Attachment</label>
+                            for="attachment">{{ isset($item) ? 'Ganti file' : 'Upload file' }}</label>
                         <input
                             class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400"
-                            name="attachment" id="attachment" type="file" required>
-
+                            name="attachment" id="attachment" placeholder="Upload" type="file"
+                            @if (!isset($item)) required @endif>
+                        @isset($item)
+                            <a href="{{ Storage::url($item->filename) }}" target="_blank"
+                                class="text-blue-600 hover:underline dark:text-blue-500">
+                                Lihat attachment
+                            </a>
+                        @endisset
                     </div>
 
                 </div>
