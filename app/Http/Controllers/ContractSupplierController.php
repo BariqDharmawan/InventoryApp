@@ -13,7 +13,16 @@ class ContractSupplierController extends Controller
      */
     public function index()
     {
-        return view('pages.supplier.contract');
+        $ths = ['Supplier', 'Tanggal Mulai', 'Tanggal Selesai', 'Value', 'Attachment'];
+        $contractSupplier = ContractSupplier::with('supplier')->get();
+
+        $suppliers = Supplier::all();
+
+        return view('pages.supplier.contract', [
+            'ths' => $ths,
+            'contractSupplier' => $contractSupplier,
+            'suppliers' => $suppliers
+        ]);
     }
 
     /**
@@ -30,7 +39,14 @@ class ContractSupplierController extends Controller
     public function store(Request $request)
     {
         $contractSupplier = new ContractSupplier;
-        $contractSupplier->addContract($request->supplier_id, $request);
+        $contractSupplier->create([
+            'contract_value' => $request->contract_value,
+            'supplier_id' => $request->supplier_id,
+            'description' => $request->description,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            // 'attachment' => $request->attachment
+        ]);
     }
 
     /**

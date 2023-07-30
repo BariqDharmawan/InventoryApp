@@ -5,6 +5,7 @@ use App\Http\Controllers\ProcurementController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductItemController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
 Route::permanentRedirect('/', '/login');
@@ -19,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('product-item', ProductItemController::class);
     Route::resource('products', ProductController::class)->except('destroy');
     Route::resource('procurement', ProcurementController::class);
+    Route::resource('supplier', SupplierController::class);
     Route::resource('contract-supplier', ContractSupplierController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -23,7 +23,7 @@
                             name="product_id">
                             <option>Pilih product</option>
                             @foreach ($products as $product)
-                                <option value="{{ $product->id }}" @if (isset($item) && $product->id === $item->id)  @endif>
+                                <option value="{{ $product->id }}" @if (isset($item) && $product->id === $item->id) selected @endif>
                                     {{ $product->name }}
                                 </option>
                             @endforeach
