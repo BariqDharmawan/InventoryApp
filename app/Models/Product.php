@@ -9,18 +9,17 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'name';
     protected $fillable = ['name', 'unit'];
 
     public const UNIT = ['pcs', 'box'];
 
-    public function productItem()
+    public function productItems()
     {
-        return $this->hasMany(ProductItem::class, 'product_name', 'name');
+        return $this->hasMany(ProductItem::class, 'product_id', 'id');
     }
 
     public function procurement()
     {
-        return $this->hasMany(Procurement::class, 'product_name', 'name');
+        return $this->hasMany(Procurement::class, 'product_id', 'id');
     }
 }

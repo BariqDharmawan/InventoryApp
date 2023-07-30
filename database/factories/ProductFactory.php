@@ -17,6 +17,7 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+        $name = fake()->sentence(5);
         return [
             'name' => fake()->sentence(5),
             'unit' => fake()->randomElement(Product::UNIT),

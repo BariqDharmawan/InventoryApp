@@ -20,7 +20,7 @@ class StockFlowFactory extends Factory
     public function definition(): array
     {
         return [
-            'product_name' => Product::factory(),
+            'product_id' => Product::factory(),
             'type' => fake()->randomElement(StockFlow::TYPE_FLOW),
             'date' => fake()->dateTimeBetween('-' . rand(1, 5) . ' week', 'now'),
             'qty' => rand(100, 1000),

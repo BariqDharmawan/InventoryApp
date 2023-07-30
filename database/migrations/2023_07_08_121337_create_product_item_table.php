@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('kode_barang')->default('IA' . strtoupper(Str::random(5)));
             $table->text('description');
             $table->timestamp('deleted_at')->nullable();
-            $table->string('product_name'); //relation to column 'name' table product
+            $table->integer('product_id');
             $table->timestamps();
         });
     }

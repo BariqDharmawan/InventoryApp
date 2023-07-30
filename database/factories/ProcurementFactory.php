@@ -28,7 +28,7 @@ class ProcurementFactory extends Factory
             'qty' => rand(100, 1000),
             'price' => fake()->numberBetween(1000000, 100000000),
             'contract_supplier_id' => ContractSupplier::factory(),
-            'product_name' => Product::factory(),
+            'product_id' => Product::factory(),
             'approved_at' => fake()->dateTimeBetween('-30 days', 'now'),
             'approved_by' => User::factory()
         ];

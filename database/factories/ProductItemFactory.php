@@ -17,11 +17,12 @@ class ProductItemFactory extends Factory
         return [
             'kode_barang' => 'IA' . Str::random(10),
             'description' => fake()->paragraph(),
-            'product_name' => Product::factory(),
+            'product_id' => Product::factory(),
         ];
     }
 
-    public function deleted(): Factory {
+    public function deleted(): Factory
+    {
         return $this->state(function (array $attributes) {
             return [
                 'deleted_at' => Carbon::now()

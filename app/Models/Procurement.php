@@ -16,7 +16,7 @@ class Procurement extends Model
         'qty',
         'price',
         'contract_supplier_id',
-        'product_name',
+        'product_id',
         'action_at',
         'status',
         'users_id'
@@ -29,7 +29,7 @@ class Procurement extends Model
 
     public function product()
     {
-        return $this->belongsTo(Product::class, 'product_name', 'id');
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
     public function users()

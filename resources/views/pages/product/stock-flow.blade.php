@@ -46,7 +46,7 @@
                     <tr
                         class="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600">
                         <td class="px-6 py-4">
-                            {{ $flow->product_name }}
+                            {{ $flow->products->name }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $flow->type }}

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('qty');
             $table->string('price');
             $table->string('contract_supplier_id');
-            $table->integer('product_name'); //relation to column 'name' table 'product'
+            $table->integer('product_id');
             $table->timestamp('action_at');
             $table->enum('status', ['approved', 'rejected']);
             $table->integer('users_id');

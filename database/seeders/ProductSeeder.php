@@ -12,13 +12,11 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         Product::factory()->has(
-            ProductItem::factory()->count(rand(2, 10))
+            ProductItem::factory()->count(3)
         )
             // ->has(
             //     Procurement::factory()->count(rand(2, 10))
             // )
             ->count(5)->create();
-
-        ProductItem::factory()->count(5)->deleted()->make();
     }
 }

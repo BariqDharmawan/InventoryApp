@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class ProductItem extends Model
 {
@@ -14,14 +15,21 @@ class ProductItem extends Model
 
     protected $fillable = [
         'kode_barang',
-        'name',
-        'unit',
         'description',
-        'deleted_at'
+        'deleted_at',
+        'product_id'
     ];
 
-    public function product()
+    public function products()
     {
-        return $this->belongsTo(Product::class, 'product_name', 'kode_barang');
+        return $this->belongsTo(Product::class, 'product_id', 'id');
+    }
+
+    public function saveProductItem($itemToSave, $request)
+    {
+        $itemToSave->product_id = $request->product_id;
+        $itemToSave->kode_barang = 'IA' . Str::random(5);
+        $itemToSave->description = $request->description;
+        $itemToSave->save();
     }
 }
