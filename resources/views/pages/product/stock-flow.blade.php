@@ -1,20 +1,20 @@
 <x-app-layout title-app="Arus Stock">
-    <div class="relative overflow-x-auto shadow-md border sm:rounded-lg">
-        <div class="flex items-center justify-between p-4 bg-white dark:bg-gray-800">
+    <div class="relative overflow-x-auto border shadow-md sm:rounded-lg">
+        <div class="flex items-center justify-between bg-white p-4 dark:bg-gray-800">
             <div>
                 <button
-                    class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                    class="inline-flex items-center rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
                     data-dropdown-toggle="dropdownAction" id="dropdownActionButton" type="button">
                     <span class="sr-only">Action button</span>
                     Action
-                    <svg aria-hidden="true" class="w-2.5 h-2.5 ml-2.5" fill="none" viewBox="0 0 10 6"
+                    <svg aria-hidden="true" class="ml-2.5 h-2.5 w-2.5" fill="none" viewBox="0 0 10 6"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="m1 1 4 4 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             stroke="currentColor" />
                     </svg>
                 </button>
                 <!-- Dropdown menu -->
-                <div class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+                <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:divide-gray-600 dark:bg-gray-700"
                     id="dropdownAction">
                     <ul aria-labelledby="dropdownActionButton" class="py-1 text-sm text-gray-700 dark:text-gray-200">
                         <li>
@@ -28,8 +28,8 @@
             </div>
         </div>
 
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
+            <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     @foreach ($ths as $th)
                         <th class="px-6 py-3" scope="col">
@@ -44,9 +44,9 @@
             <tbody>
                 @foreach ($flows as $flow)
                     <tr
-                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        class="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600">
                         <td class="px-6 py-4">
-                            {{ $flow->product_id }}
+                            {{ $flow->product_name }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $flow->type }}

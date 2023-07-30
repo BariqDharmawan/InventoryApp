@@ -46,6 +46,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function procurement()
+    {
+        return $this->hasMany(Procurement::class, 'users_id', 'id');
+    }
+
     public function addUser(Request $request)
     {
         $request->validate([

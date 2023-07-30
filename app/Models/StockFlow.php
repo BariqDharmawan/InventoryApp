@@ -13,7 +13,7 @@ class StockFlow extends Model
 
     public function products()
     {
-        return $this->hasOne(Product::class, 'product_id', 'id');
+        return $this->hasOne(Product::class, 'product_name', 'id');
     }
 
     public function procurement()

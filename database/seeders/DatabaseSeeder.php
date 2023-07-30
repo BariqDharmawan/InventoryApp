@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ProductSeeder::class,
             SupplierSeeder::class,
-            // ContractSupplier::class,
+            ContractSupplierSeeder::class,
             // ProcurementSeeder::class,
             // StockFlowSeeder::class,
         ]);
