@@ -13,7 +13,7 @@
                             stroke="currentColor" />
                     </svg>
                 </button>
-                <!-- Dropdown menu -->
+
                 <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:divide-gray-600 dark:bg-gray-700"
                     id="dropdownAction">
                     <ul aria-labelledby="dropdownActionButton" class="py-1 text-sm text-gray-700 dark:text-gray-200">
@@ -123,7 +123,6 @@
     @include('pages.supplier.popup-add', [
         'id' => 'addNewSupplier',
     ])
-
 
     @foreach ($contractSupplier as $contract)
         @include('pages.supplier.popup-detail', [

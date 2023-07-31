@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Procurement;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,13 +16,12 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->string('category');
             $table->string('qty');
             $table->string('price');
             $table->string('contract_supplier_id');
             $table->integer('product_id');
             $table->timestamp('action_at');
-            $table->enum('status', ['approved', 'rejected']);
+            $table->enum('status', Procurement::STATUS);
             $table->integer('users_id');
             $table->timestamps();
         });

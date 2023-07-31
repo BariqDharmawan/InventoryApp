@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Procurement;
 use App\Models\Product;
 use App\Models\ProductItem;
 use App\Models\StockFlow;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -41,11 +43,15 @@ class ProductController extends Controller
         $productItem = ProductItem::with('products')->whereNull('deleted_at')->get();
         $units = Product::UNIT;
 
+        $suppliers = Supplier::all();
+
         return view('pages.product.index', [
             'ths' => $ths,
             'productItem' => $productItem,
             'units' => $units,
-            'products' => Product::all()
+            'suppliers' => $suppliers,
+            'products' => Product::all(),
+            'procurementStatus' => Procurement::STATUS
         ]);
     }
 

@@ -106,6 +106,11 @@
                                 <button class="font-medium text-blue-600 hover:underline dark:text-blue-500"
                                     type="submit">Hapus</button>
                             </form>
+                            <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                                data-modal-show="addNewProcurement{{ $loop->index }}"
+                                data-modal-target="addNewProcurement{{ $loop->index }}" href="#" type="button">
+                                Buat pengadaan
+                            </a>
                         </td>
                     </tr>
                 @endforeach
@@ -120,9 +125,15 @@
                 'id' => 'editItemProduct' . $loop->index,
                 'item' => $item,
             ])
+
             @include('pages.product.popup-detail-item', [
                 'id' => 'detailProduct' . $loop->index,
                 'item' => $item,
+            ])
+
+            @include('pages.procurement.popup-add', [
+                'id' => 'addNewProcurement' . $loop->index,
+                'productId' => $item->id,
             ])
         @endforeach
     </div>

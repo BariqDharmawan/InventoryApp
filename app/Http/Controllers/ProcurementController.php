@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Procurement;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class ProcurementController extends Controller
@@ -12,7 +13,13 @@ class ProcurementController extends Controller
      */
     public function index()
     {
-        return view('pages.procurement.index');
+        $ths = ['title', 'category', 'qty', 'price', 'status', 'admin pengontrol', 'product'];
+        $procurements = Procurement::all();
+
+        return view('pages.procurement.index', [
+            'ths' => $ths,
+            'procurements' => $procurements,
+        ]);
     }
 
     /**

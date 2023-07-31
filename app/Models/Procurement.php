@@ -12,7 +12,6 @@ class Procurement extends Model
     protected $fillable = [
         'title',
         'description',
-        'category',
         'qty',
         'price',
         'contract_supplier_id',
@@ -21,6 +20,8 @@ class Procurement extends Model
         'status',
         'users_id'
     ];
+
+    public const STATUS = ['approved', 'rejected'];
 
     public function stockFlow()
     {
