@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::permanentRedirect('/', '/login');
@@ -22,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('procurement', ProcurementController::class);
     Route::resource('supplier', SupplierController::class);
     Route::resource('contract-supplier', ContractSupplierController::class);
+    Route::resource('admin', AdminController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -12,7 +12,16 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.index');
+        $ths = ['id', 'email', 'role', 'is_active'];
+
+        // Just for test change this later
+        $users = User::all()->where('role', '==', 'superadmin');
+
+
+        return view('pages.admin.index', [
+            'ths' => $ths,
+            'users' => $users,
+        ]);
     }
 
     /**
