@@ -10,7 +10,8 @@
                 @method('PUT')
             @endisset
 
-            <x-modal.header title="{{ isset($item) ? 'Ubah product ' . $item->kode_barang : 'Tambah Item Product' }}" />
+            <x-modal.header title="{{ isset($item) ? 'Ubah product ' . $item->kode_barang : 'Tambah Item Product' }}"
+                id-modal="{{ $id }}" />
 
             <article class="@if (!isset($item)) grid-cols-6 @endif grid gap-6 p-6">
                 @if (!isset($item))

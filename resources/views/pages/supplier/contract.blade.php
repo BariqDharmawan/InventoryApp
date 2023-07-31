@@ -122,7 +122,13 @@
         'id' => 'addNewSupplier',
     ])
 
+
     @foreach ($contractSupplier as $contract)
+        @include('pages.supplier.popup-detail', [
+            'id' => 'detailContract' . $loop->index,
+            'contract' => $contract
+        ])
+
         @include('pages.supplier.popup-contract', [
             'id' => 'editContract' . $loop->index,
             'item' => $contract,

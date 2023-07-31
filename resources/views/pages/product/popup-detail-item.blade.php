@@ -3,7 +3,7 @@
     id="{{ $id }}" tabindex="-1">
     <div class="relative max-h-full w-full max-w-2xl">
         <div class="rounded-lg bg-white shadow dark:bg-gray-700">
-            <x-modal.header title="{{ 'Detail product ' . $item->kode_barang }}" />
+            <x-modal.header title="{{ 'Detail product ' . $item->kode_barang }}" id-modal="{{ $id }}" />
 
             <div class="p-6">
                 <div class="mb-3">

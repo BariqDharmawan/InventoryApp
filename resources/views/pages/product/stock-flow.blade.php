@@ -66,5 +66,5 @@
         </table>
     </div>
 
-    @include('pages.product.popup-add-flow', ['products' => $products])
+    @include('pages.product.popup-add-flow', ['products' => $products, 'id' => 'addNewFlow'])
 </x-app-layout>

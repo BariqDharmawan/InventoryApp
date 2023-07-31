@@ -19,6 +19,11 @@ class ContractSupplier extends Model
         'filename'
     ];
 
+    protected  $casts = [
+        'start_date' => 'date:Y-m-d',
+        'end_date' => 'date:Y-m-d',
+    ];
+
     public function supplier()
     {
         return $this->belongsTo(Supplier::class, 'supplier_id', 'id');

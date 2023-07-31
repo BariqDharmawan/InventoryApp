@@ -3,7 +3,7 @@
     id="{{ $id }}" tabindex="-1">
     <div class="relative max-h-full w-full max-w-2xl">
         <div class="rounded-lg bg-white shadow dark:bg-gray-700">
-            <x-modal.header title="Tambah Supplier" />
+            <x-modal.header title="Tambah Supplier" id-modal="{{ $id }}" />
 
             <form action="{{ route('supplier.store') }}" method="POST">
                 @csrf
@@ -29,7 +29,7 @@
                             Telephone
                         </label>
                         <input type="tel" id="telephone" name="telephone"
-                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                            class="input-tel block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                             required>
                     </div>
                     <div>

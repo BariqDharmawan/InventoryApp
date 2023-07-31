@@ -3,8 +3,8 @@
     id="{{ $id }}" tabindex="-1">
     <div class="relative max-h-full w-full max-w-2xl">
         <div class="rounded-lg bg-white shadow dark:bg-gray-700">
-            <x-modal.header
-                title="{{ isset($item) ? 'Detail Contract ' . $item->supplier->name : 'Pasang contract' }}" />
+            <x-modal.header title="{{ isset($item) ? 'Detail Contract ' . $item->supplier->name : 'Pasang contract' }}"
+                id-modal="{{ $id }}" />
 
             <form
                 action="{{ isset($item) ? route('contract-supplier.update', $item) : route('contract-supplier.store') }}"
@@ -54,7 +54,7 @@
                         <input type="date" id="end-date"
                             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                             value="{{ isset($item) ? $item->end_date : '' }}" placeholder="Tanggal Selesai Kontrak"
-                            name="end_date" required>
+                            min="{{ date('Y-m-d') }}" name="end_date" required>
                     </div>
 
                     <div class="mb-6">
