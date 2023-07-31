@@ -8,9 +8,19 @@
             <div class="p-6">
                 <p class="mb-3">Tanggal mulai: {{ $contract->start_date->format('d M Y') }}</p>
                 <p class="mb-3">Tanggal selesai: {{ $contract->end_date->format('d M Y') }}</p>
-                <div>
+                <p class="mb-3">
+                    Nilai kontrak: {{ 'Rp.' . number_format($contract->contract_value) }}
+                </p>
+                <div class="mb-3">
                     <p>Deskripsi kontrak</p>
                     <div class="break-words text-sm">{!! $contract->description !!}</div>
+                </div>
+                <div>
+                    <p>Attachment</p>
+                    <a href="{{ Storage::url($contract->filename) }}"
+                        class="text-sm text-blue-600 hover:underline dark:text-blue-500">
+                        Lihat attachment
+                    </a>
                 </div>
             </div>
         </div>

@@ -82,13 +82,13 @@
                             {{ $contract->supplier->name }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $contract->start_date }}
+                            {{ $contract->start_date->format('d M Y') }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $contract->end_date }}
+                            {{ $contract->end_date->format('d M Y') }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $contract->contract_value }}
+                            {{ 'Rp.' . number_format($contract->contract_value) }}
                         </td>
                         <td class="px-6 py-4">
                             <a href="{{ Storage::url($contract->filename) }}" target="_blank"
@@ -97,11 +97,13 @@
                             </a>
                         </td>
                         <td class="px-6 py-4">
-                            <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                                data-modal-show="editContract{{ $loop->index }}"
-                                data-modal-target="editContract{{ $loop->index }}" href="#" type="button">Ubah
-                                persetujuan
-                            </a>
+                            @if ($contract->start_date->format('Y-m-d') > date('Y-m-d'))
+                                <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                                    data-modal-show="editContract{{ $loop->index }}"
+                                    data-modal-target="editContract{{ $loop->index }}" href="#" type="button">
+                                    Ubah persetujuan
+                                </a>
+                            @endif
                             <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"
                                 data-modal-show="detailContract{{ $loop->index }}"
                                 data-modal-target="detailContract{{ $loop->index }}" href="#" type="button">
@@ -126,7 +128,7 @@
     @foreach ($contractSupplier as $contract)
         @include('pages.supplier.popup-detail', [
             'id' => 'detailContract' . $loop->index,
-            'contract' => $contract
+            'contract' => $contract,
         ])
 
         @include('pages.supplier.popup-contract', [
