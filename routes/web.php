@@ -18,6 +18,7 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('stock-flow', [ProductController::class, 'stockFlow'])->name('products.stock-flow');
     Route::get('products/stock-prediction/{id}', [ProductController::class, 'stockPrediction'])->name('products.stock-prediction');
+    Route::patch('admin/{user}/password', [AdminController::class, 'resetPassword'])->name('admin.resetPassword');
     Route::resource('product-item', ProductItemController::class);
     Route::resource('products', ProductController::class)->except('destroy');
     Route::resource('procurement', ProcurementController::class);

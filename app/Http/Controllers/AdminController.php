@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -12,11 +13,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $ths = ['id', 'email', 'role', 'is_active'];
+        $ths = ['id', 'email', 'role', 'is active'];
 
         // Just for test change this later
-        $users = User::all()->where('role', '==', 'superadmin');
-
+        $users = User::all()->where('role', '!=', 'superadmin');
 
         return view('pages.admin.index', [
             'ths' => $ths,
@@ -32,7 +32,7 @@ class AdminController extends Controller
         $user = new User;
         $user->addUser($request);
 
-        return redirect()->back()->with('success', "Berhasil tamba admin bernama $user->name");
+        return redirect()->back()->with('success', "Berhasil tambah admin : $request->email");
     }
 
     /**
@@ -68,5 +68,17 @@ class AdminController extends Controller
         $user->update(['is_active', false]);
 
         return redirect()->back()->with('success', "Berhasil menonaktifkan admin $user->name");
+    }
+
+    public function resetPassword(Request $request, User $user)
+    {
+        $request->validate([
+            'password' => ['required', 'confirmed'],
+        ]);
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->back()->with('success', "Password berhasil di reset");
     }
 }

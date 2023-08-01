@@ -54,14 +54,15 @@ class User extends Authenticatable
     public function addUser(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            // 'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'confirmed', Password::defaults()],
         ]);
 
         return $this->create([
-            'name' => $request->name,
             'email' => $request->email,
+            'role' => $request->role,
+            'is_active' => 1,
             'password' => Hash::make($request->password),
         ]);
     }
