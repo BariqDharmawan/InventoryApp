@@ -19,5 +19,7 @@ class UserSeeder extends Seeder
             'role' => 'superadmin',
             'password' => Hash::make('admininventoryapp')
         ]);
+
+        User::factory()->count(3)->create();
     }
 }
