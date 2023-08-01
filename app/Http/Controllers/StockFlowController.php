@@ -2,18 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\ProductItem;
 use App\Models\StockFlow;
 use Illuminate\Http\Request;
 
 class StockFlowController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -28,7 +23,19 @@ class StockFlowController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        StockFlow::create([
+            'product_id' => $request->product_id,
+            'type' => $request->type,
+            'date' => $request->date,
+            'qty' => $request->qty,
+            'procurement_id' => $request->procurement_id
+        ]);
+
+        return redirect()->back()->with(
+            'success',
+            'Berhasil mencatat flow untuk produk ' .
+                Product::find($request->product_id)->name
+        );
     }
 
     /**

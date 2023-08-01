@@ -23,6 +23,7 @@ class ContractSupplierFactory extends Factory
         $endDate = new Carbon($startDate);
 
         return [
+            'title' => fake()->sentence(10),
             'contract_value' => fake()->numberBetween(10000000, 500000000),
             'supplier_id' => Supplier::factory(),
             'description' => fake()->paragraph(10),

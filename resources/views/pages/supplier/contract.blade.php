@@ -82,6 +82,9 @@
                             {{ $contract->supplier->name }}
                         </td>
                         <td class="px-6 py-4">
+                            {{ $contract->title }}
+                        </td>
+                        <td class="px-6 py-4">
                             {{ $contract->start_date->format('d M Y') }}
                         </td>
                         <td class="px-6 py-4">

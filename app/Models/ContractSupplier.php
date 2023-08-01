@@ -19,7 +19,7 @@ class ContractSupplier extends Model
         'filename'
     ];
 
-    protected  $casts = [
+    protected $casts = [
         'start_date' => 'date:Y-m-d',
         'end_date' => 'date:Y-m-d',
     ];

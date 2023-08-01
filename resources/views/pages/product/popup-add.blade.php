@@ -5,7 +5,8 @@
         <form action="{{ route('products.store') }}" class="relative rounded-lg bg-white shadow dark:bg-gray-700"
             method="POST">
             @csrf
-            <x-modal.header title="Tambah Product" id-modal="{{ $id }}" />
+            <x-modal.header title="{{ isset($product) ? 'Ubah Product ' . $product->name : 'Tambah Product' }}"
+                id-modal="{{ $id }}" />
 
             <div class="relative max-h-full w-full max-w-2xl">
                 <div class="space-y-6 p-6">

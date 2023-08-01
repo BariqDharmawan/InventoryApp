@@ -15,4 +15,9 @@ class Supplier extends Model
         'telephone',
         'email'
     ];
+
+    public function contractSupplier()
+    {
+        return $this->hasMany(ContractSupplier::class, 'supplier_id', 'id');
+    }
 }

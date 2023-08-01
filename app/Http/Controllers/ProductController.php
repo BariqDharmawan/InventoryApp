@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContractSupplier;
 use App\Models\Procurement;
 use App\Models\Product;
 use App\Models\ProductItem;
@@ -21,14 +22,17 @@ class ProductController extends Controller
 
     public function stockFlow()
     {
-        $ths = ['Nama Produk', 'Tipe Arus', 'Qty', 'Tanggal', 'Nama Procurement'];
-        $products = Product::whereNull('deleted_at')->get();
-        $flows = StockFlow::all();
+        $ths = ['Nama Produk',  'Qty', 'Tanggal', 'Nama Procurement'];
+        $products = Product::all();
+
+        $flowIn = StockFlow::with(['product', 'procurement'])->where('type', 'masuk')->latest('date')->get();
+        $flowOut = StockFlow::with(['product', 'procurement'])->where('type', 'keluar')->latest('date')->get();
 
         return view('pages.product.stock-flow', [
             'products' => $products,
-            'flows' => $flows,
-            'ths' => $ths
+            'flowIn' => $flowIn,
+            'flowOut' => $flowOut,
+            'ths' => $ths,
         ]);
     }
 
@@ -39,19 +43,23 @@ class ProductController extends Controller
 
     public function index()
     {
-        $ths = ['Kode barang', 'Nama barang', 'Peramalan'];
+        $ths = ['Nama barang', 'QTY', 'Unit', 'Peramalan'];
         $productItem = ProductItem::with('products')->whereNull('deleted_at')->get();
         $units = Product::UNIT;
 
-        $suppliers = Supplier::all();
+        $suppliers = Supplier::has('contractSupplier')->get();
+        $contractSupplier = ContractSupplier::all();
+
+        $products = Product::all();
 
         return view('pages.product.index', [
             'ths' => $ths,
             'productItem' => $productItem,
             'units' => $units,
             'suppliers' => $suppliers,
-            'products' => Product::all(),
-            'procurementStatus' => Procurement::STATUS
+            'products' => $products,
+            'procurementStatus' => Procurement::STATUS,
+            'contractSupplier' => $contractSupplier,
         ]);
     }
 
@@ -74,7 +82,10 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('pages.product.edit', ['product' => $product]);
+        $ths = ['Kode Barang', 'Deskripsi'];
+        $productItems = ProductItem::whereNull('deleted_at')->where('product_id', $product->id)->get();
+
+        return view('pages.product.detail', ['product' => $product, 'productItems' => $productItems, 'ths' => $ths]);
     }
 
     /**
@@ -88,5 +99,11 @@ class ProductController extends Controller
             'success',
             "Berhasil mengubah produk $product->name"
         );
+    }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+        return redirect()->back()->with('success', 'Berhasil menghapus produk');
     }
 }

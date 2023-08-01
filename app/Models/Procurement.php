@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Procurement extends Model
 {
@@ -23,6 +24,10 @@ class Procurement extends Model
 
     public const STATUS = ['approved', 'rejected'];
 
+    protected $casts = [
+        'action_at' => 'date:Y-m-d',
+    ];
+
     public function stockFlow()
     {
         return $this->hasOne(StockFlow::class, 'procurement_id', 'id');
@@ -33,8 +38,13 @@ class Procurement extends Model
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
-    public function users()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'users_id', 'id');
+    }
+
+    public function contractSupplier()
+    {
+        return $this->belongsTo(ContractSupplier::class, 'contract_supplier_id', 'id');
     }
 }

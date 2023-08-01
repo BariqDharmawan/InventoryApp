@@ -13,9 +13,13 @@ class StockFlow extends Model
 
     public const TYPE_FLOW = ['masuk', 'keluar'];
 
-    public function products()
+    protected $casts = [
+        'date' => 'date:Y-m-d'
+    ];
+
+    public function product()
     {
-        return $this->hasOne(Product::class, 'product_id', 'id');
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
     public function procurement()

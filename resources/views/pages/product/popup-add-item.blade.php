@@ -13,25 +13,11 @@
             <x-modal.header title="{{ isset($item) ? 'Ubah product ' . $item->kode_barang : 'Tambah Item Product' }}"
                 id-modal="{{ $id }}" />
 
-            <article class="@if (!isset($item)) grid-cols-6 @endif grid gap-6 p-6">
-                @if (!isset($item))
-                    <div class="col-span-6">
-                        <label for="product-id" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
-                            Pilih product
-                        </label>
-                        <select id="product-id"
-                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                            name="product_id">
-                            <option>Pilih product</option>
-                            @foreach ($products as $product)
-                                <option value="{{ $product->id }}" @if (isset($item) && $product->id === $item->id) selected @endif>
-                                    {{ $product->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                @endif
+            @if (isset($product))
+                <input type="hidden" name="product_id" value="{{ $product->id }}" readonly>
+            @endif
 
+            <article class="@if (!isset($item)) grid-cols-6 @endif grid gap-6 p-6">
                 @if (!isset($item))
                     <div class="col-span-6">
                         <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"

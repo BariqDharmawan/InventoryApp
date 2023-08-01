@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('contract_suppliers', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('contract_value');
+            $table->string('title');
             $table->string('supplier_id');
             $table->text('description');
             $table->date('start_date');

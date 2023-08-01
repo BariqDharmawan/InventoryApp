@@ -11,6 +11,7 @@ class ContractSupplierController extends Controller
 {
     private function saveContract($contractSupplier, $fileName, $supplierId, $request)
     {
+        $contractSupplier->title = $request->title;
         $contractSupplier->contract_value = $request->contract_value;
         $contractSupplier->start_date = $request->start_date;
         $contractSupplier->end_date = $request->end_date;
@@ -26,7 +27,7 @@ class ContractSupplierController extends Controller
      */
     public function index()
     {
-        $ths = ['Supplier', 'Tanggal Mulai', 'Tanggal Selesai', 'Value', 'Attachment'];
+        $ths = ['Supplier', 'Judul Kontrak', 'Tanggal Mulai', 'Tanggal Selesai', 'Value', 'Attachment'];
         $contractSupplier = ContractSupplier::with('supplier')->get();
 
         $suppliers = Supplier::all();
