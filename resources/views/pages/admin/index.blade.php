@@ -72,7 +72,7 @@
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex gap-3">
-                                <svg data-tooltip-target="tooltip-edit"
+                                {{-- <svg data-tooltip-target="tooltip-edit"
                                     class="w-4 h-4 cursor-pointer text-gray-800 dark:text-white" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -83,19 +83,26 @@
                                     class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                     Edit User data
                                     <div class="tooltip-arrow" data-popper-arrow></div>
-                                </div>
-                                <svg data-tooltip-target="tooltip-default"
-                                    class="w-4 h-4 text-gray-800 dark:text-white cursor-pointer" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z" />
-                                </svg>
-                                <div id="tooltip-default" role="tooltip"
-                                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                                    Delete User
-                                    <div class="tooltip-arrow" data-popper-arrow></div>
-                                </div>
+                                </div> --}}
+                                <form action="{{ route('admin.destroy', $user->id) }}" method="POST"
+                                    onsubmit="confirm('are you sure?')">
+                                    @csrf @method('DELETE')
+                                    <button>
+                                        <svg data-tooltip-target="tooltip-default"
+                                            class="w-4 h-4 text-gray-800 dark:text-white cursor-pointer"
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 18 20">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z" />
+                                        </svg>
+                                    </button>
+                                    <div id="tooltip-default" role="tooltip"
+                                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        Delete User
+                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                    </div>
+                                </form>
                                 <svg data-tooltip-target="tooltip-password"
                                     data-modal-show="resetPasswordUser{{ $loop->index }}"
                                     data-modal-target="resetPasswordUser{{ $loop->index }}"
@@ -117,10 +124,7 @@
             </tbody>
         </table>
 
-
-
         {{-- Success Toast --}}
-
         @if (session('success'))
             <div id="toast-success"
                 class="flex items-center fixed top-5 right-5 w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"

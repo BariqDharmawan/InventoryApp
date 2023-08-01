@@ -65,9 +65,9 @@ class AdminController extends Controller
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);
-        $user->update(['is_active', false]);
+        $user->update(['is_active' => 0]);
 
-        return redirect()->back()->with('success', "Berhasil menonaktifkan admin $user->name");
+        return redirect()->back()->with('success', "Berhasil menonaktifkan admin $user->email");
     }
 
     public function resetPassword(Request $request, User $user)
@@ -77,6 +77,7 @@ class AdminController extends Controller
         ]);
 
         $user->password = Hash::make($request->password);
+        $user->is_password_changed = 1;
         $user->save();
 
         return redirect()->back()->with('success', "Password berhasil di reset");
