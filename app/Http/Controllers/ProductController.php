@@ -9,12 +9,15 @@ use App\Models\ProductItem;
 use App\Models\StockFlow;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
     private function saveProduct($productToSave, $request)
     {
+        if ($request->has('supplier_id')) {
+            $productToSave->supplier_id = $request->supplier_id;
+        }
+        $productToSave->id = $request->id;
         $productToSave->name = strtolower($request->name);
         $productToSave->unit = $request->unit;
         $productToSave->save();
@@ -43,17 +46,16 @@ class ProductController extends Controller
 
     public function index()
     {
-        $ths = ['Nama barang', 'QTY', 'Unit', 'Peramalan'];
         $productItem = ProductItem::with('products')->whereNull('deleted_at')->get();
         $units = Product::UNIT;
 
         $suppliers = Supplier::has('contractSupplier')->get();
         $contractSupplier = ContractSupplier::all();
 
-        $products = Product::all();
+        $products = Product::latest('created_at')->get();
 
         return view('pages.product.index', [
-            'ths' => $ths,
+            'ths' => Product::THS,
             'productItem' => $productItem,
             'units' => $units,
             'suppliers' => $suppliers,
@@ -63,9 +65,6 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $product = new Product;
@@ -77,20 +76,18 @@ class ProductController extends Controller
         );
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Product $product)
     {
-        $ths = ['Kode Barang', 'Deskripsi'];
+        $ths = ['Kode Item', 'Deskripsi'];
         $productItems = ProductItem::whereNull('deleted_at')->where('product_id', $product->id)->get();
 
-        return view('pages.product.detail', ['product' => $product, 'productItems' => $productItems, 'ths' => $ths]);
+        return view('pages.product.detail', [
+            'product' => $product,
+            'productItems' => $productItems,
+            'ths' => $ths
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Product $product)
     {
         $this->saveProduct($product, $request);

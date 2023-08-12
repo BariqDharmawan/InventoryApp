@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('qty');
             $table->string('price');
             $table->string('contract_supplier_id');
-            $table->integer('product_id');
+            $table->string('product_id');
             $table->timestamp('action_at');
             $table->enum('status', Procurement::STATUS);
             $table->integer('users_id');

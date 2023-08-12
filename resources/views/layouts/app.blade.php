@@ -30,7 +30,7 @@
         class="fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform sm:translate-x-0"
         id="logo-sidebar">
         <div class="h-full overflow-y-auto bg-gray-50 px-3 py-4 dark:bg-gray-800">
-            <a class="mb-5 flex items-center pl-2.5" href="https://flowbite.com/">
+            <a class="mb-5 flex items-center pl-2.5" href="{{ url('/') }}">
                 <img alt="Flowbite Logo" class="mr-3 h-6 sm:h-7" src="https://flowbite.com/docs/images/logo.svg" />
                 <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
                     {{ env('APP_NAME') }}
@@ -49,6 +49,18 @@
                                 d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
                         </svg>
                         <span class="ml-3">Produk</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                        href="{{ route('suppliers.index') }}">
+                        <svg aria-hidden="true"
+                            class="h-5 w-5 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z" />
+                        </svg>
+                        <span class="ml-3 flex-1 whitespace-nowrap">Supplier</span>
                     </a>
                 </li>
                 <li>
@@ -91,7 +103,7 @@
                     @csrf
                     <li>
                         <button
-                            class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 "
+                            class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                             type="submit">
                             <svg aria-hidden="true"
                                 class="h-5 w-5 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"

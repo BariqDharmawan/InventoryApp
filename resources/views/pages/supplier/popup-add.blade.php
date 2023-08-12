@@ -5,7 +5,7 @@
         <div class="rounded-lg bg-white shadow dark:bg-gray-700">
             <x-modal.header title="Tambah Supplier" id-modal="{{ $id }}" />
 
-            <form action="{{ route('supplier.store') }}" method="POST">
+            <form action="{{ route('suppliers.store') }}" method="POST">
                 @csrf
                 <div class="p-6">
                     <div class="mb-6">

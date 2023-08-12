@@ -26,7 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('product-item', ProductItemController::class);
     Route::resource('products', ProductController::class);
     Route::resource('procurement', ProcurementController::class);
-    Route::resource('supplier', SupplierController::class);
+    Route::resource('suppliers', SupplierController::class);
+    Route::get('supplier/{supplierId}/product', [SupplierController::class, 'products'])->name('suppliers.products');
     Route::resource('contract-supplier', ContractSupplierController::class);
     Route::resource('admin', AdminController::class);
 

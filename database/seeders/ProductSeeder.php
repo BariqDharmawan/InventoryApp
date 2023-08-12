@@ -18,6 +18,6 @@ class ProductSeeder extends Seeder
             // ->has(
             //     Procurement::factory()->count(rand(2, 10))
             // )
-            ->count(5)->create();
+            ->count(50)->create();
     }
 }

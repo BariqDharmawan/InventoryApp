@@ -28,7 +28,7 @@ class ProductItem extends Model
     public function saveProductItem($itemToSave, $request)
     {
         $itemToSave->product_id = $request->product_id;
-        $itemToSave->kode_barang = 'IA' . Str::random(5);
+        $itemToSave->kode_barang = $request->kode_barang;
         $itemToSave->description = $request->description;
         $itemToSave->save();
     }

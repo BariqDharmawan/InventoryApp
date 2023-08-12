@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('stock_flows', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_id');
+            $table->string('product_id');
             $table->enum('type', StockFlow::TYPE_FLOW);
             $table->timestamp('date');
             $table->bigInteger('qty');

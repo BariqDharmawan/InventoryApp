@@ -9,9 +9,11 @@ class Product extends Model
 {
     use HasFactory;
 
+    public $incrementing = false;
     protected $fillable = ['name', 'unit'];
 
     public const UNIT = ['pcs', 'box'];
+    public const THS = ['Nama barang', 'QTY', 'Unit', 'Peramalan'];
 
     public function productItems()
     {
@@ -26,5 +28,10 @@ class Product extends Model
     public function stockFlows()
     {
         return $this->hasMany(StockFlow::class, 'product_id', 'id');
+    }
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class, 'supplier_id', 'id');
     }
 }

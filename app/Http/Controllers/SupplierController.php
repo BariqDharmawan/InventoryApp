@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContractSupplier;
+use App\Models\Product;
 use App\Models\Supplier;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -25,7 +26,16 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        return view('pages.supplier.index');
+        $listSupplier = Supplier::all();
+        $ths = [
+            'Name',
+            'Telephone',
+            'Email',
+            'Lihat Kontrak',
+            'Lihat Produk'
+        ];
+
+        return view('pages.supplier.index', ['listSupplier' => $listSupplier, 'ths' => $ths]);
     }
 
     public function show(Supplier $supplier)
@@ -66,5 +76,16 @@ class SupplierController extends Controller
     public function destroy(Supplier $supplier)
     {
         $supplier->deleted_at = Carbon::now();
+    }
+
+    public function products($supplierId)
+    {
+        $products = Product::where('supplier_id', $supplierId)->get();
+
+        return view('pages.product.index', [
+            'products' => $products,
+            'ths' => Product::THS,
+            'units' => Product::UNIT
+        ]);
     }
 }

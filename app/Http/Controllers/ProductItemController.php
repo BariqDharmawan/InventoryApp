@@ -10,14 +10,6 @@ use Illuminate\Support\Str;
 
 class ProductItemController extends Controller
 {
-    private function saveProductItem($itemToSave, $request)
-    {
-        $itemToSave->product_id = $request->product_id;
-        $itemToSave->kode_barang = 'IA' . Str::random(5);
-        $itemToSave->name = $request->name;
-        $itemToSave->description = $request->description;
-        $itemToSave->save();
-    }
     /**
      * Display a listing of the resource.
      */
@@ -39,10 +31,8 @@ class ProductItemController extends Controller
      */
     public function store(Request $request)
     {
-        for ($i = 0; $i < (int)$request->qty; $i++) {
-            $productItem = new ProductItem;
-            $productItem->saveProductItem($productItem, $request);
-        }
+        $productItem = new ProductItem;
+        $productItem->saveProductItem($productItem, $request);
 
         return redirect()->back();
     }

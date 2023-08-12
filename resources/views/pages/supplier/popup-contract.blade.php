@@ -1,6 +1,7 @@
 <div aria-hidden="true"
     class="fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden p-4 md:inset-0"
     id="{{ $id }}" tabindex="-1">
+
     <div class="relative max-h-full w-full max-w-2xl">
         <div class="rounded-lg bg-white shadow">
             <x-modal.header title="{{ isset($item) ? 'Detail Contract ' . $item->supplier->name : 'Pasang contract' }}"
@@ -25,12 +26,19 @@
                                 class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
                                 name="supplier_id">
                                 <option>Pilih Supplier</option>
-                                @foreach ($suppliers as $supplier)
-                                    <option value="{{ $supplier->id }}"
-                                        @if (isset($item) && $item->id === $item->id) selected @endif>
-                                        {{ $supplier->name }}
+                                @if (isset($addSingleContract) && $addSingleContract)
+                                    <option value="{{ $supplierToAddContract->id }}" selected>
+                                        {{ $supplierToAddContract->name }}
                                     </option>
-                                @endforeach
+                                @else
+                                    @foreach ($suppliers as $supplier)
+                                        <option value="{{ $supplier->id }}"
+                                            @if (isset($item) && $item->id === $item->id) selected @endif>
+                                            {{ $supplier->name }}
+                                        </option>
+                                    @endforeach
+                                @endif
+
                             </select>
                         </div>
                     @endif
@@ -71,7 +79,8 @@
                         </label>
                         <input type="number" id="contract-value"
                             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-                            name="contract_value" value="{{ isset($item) ? $item->contract_value : '' }}" required>
+                            name="contract_value" min="1000" step="10"
+                            value="{{ isset($item) ? $item->contract_value : '' }}" required>
                     </div>
 
                     <div class="mb-6">

@@ -58,6 +58,7 @@
                             {{ $th }}
                         </th>
                     @endforeach
+                    <th>Supplier</th>
                     <th class="px-6 py-3"></th>
                 </tr>
             </thead>
@@ -86,6 +87,7 @@
                             <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"
                                 href="">Lihat</a>
                         </td>
+                        <td>{{ $item->supplier->name }}</td>
                         <td class="px-6 py-4">
                             <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"
                                 data-modal-show="editProduct{{ $loop->index }}"
@@ -103,7 +105,6 @@
                                         type="submit">Hapus</button>
                                 </form>
                             @endif
-
                         </td>
                     </tr>
                 @endforeach
@@ -111,6 +112,7 @@
         </table>
 
         @include('pages.product.popup-add', ['id' => 'addNewProduct'])
+
         @foreach ($products as $product)
             @include('pages.product.popup-add', [
                 'id' => 'editProduct' . $loop->index,

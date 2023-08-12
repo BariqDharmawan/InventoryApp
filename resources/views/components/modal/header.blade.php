@@ -1,7 +1,7 @@
 @props(['title', 'isCloseAble' => true, 'idModal'])
 
 <div class="flex items-start justify-between rounded-t border-b p-4 dark:border-gray-600">
-    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+    <h3 class="text-xl font-semibold capitalize text-gray-900 dark:text-white">
         {{ $title }}
     </h3>
 

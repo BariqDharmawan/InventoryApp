@@ -27,7 +27,16 @@ class ContractSupplierController extends Controller
      */
     public function index()
     {
-        $ths = ['Supplier', 'Judul Kontrak', 'Tanggal Mulai', 'Tanggal Selesai', 'Value', 'Attachment'];
+        $ths = [
+            'Supplier',
+            'Judul Kontrak',
+            'Tanggal Mulai',
+            'Tanggal Selesai',
+            'Value',
+            'Attachment',
+            'Persetujuan',
+            'Lihat Produk'
+        ];
         $contractSupplier = ContractSupplier::with('supplier')->get();
 
         $suppliers = Supplier::all();

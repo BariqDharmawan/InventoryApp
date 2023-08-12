@@ -14,10 +14,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product_items', function (Blueprint $table) {
-            $table->string('kode_barang')->default('IA' . strtoupper(Str::random(5)));
+            $table->string('kode_barang')->default('IA' . strtoupper(Str::random(5)))->unique();
             $table->text('description');
             $table->timestamp('deleted_at')->nullable();
-            $table->integer('product_id');
+            $table->string('product_id');
             $table->timestamps();
         });
     }
