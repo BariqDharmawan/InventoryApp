@@ -14,10 +14,12 @@ class ProductController extends Controller
 {
     private function saveProduct($productToSave, $request)
     {
+        $productToSave->kode_barang = $request->kode_barang;
+
         if ($request->has('supplier_id')) {
             $productToSave->supplier_id = $request->supplier_id;
         }
-        $productToSave->id = $request->id;
+
         $productToSave->name = strtolower($request->name);
         $productToSave->unit = $request->unit;
         $productToSave->save();
@@ -46,9 +48,6 @@ class ProductController extends Controller
 
     public function index()
     {
-        $productItem = ProductItem::with('products')->whereNull('deleted_at')->get();
-        $units = Product::UNIT;
-
         $suppliers = Supplier::has('contractSupplier')->get();
         $contractSupplier = ContractSupplier::all();
 
@@ -56,8 +55,7 @@ class ProductController extends Controller
 
         return view('pages.product.index', [
             'ths' => Product::THS,
-            'productItem' => $productItem,
-            'units' => $units,
+            'units' => Product::UNIT,
             'suppliers' => $suppliers,
             'products' => $products,
             'procurementStatus' => Procurement::STATUS,
@@ -78,14 +76,7 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $ths = ['Kode Item', 'Deskripsi'];
-        $productItems = ProductItem::whereNull('deleted_at')->where('product_id', $product->id)->get();
-
-        return view('pages.product.detail', [
-            'product' => $product,
-            'productItems' => $productItems,
-            'ths' => $ths
-        ]);
+        //
     }
 
     public function update(Request $request, Product $product)

@@ -1,10 +1,8 @@
 <?php
 
-use App\Models\ProductItem;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Str;
 
 return new class extends Migration
 {
@@ -13,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_items', function (Blueprint $table) {
-            $table->string('kode_barang')->default('IA' . strtoupper(Str::random(5)))->unique();
-            $table->text('description');
-            $table->timestamp('deleted_at')->nullable();
+        Schema::create('penjualan', function (Blueprint $table) {
+            $table->id();
+            $table->date('tanggal');
+            $table->string('kode_barang');
             $table->string('product_id');
+            $table->integer('penjualan');
+            $table->bigInteger('harga');
+            $table->string('customer');
+            $table->string('invoice');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('penjualans');
     }
 };

@@ -19,11 +19,11 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $name = fake()->sentence(5);
         return [
-            'id' => 'IA' . Str::random(5),
+            'kode_barang' => 'IA' . Str::random(5),
             'name' => fake()->sentence(5),
             'unit' => fake()->randomElement(Product::UNIT),
+            'qty' => rand(100000, 1000000),
             'supplier_id' => Supplier::factory()
         ];
     }

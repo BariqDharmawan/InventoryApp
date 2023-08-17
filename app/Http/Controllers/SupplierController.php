@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContractSupplier;
+use App\Models\Procurement;
 use App\Models\Product;
+use App\Models\StockFlow;
 use App\Models\Supplier;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -27,15 +29,22 @@ class SupplierController extends Controller
     public function index()
     {
         $listSupplier = Supplier::all();
+
         $ths = [
             'Name',
             'Telephone',
             'Email',
             'Lihat Kontrak',
-            'Lihat Produk'
+            'Produk',
+            'Tambah Pengadaan'
         ];
 
-        return view('pages.supplier.index', ['listSupplier' => $listSupplier, 'ths' => $ths]);
+        return view('pages.supplier.index', [
+            'listSupplier' => $listSupplier,
+            'ths' => $ths,
+            'typeStock' => StockFlow::TYPE_FLOW,
+            'procurementStatus' => Procurement::STATUS,
+        ]);
     }
 
     public function show(Supplier $supplier)
@@ -83,6 +92,7 @@ class SupplierController extends Controller
         $products = Product::where('supplier_id', $supplierId)->get();
 
         return view('pages.product.index', [
+            'supplierId' => $supplierId,
             'products' => $products,
             'ths' => Product::THS,
             'units' => Product::UNIT

@@ -10,15 +10,11 @@ class Product extends Model
     use HasFactory;
 
     public $incrementing = false;
-    protected $fillable = ['name', 'unit'];
+    protected $primaryKey = 'kode_barang';
+    protected $fillable = ['kode_barang', 'name', 'unit', 'qty', 'supplier_id'];
 
     public const UNIT = ['pcs', 'box'];
     public const THS = ['Nama barang', 'QTY', 'Unit', 'Peramalan'];
-
-    public function productItems()
-    {
-        return $this->hasMany(ProductItem::class, 'product_id', 'id');
-    }
 
     public function procurement()
     {

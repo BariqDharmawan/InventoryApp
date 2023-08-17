@@ -16,13 +16,24 @@
 
                 <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:divide-gray-600 dark:bg-gray-700"
                     id="dropdownAction">
-                    <ul aria-labelledby="dropdownActionButton" class="py-1 text-sm text-gray-700 dark:text-gray-200">
-                        <li>
-                            <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                data-modal-show="addNewSupplier" data-modal-target="addNewSupplier" href="#">
-                                Tambah supplier
-                            </a>
-                        </li>
+                    <ul aria-labelledby="dropdownActionButton" class="py-1 text-sm text-gray-700">
+                        @php
+                            $menus = [
+                                [
+                                    'label' => 'Tambah supplier',
+                                    'popup' => 'addNewSupplier',
+                                ],
+                            ];
+                        @endphp
+
+                        @foreach ($menus as $menu)
+                            <li>
+                                <a class="block px-4 py-2 hover:bg-gray-100" data-modal-show="{{ $menu['popup'] }}"
+                                    data-modal-target="{{ $menu['popup'] }}" href="#">
+                                    {{ $menu['label'] }}
+                                </a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -30,12 +41,12 @@
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
-                <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+                <thead class="bg-gray-50 text-xs uppercase text-gray-700">
                     <tr>
                         <th class="p-4">
                             <div class="flex items-center">
                                 <input
-                                    class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 dark:focus:ring-offset-gray-800"
+                                    class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
                                     id="checkbox-all-search" type="checkbox">
                                 <label class="sr-only" for="checkbox-all-search">checkbox</label>
                             </div>
@@ -56,7 +67,9 @@
                                     <input
                                         class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 dark:focus:ring-offset-gray-800"
                                         id="checkbox-table-search-1" type="checkbox">
-                                    <label class="sr-only" for="checkbox-table-search-1">checkbox</label>
+                                    <label class="sr-only" for="checkbox-table-search-1">
+                                        checkbox
+                                    </label>
                                 </div>
                             </td>
                             <td class="px-6 py-4">
@@ -77,18 +90,24 @@
                                         Lihat Kontrak
                                     </a>
                                 @else
-                                    <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                                    <a class="font-medium text-blue-600 hover:underline"
                                         data-modal-show="addContract{{ $loop->index }}"
                                         data-modal-target="addContract{{ $loop->index }}" href="#"
                                         type="button">
                                         Buat Kontrak
                                     </a>
                                 @endif
-
                             </td>
                             <td>
-                                <a href="{{ route('suppliers.products', $supplier->id) }}">
+                                <a class="font-medium text-blue-600 hover:underline"
+                                    href="{{ route('suppliers.products', $supplier->id) }}">
                                     Lihat Produk
+                                </a>
+                            </td>
+                            <td>
+                                <a data-modal-show="addNewProcurement{{ $loop->index }}"
+                                    data-modal-target="addNewProcurement{{ $loop->index }}" href="#">
+                                    Tambah Pengadaan
                                 </a>
                             </td>
                         </tr>
@@ -112,6 +131,13 @@
             'id' => 'addContract' . $loop->index,
             'addSingleContract' => true,
             'supplierToAddContract' => $supplier,
+        ])
+
+        @include('pages.procurement.popup-add', [
+            'id' => 'addNewProcurement' . $loop->index,
+            'products' => $supplier->products,
+            'supplier' => $supplier,
+            'procurementStatus' => $procurementStatus,
         ])
     @endforeach
 </x-app-layout>

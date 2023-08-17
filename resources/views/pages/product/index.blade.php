@@ -1,6 +1,7 @@
 <x-app-layout title-app="Products">
 
     <div class="relative overflow-x-auto border shadow-md sm:rounded-lg">
+
         <div class="flex items-center justify-between bg-white p-4 dark:bg-gray-800">
             <div>
                 <button
@@ -14,7 +15,7 @@
                             stroke="currentColor" />
                     </svg>
                 </button>
-                <!-- Dropdown menu -->
+
                 <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:divide-gray-600 dark:bg-gray-700"
                     id="dropdownAction">
                     <ul aria-labelledby="dropdownActionButton" class="py-1 text-sm text-gray-700 dark:text-gray-200">
@@ -27,20 +28,8 @@
                     </ul>
                 </div>
             </div>
-            <label class="sr-only" for="table-search">Search</label>
-            <div class="relative">
-                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                    <svg aria-hidden="true" class="h-4 w-4 text-gray-500 dark:text-gray-400" fill="none"
-                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" stroke-linecap="round"
-                            stroke-linejoin="round" stroke-width="2" stroke="currentColor" />
-                    </svg>
-                </div>
-                <input
-                    class="block w-80 rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                    id="table-search-users" placeholder="Cari produk" type="text">
-            </div>
         </div>
+
 
         <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
             <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
@@ -78,14 +67,15 @@
                             {{ $item->name }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $item->productItems()->whereNull('deleted_at')->count() }}
+                            {{ number_format($item->qty) }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 uppercase">
                             {{ $item->unit }}
                         </td>
                         <td class="px-6 py-4">
-                            <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                                href="">Lihat</a>
+                            <a class="font-medium text-blue-600 hover:underline dark:text-blue-500" href="">
+                                Lihat
+                            </a>
                         </td>
                         <td>{{ $item->supplier->name }}</td>
                         <td class="px-6 py-4">
@@ -94,22 +84,20 @@
                                 data-modal-target="editProduct{{ $loop->index }}" href="#" type="button">Edit
                             </a>
                             <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                                href="{{ route('products.show', $item->id) }}">
+                                href="{{ route('products.show', $item) }}">
                                 Detail
                             </a>
-                            @if ($item->productItems()->whereNull('deleted_at')->count() === 0)
-                                <form action="{{ route('products.destroy', $item) }}" method="POST"
-                                    onsubmit="return confirm('are you sure?')">
-                                    @csrf @method('DELETE')
-                                    <button class="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                                        type="submit">Hapus</button>
-                                </form>
-                            @endif
+                            <form method="POST" onsubmit="return confirm('are you sure?')">
+                                @csrf @method('DELETE')
+                                <button class="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                                    type="submit">Hapus</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+
 
         @include('pages.product.popup-add', ['id' => 'addNewProduct'])
 
@@ -117,8 +105,10 @@
             @include('pages.product.popup-add', [
                 'id' => 'editProduct' . $loop->index,
                 'product' => $product,
+                'supplierId' => $supplierId,
             ])
         @endforeach
+
     </div>
 
 </x-app-layout>

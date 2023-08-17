@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             ContractSupplierSeeder::class,
             // ProcurementSeeder::class,
             // StockFlowSeeder::class,
+            PenjualanSeeder::class
         ]);
     }
 }

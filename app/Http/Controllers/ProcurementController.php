@@ -23,14 +23,12 @@ class ProcurementController extends Controller
         $flowIn = StockFlow::with(['product', 'procurement'])->where('type', 'masuk')->get();
         $flowOut = StockFlow::with(['procurement', 'product'])->where('type', 'keluar')->get();
 
-        $typeStock = StockFlow::TYPE_FLOW;
-
         $products = Product::all();
 
         return view('pages.procurement.index', [
             'ths' => $ths,
             'procurements' => $procurements,
-            'typeStock' => $typeStock,
+            'typeStock' => StockFlow::TYPE_FLOW,
             'products' => $products,
             'suppliers' => Supplier::all(),
             'procurementStatus' => Procurement::STATUS,
