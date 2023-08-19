@@ -35,15 +35,12 @@ class SupplierController extends Controller
             'Telephone',
             'Email',
             'Lihat Kontrak',
-            'Produk',
-            'Tambah Pengadaan'
         ];
 
         return view('pages.supplier.index', [
             'listSupplier' => $listSupplier,
             'ths' => $ths,
             'typeStock' => StockFlow::TYPE_FLOW,
-            'procurementStatus' => Procurement::STATUS,
         ]);
     }
 

@@ -40,6 +40,16 @@
             @php
                 $menus = [
                     [
+                        'icon' => 'product',
+                        'label' => 'Products',
+                        'href' => 'products.index',
+                    ],
+                    [
+                        'icon' => 'product',
+                        'label' => 'Penjualan',
+                        'href' => 'penjualan.index',
+                    ],
+                    [
                         'icon' => 'supplier',
                         'label' => 'Supplier',
                         'href' => 'suppliers.index',

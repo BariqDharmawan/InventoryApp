@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->string('kode_barang')->primary()->unique();
-            $table->string('name')->unique();
-            $table->enum('unit', Product::UNIT);
-            $table->integer('qty');
+        Schema::create('procurement_products', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('procurements_id');
+            $table->string('product_id');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('procurement_products');
     }
 };

@@ -11,7 +11,7 @@ class Product extends Model
 
     public $incrementing = false;
     protected $primaryKey = 'kode_barang';
-    protected $fillable = ['kode_barang', 'name', 'unit', 'qty', 'supplier_id'];
+    protected $fillable = ['kode_barang', 'name', 'unit', 'qty'];
 
     public const UNIT = ['pcs', 'box'];
     public const THS = ['Nama barang', 'QTY', 'Unit', 'Peramalan'];
@@ -24,10 +24,5 @@ class Product extends Model
     public function stockFlows()
     {
         return $this->hasMany(StockFlow::class, 'product_id', 'id');
-    }
-
-    public function supplier()
-    {
-        return $this->belongsTo(Supplier::class, 'supplier_id', 'id');
     }
 }

@@ -15,14 +15,8 @@ class Procurement extends Model
         'description',
         'qty',
         'price',
-        'contract_supplier_id',
-        'product_id',
-        'action_at',
-        'status',
         'users_id'
     ];
-
-    public const STATUS = ['approved', 'rejected'];
 
     protected $casts = [
         'action_at' => 'date:Y-m-d',
@@ -33,18 +27,8 @@ class Procurement extends Model
         return $this->hasOne(StockFlow::class, 'procurement_id', 'id');
     }
 
-    public function product()
-    {
-        return $this->belongsTo(Product::class, 'product_id', 'id');
-    }
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'users_id', 'id');
-    }
-
-    public function contractSupplier()
-    {
-        return $this->belongsTo(ContractSupplier::class, 'contract_supplier_id', 'id');
     }
 }

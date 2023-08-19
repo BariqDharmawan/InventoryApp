@@ -17,13 +17,13 @@
                 <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:divide-gray-600 dark:bg-gray-700"
                     id="dropdownAction">
                     <ul aria-labelledby="dropdownActionButton" class="py-1 text-sm text-gray-700 dark:text-gray-200">
-                        {{-- <li>
+                        <li>
                             <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                                 data-modal-show="addNewProcurement" data-modal-target="addNewProcurement"
-                                href="#">
+                                href="javascript:void(0)">
                                 Tambah pengadaan baru
                             </a>
-                        </li> --}}
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -42,19 +42,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($flowOut as $flow)
-                        @include('pages.procurement.row-data', ['flow' => $flow])
+                    @foreach ($procurements as $procurement)
+                        @include('pages.procurement.row-data', ['procurement' => $procurement])
                     @endforeach
                 </tbody>
             </table>
         </div>
 
-        {{-- @include('pages.procurement.popup-add', [
+        @include('pages.procurement.popup-add', [
             'id' => 'addNewProcurement',
             'products' => $products,
             'suppliers' => $suppliers,
-            'procurementStatus' => $procurementStatus,
-        ]) --}}
+        ])
 
     </div>
 </x-app-layout>

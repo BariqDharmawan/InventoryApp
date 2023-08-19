@@ -15,11 +15,7 @@ class ProductController extends Controller
     private function saveProduct($productToSave, $request)
     {
         $productToSave->kode_barang = $request->kode_barang;
-
-        if ($request->has('supplier_id')) {
-            $productToSave->supplier_id = $request->supplier_id;
-        }
-
+        $productToSave->qty = $request->qty;
         $productToSave->name = strtolower($request->name);
         $productToSave->unit = $request->unit;
         $productToSave->save();
@@ -48,18 +44,12 @@ class ProductController extends Controller
 
     public function index()
     {
-        $suppliers = Supplier::has('contractSupplier')->get();
-        $contractSupplier = ContractSupplier::all();
-
         $products = Product::latest('created_at')->get();
 
         return view('pages.product.index', [
             'ths' => Product::THS,
             'units' => Product::UNIT,
-            'suppliers' => $suppliers,
             'products' => $products,
-            'procurementStatus' => Procurement::STATUS,
-            'contractSupplier' => $contractSupplier,
         ]);
     }
 

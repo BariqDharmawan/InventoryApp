@@ -9,9 +9,9 @@ class Penjualan extends Model
 {
     use HasFactory;
 
+    protected $table = 'penjualan';
     protected $fillable = [
         'tanggal',
-        'kode_barang',
         'product_id',
         'penjualan',
         'harga',
@@ -19,5 +19,8 @@ class Penjualan extends Model
         'invoice'
     ];
 
-    protected $table = 'penjualan';
+    public function products()
+    {
+        return $this->hasOne(Product::class, 'id', 'product_id');
+    }
 }

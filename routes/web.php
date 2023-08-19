@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\StockFlowController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,9 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('procurement', ProcurementController::class);
     Route::resource('suppliers', SupplierController::class);
-    Route::get('supplier/{supplierId}/product', [SupplierController::class, 'products'])->name('suppliers.products');
     Route::resource('contract-supplier', ContractSupplierController::class);
     Route::resource('admin', AdminController::class);
+    Route::resource('penjualan', PenjualanController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

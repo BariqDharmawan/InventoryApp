@@ -47,8 +47,8 @@
                                 {{ 'Rp.' . number_format($contract->contract_value) }}
                             </td>
                             <td class="px-6 py-4">
-                                <a href="{{ Storage::url($contract->filename) }}" target="_blank"
-                                    class="text-blue-600 hover:underline dark:text-blue-500">
+                                <a class="text-blue-600 hover:underline dark:text-blue-500"
+                                    href="{{ Storage::url($contract->filename) }}" target="_blank">
                                     Lihat attachment
                                 </a>
                             </td>
@@ -56,20 +56,17 @@
                                 @if ($contract->start_date->format('Y-m-d') > date('Y-m-d'))
                                     <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"
                                         data-modal-show="editContract{{ $loop->index }}"
-                                        data-modal-target="editContract{{ $loop->index }}" href="#"
+                                        data-modal-target="editContract{{ $loop->index }}" href="javascript:void(0)"
                                         type="button">
                                         Ubah persetujuan
                                     </a>
                                 @endif
                                 <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"
                                     data-modal-show="detailContract{{ $loop->index }}"
-                                    data-modal-target="detailContract{{ $loop->index }}" href="#"
+                                    data-modal-target="detailContract{{ $loop->index }}" href="javascript:void(0)"
                                     type="button">
                                     Detail Persetujuan
                                 </a>
-                            </td>
-                            <td>
-                                <a href="{{ route('suppliers.products', $contract->supplier->id) }}">Lihat Produk</a>
                             </td>
                         </tr>
                     @endforeach

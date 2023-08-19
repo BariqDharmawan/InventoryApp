@@ -14,14 +14,9 @@ return new class extends Migration
     {
         Schema::create('procurements', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
             $table->text('description');
-            $table->string('qty');
-            $table->string('price');
-            $table->string('contract_supplier_id');
-            $table->string('product_id');
-            $table->timestamp('action_at');
-            $table->enum('status', Procurement::STATUS);
+            $table->integer('qty');
+            $table->bigInteger('price');
             $table->integer('users_id');
             $table->timestamps();
         });

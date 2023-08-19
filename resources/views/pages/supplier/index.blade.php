@@ -3,7 +3,7 @@
         <div class="flex items-center justify-between bg-white p-4 dark:bg-gray-800">
             <div>
                 <button
-                    class="inline-flex items-center rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+                    class="inline-flex items-center rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 "
                     data-dropdown-toggle="dropdownAction" id="dropdownActionButton" type="button">
                     <span class="sr-only">Action button</span>
                     Action
@@ -29,7 +29,7 @@
                         @foreach ($menus as $menu)
                             <li>
                                 <a class="block px-4 py-2 hover:bg-gray-100" data-modal-show="{{ $menu['popup'] }}"
-                                    data-modal-target="{{ $menu['popup'] }}" href="#">
+                                    data-modal-target="{{ $menu['popup'] }}" href="javascript:void(0)">
                                     {{ $menu['label'] }}
                                 </a>
                             </li>
@@ -85,30 +85,16 @@
                                 @if ($supplier->contractSupplier->count() > 0)
                                     <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"
                                         data-modal-show="lihatKontrak{{ $loop->index }}"
-                                        data-modal-target="lihatKontrak{{ $loop->index }}" href="#"
-                                        type="button">
+                                        data-modal-target="lihatKontrak{{ $loop->index }}" href="javascript:void(0)">
                                         Lihat Kontrak
                                     </a>
                                 @else
                                     <a class="font-medium text-blue-600 hover:underline"
                                         data-modal-show="addContract{{ $loop->index }}"
-                                        data-modal-target="addContract{{ $loop->index }}" href="#"
-                                        type="button">
+                                        data-modal-target="addContract{{ $loop->index }}" href="javascript:void(0)">
                                         Buat Kontrak
                                     </a>
                                 @endif
-                            </td>
-                            <td>
-                                <a class="font-medium text-blue-600 hover:underline"
-                                    href="{{ route('suppliers.products', $supplier->id) }}">
-                                    Lihat Produk
-                                </a>
-                            </td>
-                            <td>
-                                <a data-modal-show="addNewProcurement{{ $loop->index }}"
-                                    data-modal-target="addNewProcurement{{ $loop->index }}" href="#">
-                                    Tambah Pengadaan
-                                </a>
                             </td>
                         </tr>
                     @endforeach
@@ -131,13 +117,6 @@
             'id' => 'addContract' . $loop->index,
             'addSingleContract' => true,
             'supplierToAddContract' => $supplier,
-        ])
-
-        @include('pages.procurement.popup-add', [
-            'id' => 'addNewProcurement' . $loop->index,
-            'products' => $supplier->products,
-            'supplier' => $supplier,
-            'procurementStatus' => $procurementStatus,
         ])
     @endforeach
 </x-app-layout>

@@ -5,41 +5,33 @@
         <form action="{{ route('procurement.store') }}" class="relative rounded-lg bg-white shadow dark:bg-gray-700"
             method="POST">
             @csrf
-            <x-modal.header id-modal="{{ $id }}" title="Tambah Procurement" />
+            <x-modal.header id-modal="{{ $id }}" title="Tambah Pengadaan" />
 
             <div class="p-6">
                 <div class="mb-6">
                     <label class="mb-2 block text-sm font-medium text-gray-900 " for="supplier">
                         Supplier
                     </label>
-                    <input
-                        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5
-                    text-sm"
-                        readonly required type="text" value="{{ $supplier->name }}">
-                    <input name="supplier_id" type="hidden" value="{{ $supplier->id }}">
-                </div>
-
-                <div class="mb-6">
-                    <label class="mb-2 block text-sm font-medium text-gray-900 " for="product_id">
-                        Pilih Product
-                    </label>
-                    <select
-                        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 "
-                        id="product_id" multiple name="product_id">
-                        @foreach ($products as $product)
-                            <option value="{{ $product->id }}">{{ $product->name }}</option>
+                    <select class="basic-select" id="add-supplier" name="supplier" placeholder="Pilih Supplier"
+                        required>
+                        <option value="">Pilih Supplier</option>
+                        @foreach ($suppliers as $supplier)
+                            <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
                         @endforeach
                     </select>
-
                 </div>
+
                 <div class="mb-6">
-                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white" for="title">
-                        Judul Procurement
+                    <label class="mb-2 block text-sm font-medium text-gray-900 " for="add-product">
+                        Product
                     </label>
-                    <input
-                        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5
-                        text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-                        id="title" name="title" type="text">
+                    <select class="basic-select" id="add-product" multiple name="product_id[]"
+                        placeholder="Pilih Product" required>
+                        <option value="">Pilih Product</option>
+                        @foreach ($products as $product)
+                            <option value="{{ $product->kode_barang }}">{{ $product->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="grid grid-cols-2 gap-6">
@@ -49,7 +41,7 @@
                         </label>
                         <input
                             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-                            id="qty" name="qty" required type="number">
+                            id="qty" min="1" name="qty" required type="number">
                     </div>
                     <div class="mb-6">
                         <label class="mb-2 block text-sm font-medium text-gray-900 " for="price">
@@ -61,53 +53,14 @@
                     </div>
                 </div>
 
-                <div class="mb-6">
-                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white" for="description">
-                        Status Pengadaan
-                    </label>
-                    <div class="flex gap-6">
-                        @foreach ($procurementStatus as $eachStatus)
-                            <div class="mb-4 flex items-center">
-                                <input checked class="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-blue-300"
-                                    id="country-option-1" name="status" type="radio" value="{{ $eachStatus }}">
-                                <label
-                                    class="ml-2 block text-sm font-medium capitalize text-gray-900 dark:text-gray-300"
-                                    for="country-option-1">
-                                    {{ $eachStatus }}
-                                </label>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
 
                 <div class="mb-6">
-                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white" for="name">
-                        Tipe Flow
-                    </label>
-
-                    <div class="flex gap-6">
-                        @foreach ($typeStock as $type)
-                            <div class="mb-4 flex items-center">
-                                <input
-                                    class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-                                    id="type-{{ $type }}" name="type" type="radio"
-                                    value="{{ $type }}">
-                                <label class="ml-2 text-sm font-medium capitalize text-gray-900 dark:text-gray-300"
-                                    for="type-{{ $type }}">
-                                    {{ $type }}
-                                </label>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-
-                <div class="mb-6 flex">
                     <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white" for="date">
                         Waktu Aktivitas
                     </label>
                     <input
-                        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-sm focus:border-blue-600 focus:ring-blue-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                        id="date" name="date" required type="datetime-local">
+                        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-sm focus:border-blue-600 focus:ring-blue-600"
+                        id="date" name="date" required type="datetime-local" value="{{ date('Y-m-d H:i') }}">
                 </div>
 
 

@@ -23,14 +23,9 @@ class ProcurementFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->word(10),
             'description' => fake()->paragraph(5),
             'qty' => rand(100, 1000),
             'price' => fake()->numberBetween(1000000, 100000000),
-            'contract_supplier_id' => ContractSupplier::factory(),
-            'product_id' => Product::factory(),
-            'action_at' => fake()->dateTimeBetween('-30 days', 'now'),
-            'status' => fake()->randomElement(Procurement::STATUS),
             'users_id' => User::factory()
         ];
     }
