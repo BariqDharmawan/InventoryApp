@@ -9,15 +9,15 @@ class ProcurementProduct extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['procurements_id', 'product_id'];
+    protected $fillable = ['procurement_id', 'product_id'];
 
     public function product()
     {
-        return $this->belongsTo(Product::class, 'product_id', 'id');
+        return $this->belongsTo(Product::class, 'product_id', 'kode_barang');
     }
 
     public function procurement()
     {
-        return $this->belongsTo(Procurement::class, 'procurements_id', 'id');
+        return $this->belongsTo(Procurement::class, 'procurement_id', 'id');
     }
 }

@@ -18,12 +18,12 @@ class ProcurementController extends Controller
      */
     public function index()
     {
-        $procurements = Procurement::with('user')->get();
+        $procurements = Procurement::with(['user', 'procurementProducts', 'supplier'])->latest('action_at')->get();
         $products = Product::all();
 
         return view('pages.procurement.index', [
             'ths' => [
-                'Tanggal Aktivitas', 'Supplier', 'QTY', 'Nama Pengadaan', 'Detail'
+                'Tanggal Aktivitas', 'Supplier', 'QTY', 'Detail'
             ],
             'products' => $products,
             'procurements' => $procurements,
@@ -45,16 +45,17 @@ class ProcurementController extends Controller
     public function store(Request $request)
     {
         $procurement = Procurement::create([
+            'supplier_id' => $request->supplier_id,
             'description' => $request->description,
-            'qty' => $request->qty,
             'price' => $request->price,
             'users_id' => auth()->id(),
+            'action_at' => $request->action_at
         ]);
 
         foreach ($request->product_id as $productId) {
             ProcurementProduct::create([
                 'product_id' => $productId,
-                'procurements_id' => $procurement->id
+                'procurement_id' => $procurement->id
             ]);
         }
 

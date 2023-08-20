@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Procurement;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,9 +14,10 @@ return new class extends Migration
         Schema::create('procurements', function (Blueprint $table) {
             $table->id();
             $table->text('description');
-            $table->integer('qty');
             $table->bigInteger('price');
             $table->integer('users_id');
+            $table->integer('supplier_id');
+            $table->timestamp('action_at');
             $table->timestamps();
         });
     }

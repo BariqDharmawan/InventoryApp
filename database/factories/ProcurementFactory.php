@@ -24,9 +24,10 @@ class ProcurementFactory extends Factory
     {
         return [
             'description' => fake()->paragraph(5),
-            'qty' => rand(100, 1000),
             'price' => fake()->numberBetween(1000000, 100000000),
-            'users_id' => User::factory()
+            'users_id' => User::factory(),
+            'supplier_id' => Supplier::factory(),
+            'action_at' => now()
         ];
     }
 }

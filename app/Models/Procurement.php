@@ -5,24 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Procurement extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
         'description',
-        'qty',
         'price',
-        'users_id'
+        'users_id',
+        'supplier_id',
+        'action_at'
     ];
 
     protected $casts = [
         'action_at' => 'date:Y-m-d',
     ];
 
-    public function stockFlow()
+    public function stockFlow(): HasOne
     {
         return $this->hasOne(StockFlow::class, 'procurement_id', 'id');
     }
@@ -30,5 +32,15 @@ class Procurement extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'users_id', 'id');
+    }
+
+    public function procurementProducts(): HasMany
+    {
+        return $this->hasMany(ProcurementProduct::class, 'procurement_id', 'id');
+    }
+
+    public function supplier(): BelongsTo
+    {
+        return $this->belongsTo(Supplier::class, 'supplier_id', 'id');
     }
 }

@@ -13,10 +13,16 @@ class PenjualanController extends Controller
      */
     public function index()
     {
-        $sales = Penjualan::with('products')->get();
-        dd($sales);
+        $sales = Penjualan::with('product')->get();
 
-        return view('pages.penjualan.index', ['sales' => $sales]);
+        return view('pages.penjualan.index', ['sales' => $sales, 'ths' => [
+            'tanggal',
+            'kode barang',
+            'penjualan',
+            'harga',
+            'customer',
+            'invoice'
+        ]]);
     }
 
     /**

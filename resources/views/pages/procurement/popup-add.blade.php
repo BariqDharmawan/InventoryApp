@@ -9,10 +9,10 @@
 
             <div class="p-6">
                 <div class="mb-6">
-                    <label class="mb-2 block text-sm font-medium text-gray-900 " for="supplier">
+                    <label class="mb-2 block text-sm font-medium text-gray-900 " for="supplier-id">
                         Supplier
                     </label>
-                    <select class="basic-select" id="add-supplier" name="supplier" placeholder="Pilih Supplier"
+                    <select class="basic-select" id="supplier-id" name="supplier_id" placeholder="Pilih Supplier"
                         required>
                         <option value="">Pilih Supplier</option>
                         @foreach ($suppliers as $supplier)
@@ -36,33 +36,26 @@
 
                 <div class="grid grid-cols-2 gap-6">
                     <div class="mb-6">
-                        <label class="mb-2 block text-sm font-medium text-gray-900 " for="qty">
-                            QTY
+                        <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white" for="action-at">
+                            Waktu Aktivitas
                         </label>
                         <input
-                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-                            id="qty" min="1" name="qty" required type="number">
+                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-sm focus:border-blue-600 focus:ring-blue-600"
+                            id="action-at" name="action_at" required type="datetime-local"
+                            value="{{ date('Y-m-d H:i') }}">
                     </div>
                     <div class="mb-6">
                         <label class="mb-2 block text-sm font-medium text-gray-900 " for="price">
                             Price
                         </label>
-                        <input
-                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-                            id="price" name="price" required type="number">
+                        <div
+                            class="flex border border-gray-300 overflow-hidden rounded-lg focus-within:border-blue-500 focus-within:ring-blue-500">
+                            <span class="p-2  bg-gray-50 ">Rp.</span>
+                            <input class="block w-full  border-0 bg-gray-50 p-2.5 text-sm text-gray-900 focus:ring-0"
+                                id="price" min="100" name="price" required step="10" type="number">
+                        </div>
                     </div>
                 </div>
-
-
-                <div class="mb-6">
-                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white" for="date">
-                        Waktu Aktivitas
-                    </label>
-                    <input
-                        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-sm focus:border-blue-600 focus:ring-blue-600"
-                        id="date" name="date" required type="datetime-local" value="{{ date('Y-m-d H:i') }}">
-                </div>
-
 
                 <div class="mb-6">
                     <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white" for="description">

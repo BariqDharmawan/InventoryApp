@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Procurement;
+use App\Models\ProcurementProduct;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,6 +14,6 @@ class ProcurementSeeder extends Seeder
      */
     public function run(): void
     {
-        Procurement::factory()->count(50)->create();
+        Procurement::factory()->has(ProcurementProduct::factory()->count(2))->count(50)->create();
     }
 }

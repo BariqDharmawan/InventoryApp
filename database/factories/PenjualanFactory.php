@@ -13,9 +13,6 @@ class PenjualanFactory extends Factory
         return [
             'product_id' => Product::factory(),
             'tanggal' => fake()->date(),
-            'kode_barang' => function (array $attributes) {
-                return Product::find($attributes['product_id'])->kode_barang;
-            },
             'penjualan' => rand(10, 999),
             'harga' => rand(1000000, 100000000),
             'customer' => fake()->sentence(10),
