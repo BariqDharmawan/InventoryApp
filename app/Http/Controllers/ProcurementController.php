@@ -18,7 +18,9 @@ class ProcurementController extends Controller
      */
     public function index()
     {
-        $procurements = Procurement::with(['user', 'procurementProducts', 'supplier'])->latest('action_at')->get();
+        $procurements = Procurement::with([
+            'user', 'procurementProducts', 'supplier'
+        ])->latest('action_at')->get();
         $products = Product::all();
 
         return view('pages.procurement.index', [
@@ -31,33 +33,39 @@ class ProcurementController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $procurement = Procurement::create([
             'supplier_id' => $request->supplier_id,
             'description' => $request->description,
-            'price' => $request->price,
             'users_id' => auth()->id(),
+            'price' => 0,
             'action_at' => $request->action_at
         ]);
 
-        foreach ($request->product_id as $productId) {
+        $priceProductSelected = [];
+        foreach ($request->product_id as $index => $productId) {
             ProcurementProduct::create([
                 'product_id' => $productId,
                 'procurement_id' => $procurement->id
             ]);
+
+            $product = Product::where('kode_barang', $request->product_id)->first();
+
+            $product->qty = $product->qty + $request->qty_selected_product[$index];
+            $product->save();
+
+            $priceProductSelected[] = $product->harga_satuan;
         }
+
+        $procurement->update([
+            'price' => array_sum($priceProductSelected)
+        ]);
 
         return redirect()->back()->with('success', 'Berhasil mencatat pengadaan ' . $request->title);
     }
