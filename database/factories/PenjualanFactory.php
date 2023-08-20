@@ -14,7 +14,6 @@ class PenjualanFactory extends Factory
             'product_id' => Product::factory(),
             'tanggal' => fake()->date(),
             'penjualan' => rand(10, 999),
-            'harga' => rand(1000000, 100000000),
             'customer' => fake()->sentence(10),
             'invoice' => fake()->word(10)
         ];

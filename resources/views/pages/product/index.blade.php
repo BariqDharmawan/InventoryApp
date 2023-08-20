@@ -71,6 +71,9 @@
                             {{ $item->unit }}
                         </td>
                         <td class="px-6 py-4">
+                            {{ 'Rp. ' . number_format($item->harga_satuan) }}
+                        </td>
+                        <td class="px-6 py-4">
                             <a class="font-medium text-blue-600 hover:underline" href="">
                                 Lihat
                             </a>

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('kode_barang')->primary()->unique();
             $table->string('name')->unique();
             $table->enum('unit', Product::UNIT);
+            $table->bigInteger('harga_satuan');
             $table->integer('qty');
             $table->timestamps();
         });

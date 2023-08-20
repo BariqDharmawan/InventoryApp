@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Penjualan;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -13,13 +14,13 @@ class PenjualanController extends Controller
      */
     public function index()
     {
-        $sales = Penjualan::with('product')->get();
+        $sales = Penjualan::with('product')->latest('tanggal')->get();
+        $products = Product::orderBy('name', 'asc')->get();
 
-        return view('pages.penjualan.index', ['sales' => $sales, 'ths' => [
+        return view('pages.penjualan.index', ['sales' => $sales, 'products' => $products, 'ths' => [
             'tanggal',
             'kode barang',
             'penjualan',
-            'harga',
             'customer',
             'invoice'
         ]]);
@@ -38,14 +39,15 @@ class PenjualanController extends Controller
      */
     public function store(Request $request)
     {
-        Penjualan::create([
-            'tanggal' => $request->tanggal,
+        $penjualan = Penjualan::create([
+            'tanggal' => $request->has('tanggal') ? $request->tanggal : now(),
             'product_id' => $request->product_id,
             'penjualan' => $request->penjualan,
-            'harga' => $request->harga,
             'customer' => $request->customer,
             'invoice' => 'IV' . Str::random(10)
         ]);
+
+        return redirect()->back()->with('success', "Berhasil menambah penjualan $penjualan->product->kode_barang");
     }
 
     /**

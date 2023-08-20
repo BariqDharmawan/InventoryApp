@@ -50,6 +50,7 @@
                                 id="name" name="name" placeholder="Masukan nama product" required type="text"
                                 value="{{ isset($productPopup) ? $productPopup->name : '' }}">
                         </div>
+
                         <div class="col-span-3">
                             <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                                 for="last-name">Unit</label>
@@ -65,6 +66,17 @@
                                     </option>
                                 @endforeach
                             </select>
+                        </div>
+
+                        <div class="col-span-6">
+                            <label class="mb-2 block text-sm font-medium text-gray-900 " for="name">
+                                Harga Satuan
+                            </label>
+                            <input
+                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-sm focus:border-blue-600 focus:ring-blue-600 "
+                                id="name" min="10" name="harga_satuan" placeholder="Masukan harga satuan"
+                                required step="10" type="number"
+                                value="{{ isset($productPopup) ? $productPopup->harga_satuan : '' }}">
                         </div>
                     </div>
                 </div>

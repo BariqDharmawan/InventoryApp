@@ -16,7 +16,6 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('product_id');
             $table->integer('penjualan');
-            $table->bigInteger('harga');
             $table->string('customer');
             $table->string('invoice');
             $table->timestamps();

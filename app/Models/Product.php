@@ -11,10 +11,10 @@ class Product extends Model
 
     public $incrementing = false;
     protected $primaryKey = 'kode_barang';
-    protected $fillable = ['kode_barang', 'name', 'unit', 'qty'];
+    protected $fillable = ['kode_barang', 'name', 'unit', 'qty', 'harga_satuan'];
 
     public const UNIT = ['pcs', 'box'];
-    public const THS = ['Nama barang', 'QTY', 'Unit', 'Peramalan'];
+    public const THS = ['Nama barang', 'QTY', 'Unit', 'Harga Satuan', 'Peramalan'];
 
     public function procurement()
     {

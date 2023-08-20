@@ -16,6 +16,7 @@ class ProductController extends Controller
     {
         $productToSave->kode_barang = $request->kode_barang;
         $productToSave->qty = $request->qty;
+        $productToSave->harga_satuan = $request->harga_satuan;
         $productToSave->name = strtolower($request->name);
         $productToSave->unit = $request->unit;
         $productToSave->save();

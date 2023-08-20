@@ -23,6 +23,7 @@ class ProductFactory extends Factory
             'kode_barang' => 'IA' . Str::random(5),
             'name' => fake()->sentence(5),
             'unit' => fake()->randomElement(Product::UNIT),
+            'harga_satuan' => rand(100000, 1000000),
             'qty' => rand(100000, 1000000)
         ];
     }

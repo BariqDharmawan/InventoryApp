@@ -14,7 +14,6 @@ class Penjualan extends Model
         'tanggal',
         'product_id',
         'penjualan',
-        'harga',
         'customer',
         'invoice',
     ];
