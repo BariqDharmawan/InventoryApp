@@ -56,8 +56,7 @@
                             </td>
                             <td class="px-6 py-4">
                                 <a class="font-medium text-blue-600 hover:underline"
-                                    data-modal-show="detailProcurement{{ $loop->index }}"
-                                    data-modal-target="detailProcurement{{ $loop->index }}" href="javascript:void(0)">
+                                    href="{{ route('procurement.show', $procurement->id) }}">
                                     Lihat Detail
                                 </a>
                             </td>
@@ -67,12 +66,6 @@
                 </tbody>
             </table>
         </div>
-
-        @foreach ($procurements as $procurementPopup)
-            @include('pages.procurement.popup-detail', [
-                'id' => 'detailProcurement' . $loop->index,
-            ])
-        @endforeach
 
         @include('pages.procurement.popup-add', [
             'id' => 'addNewProcurement',

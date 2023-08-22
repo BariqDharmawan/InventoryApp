@@ -23,6 +23,8 @@ class LogStockFactory extends Factory
 
         return [
             'product_id' => Product::factory(),
+            'type_log' => 'penjualan',
+            'activity_id' => Penjualan::factory(),
             'activity_desc' => function (array $attributes) use ($dummyQTYPenjualan) {
                 return "Penjualan Barang Dengan Kode " .
                     Product::find($attributes['product_id'])->kode_barang . " sebanyak " . $dummyQTYPenjualan . " qty";

@@ -24,7 +24,7 @@ class ProductController extends Controller
     {
         return view('pages.product.log', [
             'logs' => LogStock::latest('action_at')->get(),
-            'ths' => ['Product', 'Deskripsi', 'Tanggal Aktivitas']
+            'ths' => ['Product', 'Deskripsi', 'Tanggal Aktivitas', 'Detail']
         ]);
     }
 

@@ -19,6 +19,10 @@ class Penjualan extends Model
         'invoice',
     ];
 
+    protected $casts = [
+        'tanggal' => 'date:Y-m-d',
+    ];
+
     public function dummyQTYPenjualan()
     {
         return rand(10, 999);

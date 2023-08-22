@@ -39,7 +39,6 @@ class SupplierController extends Controller
         return view('pages.supplier.index', [
             'listSupplier' => $listSupplier,
             'ths' => $ths,
-            'typeStock' => StockFlow::TYPE_FLOW,
         ]);
     }
 

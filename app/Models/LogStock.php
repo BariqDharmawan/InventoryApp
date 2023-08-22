@@ -10,7 +10,7 @@ class LogStock extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['product_id', 'activity_desc', 'action_at'];
+    protected $fillable = ['product_id', 'activity_desc', 'type_log', 'activity_id', 'action_at'];
 
     public function product(): BelongsTo
     {

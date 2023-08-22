@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContractSupplier;
+use App\Models\LogStock;
 use App\Models\Procurement;
 use App\Models\ProcurementProduct;
 use App\Models\Product;
@@ -55,12 +56,20 @@ class ProcurementController extends Controller
                 'procurement_id' => $procurement->id
             ]);
 
-            $product = Product::where('kode_barang', $request->product_id)->first();
+            $product = Product::where('kode_barang', $productId)->first();
 
-            $product->qty = $product->qty + $request->qty_selected_product[$index];
+            $product->qty = $product->qty + (int)$request->qty_selected_product[$index];
             $product->save();
 
             $priceProductSelected[] = $product->harga_satuan;
+
+            LogStock::create([
+                'activity_id' => $procurement->id,
+                'type_log' => 'procurement',
+                'product_id' => $productId,
+                'activity_desc' => "Pengadaan Barang Dengan Kode $product->kode_barang sebanyak" . (int)$request->qty_selected_product[$index] . " qty",
+                'action_at' => $request->action_at
+            ]);
         }
 
         $procurement->update([
@@ -75,7 +84,7 @@ class ProcurementController extends Controller
      */
     public function show(Procurement $procurement)
     {
-        //
+        return view('pages.procurement.detail', ['procurement' => $procurement]);
     }
 
     /**

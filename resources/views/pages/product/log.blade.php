@@ -22,6 +22,12 @@
                         <td class="px-6 py-4">
                             {{ $log->action_at->format('d M Y H:i') }} WIB
                         </td>
+                        <td class="px-6 py-4">
+                            <a class="font-medium text-blue-600 hover:underline"
+                                href="{{ $log->type_log === 'penjualan' ? route('penjualan.show', $log->id) : route('procurement.show', $log->id) }}">
+                                Lihat detail
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

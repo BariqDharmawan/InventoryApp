@@ -55,6 +55,8 @@ class PenjualanController extends Controller
         ]);
 
         LogStock::create([
+            'type_log' => 'penjualan',
+            'activity_id' => $penjualan->id,
             'product_id' => $request->product_id,
             'activity_desc' => "Penjualan Barang Dengan Kode $productToSell->kode_barang sebanyak $request->penjualan qty",
             'action_at' => $actionAt
@@ -69,7 +71,7 @@ class PenjualanController extends Controller
     public function show(string $id)
     {
         $sale = Penjualan::findOrFail($id);
-        return view('pages.penjualan.detail', ['penjualan' => $sale]);
+        return view('pages.penjualan.detail', ['sale' => $sale]);
     }
 
     /**

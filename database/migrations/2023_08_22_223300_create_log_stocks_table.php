@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('product_id');
             $table->text('activity_desc');
+            $table->enum('type_log', ['procurement', 'penjualan']);
+            $table->integer('activity_id');
             $table->timestamp('action_at');
             $table->timestamps();
         });
