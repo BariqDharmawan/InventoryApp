@@ -81,21 +81,7 @@
                             <td class="px-6 py-4">
                                 {{ $supplier->email }}
                             </td>
-                            <td class="px-6 py-4">
-                                @if ($supplier->contractSupplier->count() > 0)
-                                    <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                                        data-modal-show="lihatKontrak{{ $loop->index }}"
-                                        data-modal-target="lihatKontrak{{ $loop->index }}" href="javascript:void(0)">
-                                        Lihat Kontrak
-                                    </a>
-                                @else
-                                    <a class="font-medium text-blue-600 hover:underline"
-                                        data-modal-show="addContract{{ $loop->index }}"
-                                        data-modal-target="addContract{{ $loop->index }}" href="javascript:void(0)">
-                                        Buat Kontrak
-                                    </a>
-                                @endif
-                            </td>
+
                         </tr>
                     @endforeach
                 </tbody>

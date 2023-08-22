@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContractSupplier;
+use App\Models\LogStock;
 use App\Models\Procurement;
 use App\Models\Product;
-use App\Models\ProductItem;
-use App\Models\StockFlow;
-use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -22,25 +20,12 @@ class ProductController extends Controller
         $productToSave->save();
     }
 
-    public function stockFlow()
+    public function logStock()
     {
-        $ths = ['Nama Produk',  'Qty', 'Tanggal', 'Nama Procurement'];
-        $products = Product::all();
-
-        $flowIn = StockFlow::with(['product', 'procurement'])->where('type', 'masuk')->latest('date')->get();
-        $flowOut = StockFlow::with(['product', 'procurement'])->where('type', 'keluar')->latest('date')->get();
-
-        return view('pages.product.stock-flow', [
-            'products' => $products,
-            'flowIn' => $flowIn,
-            'flowOut' => $flowOut,
-            'ths' => $ths,
+        return view('pages.product.log', [
+            'logs' => LogStock::latest('action_at')->get(),
+            'ths' => ['Product', 'Deskripsi', 'Tanggal Aktivitas']
         ]);
-    }
-
-    public function stockPrediction($id)
-    {
-        return view('pages.product.stock-prediction', ['id' => $id]);
     }
 
     public function index()

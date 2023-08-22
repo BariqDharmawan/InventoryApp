@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\StockFlow;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stock_flows', function (Blueprint $table) {
+        Schema::create('log_stocks', function (Blueprint $table) {
             $table->id();
             $table->string('product_id');
-            $table->enum('type', StockFlow::TYPE_FLOW);
-            $table->timestamp('date');
-            $table->bigInteger('qty');
-            $table->integer('procurement_id');
+            $table->text('activity_desc');
+            $table->timestamp('action_at');
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stock_flows');
+        Schema::dropIfExists('log_stocks');
     }
 };

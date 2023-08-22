@@ -6,7 +6,7 @@
         <ul>
             <li class="flex gap-4 items-center mb-4">
                 <span class="font-bold">TANGGAL AKTIVITAS</span>
-                <span>{{ $procurementPopup->action_at->format('d M Y H:i') }}</span>
+                <span>{{ $procurementPopup->action_at->format('d M Y H:i') }} WIB</span>
             </li>
             <li class="flex gap-4 items-center mb-4">
                 <span class="font-bold">SUPPLIER</span>

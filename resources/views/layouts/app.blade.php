@@ -50,6 +50,11 @@
                         'href' => 'penjualan.index',
                     ],
                     [
+                        'icon' => 'product',
+                        'label' => 'Stock Flow',
+                        'href' => 'products.log',
+                    ],
+                    [
                         'icon' => 'supplier',
                         'label' => 'Supplier',
                         'href' => 'suppliers.index',

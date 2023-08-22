@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LogStock;
 use App\Models\Penjualan;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -39,12 +40,24 @@ class PenjualanController extends Controller
      */
     public function store(Request $request)
     {
+        $productToSell = Product::findOrFail($request->product_id);
+        $productToSell->qty = $productToSell->qty - $request->penjualan;
+        $productToSell->save();
+
+        $actionAt = $request->has('tanggal') ? $request->tanggal : now();
+
         $penjualan = Penjualan::create([
-            'tanggal' => $request->has('tanggal') ? $request->tanggal : now(),
+            'tanggal' => $actionAt,
             'product_id' => $request->product_id,
             'penjualan' => $request->penjualan,
             'customer' => $request->customer,
             'invoice' => 'IV' . Str::random(10)
+        ]);
+
+        LogStock::create([
+            'product_id' => $request->product_id,
+            'activity_desc' => "Penjualan Barang Dengan Kode $productToSell->kode_barang sebanyak $request->penjualan qty",
+            'action_at' => $actionAt
         ]);
 
         return redirect()->back()->with('success', "Berhasil menambah penjualan $penjualan->product->kode_barang");

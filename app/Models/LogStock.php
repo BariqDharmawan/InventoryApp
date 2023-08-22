@@ -6,26 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Penjualan extends Model
+class LogStock extends Model
 {
     use HasFactory;
 
-    protected $table = 'penjualan';
-    protected $fillable = [
-        'tanggal',
-        'product_id',
-        'penjualan',
-        'customer',
-        'invoice',
-    ];
-
-    public function dummyQTYPenjualan()
-    {
-        return rand(10, 999);
-    }
+    protected $fillable = ['product_id', 'activity_desc', 'action_at'];
 
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class, 'product_id', 'kode_barang');
     }
+
+    protected $casts = [
+        'action_at' => 'datetime:Y-m-d H:i',
+    ];
 }

@@ -25,7 +25,7 @@
                     </label>
                     <input
                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-sm focus:border-blue-600 focus:ring-blue-600"
-                        id="action-at" max="{{ date('Y-m-d') }}" name="tanggal" required type="date">
+                        id="action-at" max="{{ date('Y-m-d H:i') }}" name="tanggal" required type="datetime-local">
                     <small class="text-gray-500">Satuan mengikuti produk yang dipilih</small>
                 </div>
 
