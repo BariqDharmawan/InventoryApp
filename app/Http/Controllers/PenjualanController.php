@@ -6,6 +6,7 @@ use App\Models\LogStock;
 use App\Models\Penjualan;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 
 class PenjualanController extends Controller
@@ -22,8 +23,7 @@ class PenjualanController extends Controller
             'tanggal',
             'nama barang',
             'penjualan',
-            'customer',
-            'invoice'
+            'customer'
         ]]);
     }
 
@@ -61,6 +61,8 @@ class PenjualanController extends Controller
             'activity_desc' => "Penjualan Barang Dengan Kode $productToSell->kode_barang sebanyak $request->penjualan qty",
             'action_at' => $actionAt
         ]);
+
+        Artisan::call('app:create-peramalan');
 
         return redirect()->back()->with('success', "Berhasil menambah penjualan $penjualan->product->kode_barang");
     }

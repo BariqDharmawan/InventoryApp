@@ -46,7 +46,6 @@
                         <td class="px-6 py-4">{{ $sale->product->name }}</td>
                         <td class="px-6 py-4">{{ $sale->penjualan }} PCS</td>
                         <td class="px-6 py-4">{{ $sale->customer }}</td>
-                        <td class="px-6 py-4">{{ $sale->invoice }}</td>
                     </tr>
                 @endforeach
             </tbody>

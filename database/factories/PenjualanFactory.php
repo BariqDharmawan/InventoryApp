@@ -26,7 +26,18 @@ class PenjualanFactory extends Factory
             'product_id' => fake()->randomElement(Product::all()->pluck('kode_barang')->toArray()),
             'tanggal' => $date,
             'penjualan' => $dummyQTYPenjualan,
-            'customer' => fake()->sentence(10),
+            'customer' => fake()->randomElement([
+                'SEKRETARIAT DAERAH - TAMBRAUW',
+                'DEPAG KAB. SORONG',
+                'BANK PAPUA AIMAS',
+                'PT. ANJ',
+                'KPP PRATAMA KOTA SORONG',
+                'LILING DIGITAL PRINTING',
+                'RS. SELEBESOLU',
+                'SD INPRES SORONG',
+                'BLK KOTA SORONG',
+                'PERCETAKAN ADORA SORONG 3'
+            ]),
             'invoice' => fake()->word(10)
         ];
     }
