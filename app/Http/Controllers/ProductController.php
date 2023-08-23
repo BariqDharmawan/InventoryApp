@@ -30,7 +30,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::latest('created_at')->get();
+        $products = Product::latest('created_at')->with('penjualan')->get();
 
         return view('pages.product.index', [
             'ths' => Product::THS,

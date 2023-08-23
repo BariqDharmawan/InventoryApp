@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Peramalan;
 use App\Models\Procurement;
 use App\Models\Product;
 use App\Models\ProductItem;
@@ -11,6 +12,6 @@ class ProductSeeder extends Seeder
 {
     public function run(): void
     {
-        Product::factory()->count(50)->create();
+        Product::factory()->has(Peramalan::factory()->count(1))->count(50)->create();
     }
 }

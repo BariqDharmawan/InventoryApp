@@ -14,15 +14,25 @@ class Product extends Model
     protected $fillable = ['kode_barang', 'name', 'unit', 'qty', 'harga_satuan'];
 
     public const UNIT = ['pcs', 'box'];
-    public const THS = ['Nama barang', 'QTY', 'Unit', 'Harga Satuan', 'Peramalan'];
+    public const THS = ['Nama barang', 'QTY', 'Unit', 'Harga Satuan', 'Penjualan', 'Peramalan'];
 
     public function procurement()
     {
-        return $this->hasMany(Procurement::class, 'product_id', 'id');
+        return $this->hasMany(Procurement::class, 'product_id', 'kode_barang');
     }
 
     public function stockFlows()
     {
-        return $this->hasMany(StockFlow::class, 'product_id', 'id');
+        return $this->hasMany(StockFlow::class, 'product_id', 'kode_barang');
+    }
+
+    public function penjualan()
+    {
+        return $this->hasMany(Penjualan::class, 'product_id', 'kode_barang');
+    }
+
+    public function peramalan()
+    {
+        return $this->hasMany(Peramalan::class, 'product_id', 'kode_barang');
     }
 }

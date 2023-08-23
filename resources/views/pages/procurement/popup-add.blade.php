@@ -43,7 +43,8 @@
                             </label>
                             <input
                                 class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-sm focus:border-blue-600 focus:ring-blue-600 input-qty-selected-product"
-                                id="qty-selected-product-column" name="qty_selected_product[]" required type="number">
+                                id="qty-selected-product-column" name="qty_selected_product[]" readonly required
+                                type="number">
                         </div>
                     </template>
                     <div id="qty-selected-product">

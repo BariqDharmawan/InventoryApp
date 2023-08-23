@@ -1,3 +1,4 @@
+import axios from "axios";
 import TomSelect from "tom-select";
 
 const pilihProdukPengadaan = document.querySelector("#pilih-produk-pengadaan");
@@ -24,9 +25,19 @@ if (pilihProdukPengadaan) {
                     ".input-qty-selected-product"
                 ).id = `qty-selected-product-column-${index}`;
 
-                labelSelectedQtyProduct.textContent = `Stok ${productNameSelected}`;
+                axios
+                    .post("/api/peramalan", {
+                        product_id: productId,
+                    })
+                    .then((res) => {
+                        console.log(res.data);
 
-                document.querySelector("#qty-selected-product").appendChild(qtySelectedProductNode);
+                        qtySelectedProductNode.querySelector(".input-qty-selected-product").value = res.data.val;
+
+                        labelSelectedQtyProduct.textContent = `Stok ${productNameSelected}`;
+
+                        document.querySelector("#qty-selected-product").appendChild(qtySelectedProductNode);
+                    });
             });
         },
     });

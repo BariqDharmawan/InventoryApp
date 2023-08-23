@@ -43,7 +43,7 @@
                 @foreach ($sales as $sale)
                     <tr class="border-b bg-white hover:bg-gray-50">
                         <td class="px-6 py-4">{{ $sale->tanggal }}</td>
-                        <td class="px-6 py-4">{{ $sale->product->kode_barang }}</td>
+                        <td class="px-6 py-4">{{ $sale->product->name }}</td>
                         <td class="px-6 py-4">{{ $sale->penjualan }} PCS</td>
                         <td class="px-6 py-4">{{ $sale->customer }}</td>
                         <td class="px-6 py-4">{{ $sale->invoice }}</td>

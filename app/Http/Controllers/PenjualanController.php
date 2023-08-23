@@ -20,7 +20,7 @@ class PenjualanController extends Controller
 
         return view('pages.penjualan.index', ['sales' => $sales, 'products' => $products, 'ths' => [
             'tanggal',
-            'kode barang',
+            'nama barang',
             'penjualan',
             'customer',
             'invoice'
