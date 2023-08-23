@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::get('products/stock-flow', [ProductController::class, 'logStock'])->name('products.log');
     Route::patch('admin/{user}/password', [AdminController::class, 'resetPassword'])->name('admin.resetPassword');
     Route::resource('products', ProductController::class);
+    Route::put('procurement/{procurement}/make-done', [ProcurementController::class, 'makeDone'])->name('procurement.done');
     Route::resource('procurement', ProcurementController::class);
     Route::resource('suppliers', SupplierController::class);
     Route::resource('contract-supplier', ContractSupplierController::class);

@@ -16,8 +16,9 @@ class Procurement extends Model
         'description',
         'price',
         'users_id',
+        'status',
         'supplier_id',
-        'action_at'
+        'action_at',
     ];
 
     protected $casts = [
