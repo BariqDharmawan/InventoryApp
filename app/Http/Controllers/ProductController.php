@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\ContractSupplier;
 use App\Models\LogStock;
+use App\Models\Penjualan;
 use App\Models\Procurement;
 use App\Models\Product;
+use App\Service\PeramalanService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -70,4 +74,10 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->back()->with('success', 'Berhasil menghapus produk');
     }
+
+    public function peramalan()
+    {
+        Artisan::call('app:create-peramalan');
+        return "ok";
+    } 
 }

@@ -31,4 +31,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/generate-peramalan', [ProductController::class, 'peramalan'])->name('product.pramalan.generate');
+
 require __DIR__ . '/auth.php';

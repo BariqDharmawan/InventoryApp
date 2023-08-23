@@ -13,11 +13,8 @@ return new class extends Migration
     {
         Schema::create('peramalan', function (Blueprint $table) {
             $table->id();
-            $table->string('product_id');
-            $table->integer('jumlah_peramalan');
-            $table->enum('month', [
-                '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'
-            ]);
+            $table->string('product_code');
+            $table->integer('peramalan');
             $table->timestamps();
         });
     }

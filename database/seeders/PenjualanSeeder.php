@@ -14,7 +14,7 @@ class PenjualanSeeder extends Seeder
      */
     public function run(): void
     {
-        Penjualan::factory()->count(50)->create();
-        LogStock::factory()->count(50)->create();
+        Penjualan::factory()->count(10)->create();
+        LogStock::factory()->count(10)->create();
     }
 }
