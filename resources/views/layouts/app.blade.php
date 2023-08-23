@@ -31,8 +31,7 @@
         id="logo-sidebar">
         <div class="h-full overflow-y-auto bg-gray-50 px-3 py-4 dark:bg-gray-800">
             <a class="mb-5 flex items-center pl-2.5" href="{{ url('/') }}">
-                <img alt="Flowbite Logo" class="mr-3 h-6 sm:h-7" src="https://flowbite.com/docs/images/logo.svg" />
-                <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+                <span class="self-center whitespace-nowrap font-semibold dark:text-white w-full">
                     {{ env('APP_NAME') }}
                 </span>
             </a>

@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\ProductItem;
 use App\Models\StockFlow;
 use App\Models\Supplier;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class ProcurementController extends Controller
@@ -22,7 +23,10 @@ class ProcurementController extends Controller
         $procurements = Procurement::with([
             'user', 'procurementProducts', 'supplier'
         ])->latest('action_at')->get();
-        $products = Product::all();
+
+        $products = Product::whereHas('peramalan', function (Builder $query) {
+            $query->where('peramalan', '>', 1);
+        })->get();
 
         return view('pages.procurement.index', [
             'ths' => [

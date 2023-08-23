@@ -33,6 +33,6 @@ class Product extends Model
 
     public function peramalan()
     {
-        return $this->hasMany(Peramalan::class, 'product_id', 'kode_barang');
+        return $this->hasOne(Peramalan::class, 'product_code', 'kode_barang');
     }
 }

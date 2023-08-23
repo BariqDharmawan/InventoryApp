@@ -32,7 +32,8 @@ if (pilihProdukPengadaan) {
                     .then((res) => {
                         console.log(res.data);
 
-                        qtySelectedProductNode.querySelector(".input-qty-selected-product").value = res.data.val;
+                        qtySelectedProductNode.querySelector(".input-qty-selected-product").value =
+                            res.data.product.peramalan.peramalan;
 
                         labelSelectedQtyProduct.textContent = `Stok ${productNameSelected}`;
 
