@@ -118,7 +118,9 @@ class ProcurementController extends Controller
         if ($request->status === 'tidak') {
             foreach ($procurement->procurementProducts()->get() as $procurementProduct) {
                 $logStock = LogStock::where('product_id', 'A015')->first();
-                $logStock->delete();
+                if ($logStock) {
+                    $logStock->delete();
+                }
             }
         }
 

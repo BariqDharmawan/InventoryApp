@@ -54,8 +54,12 @@
                             <td class="px-6 py-4">
                                 {{ $procurement->procurementProducts->count() }}
                             </td>
-                            <td class="px-6 py-4">
-                                {{ $procurement->status === 'tidak' ? 'Tidak Sesuai' : 'Sesuai' }}
+                            <td class="px-6 py-4 capitalize">
+                                @if ($procurement->status === 'tidak')
+                                    Tidak Sesuai
+                                @else
+                                    {{ $procurement->status }}
+                                @endif
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex gap-3 items-center">
