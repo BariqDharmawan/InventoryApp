@@ -74,7 +74,7 @@
                             {{ 'Rp. ' . number_format($item->harga_satuan) }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $item->penjualan->count() }}
+                            {{ $item->penjualan->pluck('penjualan')->sum() . 'PCS' }}
                         </td>
                         <td class="px-6 py-4">
                             <a class="font-medium text-blue-600 hover:underline" href="">
