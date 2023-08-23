@@ -30,4 +30,13 @@ class ProcurementFactory extends Factory
             'action_at' => now()
         ];
     }
+
+    public function ongoing(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => 'ongoing'
+            ];
+        });
+    }
 }

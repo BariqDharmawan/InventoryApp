@@ -26,7 +26,7 @@ class ProcurementController extends Controller
 
         return view('pages.procurement.index', [
             'ths' => [
-                'Tanggal Aktivitas', 'Supplier', 'QTY', 'Detail'
+                'Tanggal Aktivitas', 'Supplier', 'QTY', 'Status', 'Detail'
             ],
             'products' => $products,
             'procurements' => $procurements,
@@ -101,6 +101,16 @@ class ProcurementController extends Controller
     public function update(Request $request, Procurement $procurement)
     {
         //
+    }
+
+    public function makeDone(Procurement $procurement)
+    {
+        $procurement->update([
+            'status' => 'done',
+            'users_id' => auth()->id()
+        ]);
+
+        return redirect()->back()->with('success', "Berhasil menyelesaikan pengadaan");
     }
 
     /**

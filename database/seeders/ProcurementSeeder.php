@@ -14,6 +14,7 @@ class ProcurementSeeder extends Seeder
      */
     public function run(): void
     {
-        Procurement::factory()->has(ProcurementProduct::factory()->count(2))->count(50)->create();
+        Procurement::factory()->has(ProcurementProduct::factory()->count(2))->count(40)->create();
+        Procurement::factory()->has(ProcurementProduct::factory()->count(2))->ongoing()->count(10)->create();
     }
 }

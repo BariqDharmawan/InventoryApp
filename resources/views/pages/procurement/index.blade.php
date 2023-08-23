@@ -55,10 +55,31 @@
                                 {{ $procurement->procurementProducts->count() }}
                             </td>
                             <td class="px-6 py-4">
-                                <a class="font-medium text-blue-600 hover:underline"
-                                    href="{{ route('procurement.show', $procurement->id) }}">
-                                    Lihat Detail
-                                </a>
+                                {{ $procurement->status }}
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex gap-3 items-center">
+                                    @if ($procurement->status === 'ongoing')
+                                        <form action="{{ route('procurement.done', $procurement) }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+
+                                            <button class="bg-blue-600 text-white p-2 rounded-lg" type="submit">
+                                                Selesaikan
+                                            </button>
+                                        </form>
+                                    @else
+                                        <a class="text-green-600 hover:underline"
+                                            data-modal-show="qc-by-{{ $procurement->id }}"
+                                            data-modal-target="qc-by-{{ $procurement->id }}" href="javascript:void(0)">
+                                            Telah di QC
+                                        </a>
+                                    @endif
+                                    <a class="font-medium text-blue-600 hover:underline"
+                                        href="{{ route('procurement.show', $procurement->id) }}">
+                                        Lihat Detail
+                                    </a>
+                                </div>
                             </td>
 
                         </tr>
@@ -66,6 +87,25 @@
                 </tbody>
             </table>
         </div>
+
+        @foreach ($procurements as $procurementPopup)
+            <div aria-hidden="true"
+                class="fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden p-4 md:inset-0"
+                id="qc-by-{{ $procurementPopup->id }}" tabindex="-1">
+                <div class="relative max-h-full w-full max-w-sm">
+                    <div class="relative rounded-lg bg-white shadow dark:bg-gray-700 p-6">
+                        <p>Di QC oleh {{ $procurementPopup->user->email }}</p>
+                        <small>
+                            Tanggal:
+                            <time datetime="{{ $procurementPopup->updated_at }}">
+                                {{ $procurementPopup->updated_at->format('d M Y H:i') }}
+                                WIB
+                            </time>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        @endforeach
 
         @include('pages.procurement.popup-add', [
             'id' => 'addNewProcurement',
