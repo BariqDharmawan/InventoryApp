@@ -26,7 +26,7 @@ class ProcurementFactory extends Factory
             'description' => fake()->paragraph(5),
             'price' => fake()->numberBetween(1000000, 100000000),
             'users_id' => User::factory(),
-            'supplier_id' => Supplier::factory(),
+            'supplier_id' => fake()->randomElement(Supplier::all()->pluck('id')->toArray()),
             'action_at' => now()
         ];
     }

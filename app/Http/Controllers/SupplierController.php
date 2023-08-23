@@ -34,6 +34,7 @@ class SupplierController extends Controller
             'Name',
             'Telephone',
             'Email',
+            'Alamat'
         ];
 
         return view('pages.supplier.index', [

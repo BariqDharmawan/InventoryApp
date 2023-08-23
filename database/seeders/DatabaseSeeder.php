@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ProductSeeder::class,
             SupplierSeeder::class,
-            ContractSupplierSeeder::class,
-            ProcurementSeeder::class,
-            PenjualanSeeder::class
+            // ContractSupplierSeeder::class,
+            // ProcurementSeeder::class,
+            // PenjualanSeeder::class
         ]);
     }
 }

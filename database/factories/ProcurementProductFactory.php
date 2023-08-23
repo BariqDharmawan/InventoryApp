@@ -19,8 +19,8 @@ class ProcurementProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'procurement_id' => Procurement::factory(),
-            'product_id' => Product::factory()
+            'procurement_id' => fake()->randomElement(Procurement::all()->pluck('id')->toArray()),
+            'product_id' => fake()->randomElement(Product::all()->pluck('kode_barang')->toArray())
         ];
     }
 }

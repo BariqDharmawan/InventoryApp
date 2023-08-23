@@ -25,7 +25,7 @@ class ContractSupplierFactory extends Factory
         return [
             'title' => fake()->sentence(10),
             'contract_value' => fake()->numberBetween(10000000, 500000000),
-            'supplier_id' => Supplier::factory(),
+            'supplier_id' => fake()->randomElement(Supplier::all()->pluck('id')->toArray()),
             'description' => fake()->paragraph(10),
             'start_date' => $startDate,
             'end_date' => $endDate->addDays(rand(1, 10)),

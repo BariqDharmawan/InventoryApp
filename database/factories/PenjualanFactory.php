@@ -16,14 +16,14 @@ class PenjualanFactory extends Factory
         $dummyQTYPenjualan = $penjualan->dummyQTYPenjualan();
 
         $date = Carbon::parse(fake()->date());
-        $date->year(fake()->randomElement([2023,2022]));
+        $date->year(fake()->randomElement([2023, 2022]));
 
         if ($date->year == now()->year) {
             $date->month(random_int(1, now()->month));
         }
 
         return [
-            'product_id' => Product::factory(),
+            'product_id' => fake()->randomElement(Product::all()->pluck('kode_barang')->toArray()),
             'tanggal' => $date,
             'penjualan' => $dummyQTYPenjualan,
             'customer' => fake()->sentence(10),
