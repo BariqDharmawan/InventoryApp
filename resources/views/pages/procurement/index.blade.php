@@ -55,7 +55,7 @@
                                 {{ $procurement->procurementProducts->count() }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $procurement->status }}
+                                {{ $procurement->status === 'tidak' ? 'Tidak Sesuai' : 'Sesuai' }}
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex gap-3 items-center">
@@ -64,8 +64,18 @@
                                             @csrf
                                             @method('PUT')
 
-                                            <button class="bg-blue-600 text-white p-2 rounded-lg" type="submit">
-                                                Selesaikan
+                                            <button class="bg-blue-600 text-white p-2 rounded-lg" name="status"
+                                                type="submit" value="sesuai">
+                                                Sesuai
+                                            </button>
+                                        </form>
+                                        <form action="{{ route('procurement.done', $procurement) }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+
+                                            <button class="bg-red-600 text-white p-2 rounded-lg" name="status"
+                                                type="submit" value="tidak">
+                                                Tidak Sesuai
                                             </button>
                                         </form>
                                     @else

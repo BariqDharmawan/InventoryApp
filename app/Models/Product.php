@@ -13,7 +13,7 @@ class Product extends Model
     protected $primaryKey = 'kode_barang';
     protected $fillable = ['kode_barang', 'name', 'unit', 'qty', 'harga_satuan'];
 
-    public const UNIT = ['pcs', 'box'];
+    public const UNIT = ['pcs', 'box', 'pack', 'karton'];
     public const THS = ['Nama barang', 'QTY', 'Unit', 'Harga Satuan', 'Penjualan', 'Peramalan'];
 
     public function procurement()

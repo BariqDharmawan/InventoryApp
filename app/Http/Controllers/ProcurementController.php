@@ -50,6 +50,7 @@ class ProcurementController extends Controller
             'description' => $request->description,
             'users_id' => auth()->id(),
             'price' => 0,
+            'status' => 'ongoing',
             'action_at' => $request->action_at
         ]);
 
@@ -107,12 +108,19 @@ class ProcurementController extends Controller
         //
     }
 
-    public function makeDone(Procurement $procurement)
+    public function makeDone(Request $request, Procurement $procurement)
     {
         $procurement->update([
-            'status' => 'done',
+            'status' => $request->status,
             'users_id' => auth()->id()
         ]);
+
+        if ($request->status === 'tidak') {
+            foreach ($procurement->procurementProducts()->get() as $procurementProduct) {
+                $logStock = LogStock::where('product_id', 'A015')->first();
+                $logStock->delete();
+            }
+        }
 
         return redirect()->back()->with('success', "Berhasil menyelesaikan pengadaan");
     }

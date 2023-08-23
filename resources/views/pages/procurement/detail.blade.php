@@ -42,6 +42,12 @@
                                 {{ $procurementProducts->product->unit }}
                             </span>
                         </li>
+                        <li>
+                            <b>Peramalan Stok:</b>
+                            <span class="uppercase">
+                                {{ $procurementProducts->product->peramalan->peramalan }}
+                            </span>
+                        </li>
                     </ul>
                 </div>
             @endforeach

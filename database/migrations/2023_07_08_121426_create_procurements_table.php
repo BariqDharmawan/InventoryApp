@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('users_id');
             $table->integer('supplier_id');
             $table->timestamp('action_at');
-            $table->enum('status', ['ongoing', 'done'])->default('done');
+            $table->enum('status', ['ongoing', 'sesuai', 'tidak'])->default('sesuai');
             $table->timestamps();
         });
     }
