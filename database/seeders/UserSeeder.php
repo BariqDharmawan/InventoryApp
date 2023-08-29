@@ -14,12 +14,22 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'email' => 'admin@inventoryapp.com',
-            'role' => 'superadmin',
-            'password' => Hash::make('admininventoryapp')
+        User::insert([
+            [
+                'email' => 'admin@inventoryapp.com',
+                'role' => 'superadmin',
+                'password' => Hash::make('admininventoryapp')
+            ],
+            [
+                'email' => 'purchasing@inventoryapp.com',
+                'role' => 'purchasing',
+                'password' => Hash::make('purchasinginventoryapp')
+            ],
+            [
+                'email' => 'qc@inventoryapp.com',
+                'role' => 'qc',
+                'password' => Hash::make('qcinventoryapp')
+            ]
         ]);
-
-        User::factory()->count(3)->create();
     }
 }

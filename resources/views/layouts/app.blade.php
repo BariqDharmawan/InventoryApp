@@ -13,9 +13,45 @@
 </head>
 
 <body>
-
+    @php
+        $menus = [];
+        if (auth()->user()->role === 'qc' || auth()->user()->role === 'purchasing') {
+            $menus[] = [
+                'icon' => 'procurement',
+                'label' => 'Pengadaan',
+                'href' => 'procurement.index',
+            ];
+        } elseif (auth()->user()->role === 'purchasing') {
+            $menus[] = [
+                'icon' => 'product',
+                'label' => 'Penjualan',
+                'href' => 'penjualan.index',
+            ];
+            $menus[] = [
+                'icon' => 'product',
+                'label' => 'Stock Flow',
+                'href' => 'products.log',
+            ];
+            $menus[] = [
+                'icon' => 'product',
+                'label' => 'Products',
+                'href' => 'products.index',
+            ];
+        } elseif (auth()->user()->role === 'superadmin') {
+            $menus[] = [
+                'icon' => 'users',
+                'label' => 'Users',
+                'href' => 'admin.index',
+            ];
+            $menus[] = [
+                'icon' => 'supplier',
+                'label' => 'Supplier',
+                'href' => 'suppliers.index',
+            ];
+        }
+    @endphp
     <button aria-controls="logo-sidebar"
-        class="ml-3 mt-2 inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 sm:hidden"
+        class="ml-3 mt-2 inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 sm:hidden"
         data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" type="button">
         <span class="sr-only">Open sidebar</span>
         <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"
@@ -35,41 +71,6 @@
                     {{ env('APP_NAME') }}
                 </span>
             </a>
-
-            @php
-                $menus = [
-                    [
-                        'icon' => 'product',
-                        'label' => 'Products',
-                        'href' => 'products.index',
-                    ],
-                    [
-                        'icon' => 'product',
-                        'label' => 'Penjualan',
-                        'href' => 'penjualan.index',
-                    ],
-                    [
-                        'icon' => 'product',
-                        'label' => 'Stock Flow',
-                        'href' => 'products.log',
-                    ],
-                    [
-                        'icon' => 'supplier',
-                        'label' => 'Supplier',
-                        'href' => 'suppliers.index',
-                    ],
-                    [
-                        'icon' => 'procurement',
-                        'label' => 'Pengadaan',
-                        'href' => 'procurement.index',
-                    ],
-                    [
-                        'icon' => 'users',
-                        'label' => 'Users',
-                        'href' => 'admin.index',
-                    ],
-                ];
-            @endphp
 
             <ul class="space-y-2 font-medium">
                 @foreach ($menus as $menu)
