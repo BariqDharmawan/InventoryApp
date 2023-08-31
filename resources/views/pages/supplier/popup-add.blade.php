@@ -3,43 +3,51 @@
     id="{{ $id }}" tabindex="-1">
     <div class="relative max-h-full w-full max-w-2xl">
         <div class="rounded-lg bg-white shadow dark:bg-gray-700">
-            <x-modal.header title="Tambah Supplier" id-modal="{{ $id }}" />
+            <x-modal.header id-modal="{{ $id }}"
+                title="{{ isset($supplierEdit) ? 'Ubah Supplier ' . $supplierEdit->name : 'Tambah Supplier' }}" />
 
-            <form action="{{ route('suppliers.store') }}" method="POST">
+            <form
+                action="{{ isset($supplierEdit) ? route('suppliers.update', $supplierEdit->id) : route('suppliers.store') }}"
+                method="POST">
                 @csrf
+                @isset($supplierEdit)
+                    @method('PUT')
+                @endisset
                 <div class="p-6">
                     <div class="mb-6">
-                        <label for="name" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                        <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white" for="name">
                             Nama
                         </label>
-                        <input type="text" id="name"
+                        <input
                             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                            name="name" required>
+                            id="name" name="name" required type="text"
+                            value="{{ isset($supplierEdit) ? $supplierEdit->name : '' }}">
                     </div>
                     <div class="mb-6">
-                        <label for="email" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                        <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white" for="email">
                             Email
                         </label>
-                        <input type="tel" id="email" name="email"
-                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                            required>
+                        <input
+                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                            id="email" name="email" required type="email"
+                            value="{{ isset($supplierEdit) ? $supplierEdit->email : '' }}">
                     </div>
                     <div class="mb-6">
-                        <label for="telephone" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                        <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white" for="telephone">
                             Telephone
                         </label>
-                        <input type="tel" id="telephone" name="telephone"
-                            class="input-tel block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                            required>
+                        <input
+                            class="input-tel block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                            id="telephone" name="telephone" required type="tel"
+                            value="{{ isset($supplierEdit) ? $supplierEdit->telephone : '' }}">
                     </div>
                     <div>
-
-                        <label for="address" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                        <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white" for="address">
                             Alamat
                         </label>
-                        <textarea id="address" rows="4" name="address"
-                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                            placeholder="Alamat supplier" required></textarea>
+                        <textarea
+                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                            id="address" name="address" placeholder="Alamat supplier" required rows="4">{{ isset($supplierEdit) ? $supplierEdit->address : '' }}</textarea>
                     </div>
                 </div>
 

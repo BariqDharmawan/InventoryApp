@@ -15,7 +15,7 @@
 <body>
     @php
         $menus = [];
-        if (auth()->user()->role === 'qc' || auth()->user()->role === 'purchasing') {
+        if (auth()->user()->role === 'qc') {
             $menus[] = [
                 'icon' => 'procurement',
                 'label' => 'Pengadaan',
@@ -28,6 +28,11 @@
                 'href' => 'penjualan.index',
             ];
             $menus[] = [
+                'icon' => 'supplier',
+                'label' => 'Supplier',
+                'href' => 'suppliers.index',
+            ];
+            $menus[] = [
                 'icon' => 'product',
                 'label' => 'Stock Flow',
                 'href' => 'products.log',
@@ -37,16 +42,16 @@
                 'label' => 'Products',
                 'href' => 'products.index',
             ];
+            $menus[] = [
+                'icon' => 'procurement',
+                'label' => 'Pengadaan',
+                'href' => 'procurement.index',
+            ];
         } elseif (auth()->user()->role === 'superadmin') {
             $menus[] = [
                 'icon' => 'users',
                 'label' => 'Users',
                 'href' => 'admin.index',
-            ];
-            $menus[] = [
-                'icon' => 'supplier',
-                'label' => 'Supplier',
-                'href' => 'suppliers.index',
             ];
         }
     @endphp
@@ -65,14 +70,14 @@
     <aside aria-label="Sidebar"
         class="fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform sm:translate-x-0"
         id="logo-sidebar">
-        <div class="h-full overflow-y-auto bg-gray-50 px-3 py-4 dark:bg-gray-800">
+        <div class="h-full overflow-y-auto bg-gray-50 px-3 py-4 dark:bg-gray-800 flex flex-col">
             <a class="mb-5 flex items-center pl-2.5" href="{{ url('/') }}">
                 <span class="self-center whitespace-nowrap font-semibold dark:text-white w-full">
                     {{ env('APP_NAME') }}
                 </span>
             </a>
 
-            <ul class="space-y-2 font-medium">
+            <ul class="space-y-2 font-medium mb-auto">
                 @foreach ($menus as $menu)
                     <li>
                         <a class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
@@ -82,9 +87,9 @@
                         </a>
                     </li>
                 @endforeach
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <li>
+                <li>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
                         <button
                             class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                             type="submit">
@@ -97,9 +102,10 @@
                             </svg>
                             <span class="ml-3 flex-1 whitespace-nowrap">Sign Out</span>
                         </button>
-                    </li>
-                </form>
+                    </form>
+                </li>
             </ul>
+            <span class="capitalize font-bold">{{ auth()->user()->role }}</span>
         </div>
     </aside>
 

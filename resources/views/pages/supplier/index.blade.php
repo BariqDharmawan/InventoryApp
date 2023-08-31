@@ -65,24 +65,21 @@
                             <td class="w-4 p-4">
                                 <div class="flex items-center">
                                     <input
-                                        class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 dark:focus:ring-offset-gray-800"
+                                        class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 "
                                         id="checkbox-table-search-1" type="checkbox">
-                                    <label class="sr-only" for="checkbox-table-search-1">
-                                        checkbox
-                                    </label>
+                                    <label class="sr-only" for="checkbox-table-search-1"></label>
                                 </div>
                             </td>
                             <td class="px-6 py-4">
                                 {{ $supplier->name }}
                             </td>
-                            <td class="px-6 py-4">
-                                {{ $supplier->telephone }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $supplier->email }}
-                            </td>
                             <td class="px-6 py-4">{{ $supplier->address }}</td>
-
+                            <td>
+                                <button class="text-blue-500" data-modal-target="editSupplier{{ $supplier->id }}"
+                                    data-modal-toggle="editSupplier{{ $supplier->id }}">
+                                    Edit
+                                </button>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -95,6 +92,11 @@
     ])
 
     @foreach ($listSupplier as $supplier)
+        @include('pages.supplier.popup-add', [
+            'id' => 'editSupplier' . $supplier->id,
+            'supplierEdit' => $supplier,
+        ])
+
         @include('pages.supplier.contract-detail', [
             'id' => 'lihatKontrak' . $loop->index,
             'contracts' => $supplier->contractSupplier,

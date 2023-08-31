@@ -32,9 +32,8 @@ class SupplierController extends Controller
 
         $ths = [
             'Name',
-            'Telephone',
-            'Email',
-            'Alamat'
+            'Alamat',
+            ''
         ];
 
         return view('pages.supplier.index', [
@@ -73,6 +72,7 @@ class SupplierController extends Controller
     public function update(Request $request, Supplier $supplier)
     {
         $this->saveSupplier($supplier, $request);
+        return redirect()->back();
     }
 
     /**
