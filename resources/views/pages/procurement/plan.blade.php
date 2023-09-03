@@ -13,44 +13,42 @@
         </thead>
         <tbody>
             @foreach ($procurementProducts as $procurementProduct)
-                <tr class="border-b bg-white hover:bg-gray-50">
-                    <td class="px-6 py-4">
-                        {{ $procurementProduct['product']['kode_barang'] }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ $procurementProduct['product']['name'] }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ $procurementProduct['product']['unit'] }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ $procurementProduct['product']['max_capacity'] }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ $procurementProduct->action_at->format('d M Y') }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ $procurementProduct['product']['qty'] }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ $procurementProduct->procurement->procurementProducts()->count() }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ $procurementProduct->product->penjualan()->count() }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ $procurementProduct['product']['qty'] }}
-                    </td>
-                    <td class="px-6 py-4">
-                        @if (
-                            $procurementProduct->product->penjualan()->count() >
-                                $procurementProduct->procurement->procurementProducts()->count())
+                @if (
+                    $procurementProduct->product->penjualan()->count() >
+                        $procurementProduct->procurement->procurementProducts()->count())
+                    <tr class="border-b bg-white hover:bg-gray-50">
+                        <td class="px-6 py-4">
+                            {{ $procurementProduct['product']['kode_barang'] }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $procurementProduct['product']['name'] }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $procurementProduct['product']['unit'] }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $procurementProduct['product']['max_capacity'] }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $procurementProduct->action_at->format('d M Y') }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $procurementProduct['product']['qty'] }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $procurementProduct->procurement->procurementProducts()->count() }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $procurementProduct->product->penjualan()->count() }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $procurementProduct['product']['qty'] }}
+                        </td>
+                        <td class="px-6 py-4">
                             Stok Kurang
-                        @else
-                            Stok Cukup
-                        @endif
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
+                @endif
             @endforeach
         </tbody>
     </table>
