@@ -50,7 +50,7 @@ class ProcurementController extends Controller
 
         $procurementProducts = ProcurementProduct::whereYear('action_at', $triwulanYear)
             ->whereBetween(DB::raw('MONTH(action_at)'), [$startMonth, $endMonth])
-            ->with('product')->groupBy('product_id')->orderBy('action_at', 'ASC')->get();
+            ->with('product')->orderBy('action_at', 'ASC')->get();
 
 
         return view('pages.procurement.plan', [
@@ -74,7 +74,7 @@ class ProcurementController extends Controller
 
         $products = ProcurementProduct::whereYear('action_at', $triwulanYear)
             ->whereBetween(DB::raw('MONTH(action_at)'), [$startMonth, $endMonth])
-            ->with('product')->groupBy('product_id')->orderBy('action_at', 'ASC')->get();
+            ->with('product')->orderBy('action_at', 'ASC')->get();
 
 
         return view('pages.procurement.do', [
@@ -94,7 +94,7 @@ class ProcurementController extends Controller
 
         $products = ProcurementProduct::whereYear('action_at', $triwulanYear)
             ->whereBetween(DB::raw('MONTH(action_at)'), [$startMonth, $endMonth])
-            ->with('product')->groupBy('product_id')->orderBy('action_at', 'ASC')->get();
+            ->with('product')->orderBy('action_at', 'ASC')->get();
 
 
         return view('pages.procurement.check', [
@@ -111,7 +111,7 @@ class ProcurementController extends Controller
         $endMonth = explode('-', $triwulanMonth)[1];
 
         $products = ProcurementProduct::whereYear('action_at', $triwulanYear)
-            ->whereBetween(DB::raw('MONTH(action_at)'), [$startMonth, $endMonth])->groupBy('product_id')->orderBy('action_at', 'ASC')->get();
+            ->whereBetween(DB::raw('MONTH(action_at)'), [$startMonth, $endMonth])->orderBy('action_at', 'ASC')->get();
 
 
         return view('pages.procurement.action', [

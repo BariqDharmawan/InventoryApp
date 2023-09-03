@@ -45,7 +45,7 @@
                                     <div class="flex gap-3 items-center">
                                         @if ($product->procurement->status === 'tidak')
                                             <form action="{{ route('procurement.done', $product->procurement) }}"
-                                                method="post">
+                                                method="post" onsubmit="return confirm('Apakah barang sudah sesuai?')">
                                                 @csrf
                                                 @method('PUT')
                                                 <button class="bg-blue-600 text-white p-2 rounded-lg" name="status"

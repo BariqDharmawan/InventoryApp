@@ -36,6 +36,8 @@
                             <td class="px-6 py-4 capitalize">
                                 @if ($product->procurement->status === 'tidak')
                                     Tidak Sesuai
+                                @elseif($product->procurement->status === 'ongoing')
+                                    Sedang di QC
                                 @else
                                     {{ $product->procurement->status }}
                                 @endif
@@ -44,7 +46,7 @@
                                 <div class="flex gap-3 items-center">
                                     @if (auth()->user()->role === 'qc' && $product->procurement->status === 'ongoing')
                                         <form action="{{ route('procurement.done', $product->procurement) }}"
-                                            method="post">
+                                            method="post" onsubmit="return confirm('Apakah barang sudah sesuai?')">
                                             @csrf
                                             @method('PUT')
                                             <button class="bg-blue-600 text-white p-2 rounded-lg" name="status"
@@ -53,7 +55,7 @@
                                             </button>
                                         </form>
                                         <form action="{{ route('procurement.done', $product->procurement) }}"
-                                            method="post">
+                                            method="post" onsubmit="return confirm('Apakah barang tidak sesuai?')">
                                             @csrf
                                             @method('PUT')
 
