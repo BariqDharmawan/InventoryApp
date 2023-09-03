@@ -11,14 +11,19 @@ class Product extends Model
 
     public $incrementing = false;
     protected $primaryKey = 'kode_barang';
-    protected $fillable = ['kode_barang', 'name', 'unit', 'qty', 'harga_satuan'];
+    protected $fillable = ['kode_barang', 'name', 'unit', 'qty', 'harga_satuan', 'max_capacity'];
 
     public const UNIT = ['pcs', 'box', 'pack', 'karton'];
-    public const THS = ['Nama barang', 'QTY', 'Unit', 'Harga Satuan', 'Penjualan', 'Peramalan'];
+    public const THS = ['Nama barang', 'QTY', 'Max Capacity', 'Unit', 'Harga Satuan', 'Penjualan', 'Peramalan'];
 
     public function procurement()
     {
         return $this->hasMany(Procurement::class, 'product_id', 'kode_barang');
+    }
+
+    public function procurementProducts()
+    {
+        return $this->hasMany(ProcurementProduct::class, 'product_id', 'kode_barang');
     }
 
     public function stockFlows()

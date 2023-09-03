@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->string('kode_barang')->primary()->unique();
             $table->string('name')->unique();
+            $table->integer('max_capacity');
             $table->enum('unit', Product::UNIT);
             $table->bigInteger('harga_satuan');
             $table->integer('qty');

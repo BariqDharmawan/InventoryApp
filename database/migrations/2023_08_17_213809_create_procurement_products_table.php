@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('procurement_products', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('procurement_id');
+            $table->timestamp('action_at');
             $table->string('product_id');
             $table->timestamps();
         });

@@ -29,8 +29,13 @@
                         <select id="pilih-produk-pengadaan" multiple name="product_id[]" placeholder="Pilih Product"
                             required>
                             <option value="">Pilih Product</option>
+
                             @foreach ($products as $product)
-                                <option value="{{ $product->kode_barang }}">{{ $product->name }}</option>
+                                @if ($product->product->penjualan()->count() > $product->product->procurementProducts()->count())
+                                    <option value="{{ $product->product->kode_barang }}">
+                                        {{ $product->product->name }}
+                                    </option>
+                                @endif
                             @endforeach
                         </select>
                     </div>
@@ -59,7 +64,8 @@
                     </label>
                     <input
                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-sm focus:border-blue-600 focus:ring-blue-600"
-                        id="action-at" name="action_at" required type="datetime-local" value="{{ date('Y-m-d H:i') }}">
+                        id="action-at" name="action_at" readonly required type="datetime-local"
+                        value="{{ date('Y-m-d H:i') }}">
                 </div>
 
                 <div class="mb-6">

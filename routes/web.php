@@ -21,6 +21,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('admin/{user}/password', [AdminController::class, 'resetPassword'])->name('admin.resetPassword');
     Route::resource('products', ProductController::class);
     Route::put('procurement/{procurement}/make-done', [ProcurementController::class, 'makeDone'])->name('procurement.done');
+    Route::get('procurement/plan/{triwulanYear}/{triwulanMonth}', [ProcurementController::class, 'plan'])->name('procurement.plan');
+    Route::get('procurement/do/{triwulanYear}/{triwulanMonth}', [ProcurementController::class, 'do'])->name('procurement.do');
+    Route::get('procurement/check/{triwulanYear}/{triwulanMonth}', [ProcurementController::class, 'check'])->name('procurement.check');
+    Route::get('procurement/action/{triwulanYear}/{triwulanMonth}', [ProcurementController::class, 'action'])->name('procurement.action');
     Route::resource('procurement', ProcurementController::class);
     Route::resource('suppliers', SupplierController::class);
     Route::resource('contract-supplier', ContractSupplierController::class);

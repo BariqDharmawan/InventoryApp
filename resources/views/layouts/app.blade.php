@@ -19,41 +19,86 @@
             $menus[] = [
                 'icon' => 'procurement',
                 'label' => 'Pengadaan',
-                'href' => 'procurement.index',
+                'href' => 'javascript:void(0);',
+                'dropdown' => [
+                    [
+                        'icon' => 'plan',
+                        'label' => 'Check',
+                        'href' => route('procurement.check', [
+                            'triwulanYear' => '2023',
+                            'triwulanMonth' => date('n') . '-' . date('n'),
+                        ]),
+                    ],
+                ],
             ];
         } elseif (auth()->user()->role === 'purchasing') {
             $menus[] = [
                 'icon' => 'product',
                 'label' => 'Penjualan',
-                'href' => 'penjualan.index',
+                'href' => route('penjualan.index'),
             ];
             $menus[] = [
                 'icon' => 'supplier',
                 'label' => 'Supplier',
-                'href' => 'suppliers.index',
+                'href' => route('suppliers.index'),
             ];
             $menus[] = [
                 'icon' => 'product',
                 'label' => 'Stock Flow',
-                'href' => 'products.log',
+                'href' => route('products.log'),
             ];
             $menus[] = [
                 'icon' => 'product',
                 'label' => 'Products',
-                'href' => 'products.index',
+                'href' => route('products.index'),
             ];
             $menus[] = [
                 'icon' => 'procurement',
                 'label' => 'Pengadaan',
-                'href' => 'procurement.index',
+                'href' => 'javascript:void(0);',
+                'dropdown' => [
+                    [
+                        'icon' => 'plan',
+                        'label' => 'Plan',
+                        'href' => route('procurement.plan', [
+                            'triwulanYear' => '2023',
+                            'triwulanMonth' => date('n') - 3 . '-' . date('n'),
+                        ]),
+                    ],
+                    [
+                        'icon' => 'plan',
+                        'label' => 'Do',
+                        'href' => route('procurement.do', [
+                            'triwulanYear' => '2023',
+                            'triwulanMonth' => date('n') - 3 . '-' . date('n'),
+                        ]),
+                    ],
+                    [
+                        'icon' => 'plan',
+                        'label' => 'Check',
+                        'href' => route('procurement.check', [
+                            'triwulanYear' => '2023',
+                            'triwulanMonth' => date('n') . '-' . date('n'),
+                        ]),
+                    ],
+                    [
+                        'icon' => 'plan',
+                        'label' => 'Action',
+                        'href' => route('procurement.action', [
+                            'triwulanYear' => '2023',
+                            'triwulanMonth' => date('n') . '-' . date('n'),
+                        ]),
+                    ],
+                ],
             ];
         } elseif (auth()->user()->role === 'superadmin') {
             $menus[] = [
                 'icon' => 'users',
                 'label' => 'Users',
-                'href' => 'admin.index',
+                'href' => route('admin.index'),
             ];
         }
+        // dd($menus);
     @endphp
     <button aria-controls="logo-sidebar"
         class="ml-3 mt-2 inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 sm:hidden"
@@ -70,9 +115,9 @@
     <aside aria-label="Sidebar"
         class="fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform sm:translate-x-0"
         id="logo-sidebar">
-        <div class="h-full overflow-y-auto bg-gray-50 px-3 py-4 dark:bg-gray-800 flex flex-col">
+        <div class="h-full overflow-y-auto bg-gray-50 px-3 py-4  flex flex-col">
             <a class="mb-5 flex items-center pl-2.5" href="{{ url('/') }}">
-                <span class="self-center whitespace-nowrap font-semibold dark:text-white w-full">
+                <span class="self-center whitespace-nowrap font-semibold  w-full">
                     {{ env('APP_NAME') }}
                 </span>
             </a>
@@ -80,26 +125,47 @@
             <ul class="space-y-2 font-medium mb-auto">
                 @foreach ($menus as $menu)
                     <li>
-                        <a class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                            href="{{ route($menu['href']) }}">
-                            <x-dynamic-component :component="'icon.' . $menu['icon']" />
-                            <span class="ml-3">{{ $menu['label'] }}</span>
-                        </a>
+                        @if (isset($menu['dropdown']))
+                            <button aria-controls="dropdown-example"
+                                class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 "
+                                data-collapse-toggle="dropdown-example" type="button">
+                                <x-dynamic-component :component="'icon.' . $menu['icon']" />
+
+                                <span class="flex-1 ml-3 text-left whitespace-nowrap">
+                                    {{ $menu['label'] }}
+                                </span>
+                                <svg aria-hidden="true" class="w-3 h-3" fill="none" viewBox="0 0 10 6"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="m1 1 4 4 4-4" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" stroke="currentColor" />
+                                </svg>
+                            </button>
+                            <ul class="hidden pl-4 py-2 space-y-2" id="dropdown-example">
+                                @foreach ($menu['dropdown'] as $dropdown)
+                                    <li>
+                                        <a class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 "
+                                            href="{{ $dropdown['href'] }}">
+                                            <x-dynamic-component :component="'icon.' . $dropdown['icon']" />
+                                            <span class="ml-3">{{ $dropdown['label'] }}</span>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <a class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100"
+                                href="{{ $menu['href'] }}">
+                                <x-dynamic-component :component="'icon.' . $menu['icon']" />
+                                <span class="ml-3">{{ $menu['label'] }}</span>
+                            </a>
+                        @endif
                     </li>
                 @endforeach
                 <li>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button
-                            class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                        <button class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 "
                             type="submit">
-                            <svg aria-hidden="true"
-                                class="h-5 w-5 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                                fill="none" viewBox="0 0 18 16" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    stroke="currentColor" />
-                            </svg>
+                            <x-icon.logout />
                             <span class="ml-3 flex-1 whitespace-nowrap">Sign Out</span>
                         </button>
                     </form>

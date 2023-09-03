@@ -27,7 +27,7 @@ class ProcurementFactory extends Factory
             'price' => fake()->numberBetween(1000000, 100000000),
             'users_id' => User::factory(),
             'supplier_id' => fake()->randomElement(Supplier::all()->pluck('id')->toArray()),
-            'action_at' => now()
+            'action_at' => fake()->dateTimeThisYear('+3 months')
         ];
     }
 

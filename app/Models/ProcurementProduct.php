@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +10,11 @@ class ProcurementProduct extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['procurement_id', 'product_id'];
+    protected $fillable = ['procurement_id', 'product_id', 'action_at'];
+
+    protected $casts = [
+        'action_at' => 'date:Y-m-d',
+    ];
 
     public function product()
     {

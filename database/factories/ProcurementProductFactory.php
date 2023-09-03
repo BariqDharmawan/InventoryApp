@@ -20,6 +20,7 @@ class ProcurementProductFactory extends Factory
     {
         return [
             'procurement_id' => fake()->randomElement(Procurement::all()->pluck('id')->toArray()),
+            'action_at' => fake()->dateTimeThisYear('+3 months'),
             'product_id' => fake()->randomElement(Product::all()->pluck('kode_barang')->toArray())
         ];
     }

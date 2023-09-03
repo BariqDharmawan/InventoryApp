@@ -10,8 +10,10 @@ use App\Models\Product;
 use App\Models\ProductItem;
 use App\Models\StockFlow;
 use App\Models\Supplier;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProcurementController extends Controller
 {
@@ -20,21 +22,103 @@ class ProcurementController extends Controller
      */
     public function index()
     {
+    }
+
+    public function plan($triwulanYear, $triwulanMonth)
+    {
+        $monthNames = [
+            'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember'
+        ];
+
+        $startMonth = explode('-', $triwulanMonth)[0];
+        $endMonth = explode('-', $triwulanMonth)[1];
+
+        $monthProcurement = $monthNames[$startMonth - 1] . ' - ' .
+            $monthNames[$endMonth - 1] . ' ' . $triwulanYear;
+
+
+        $procurementProducts = ProcurementProduct::whereYear('action_at', $triwulanYear)
+            ->whereBetween(DB::raw('MONTH(action_at)'), [$startMonth, $endMonth])
+            ->with('product')->groupBy('product_id')->orderBy('action_at', 'ASC')->get();
+
+
+        return view('pages.procurement.plan', [
+            'procurementProducts' => $procurementProducts,
+            'ths' => [
+                'Kode Barang', 'Nama Barang', 'Satuan', 'Kapasitas Gudang', 'Tanggal',
+                'Stok Awal ' . $monthProcurement, 'Total Pengadaan', 'Total Penjualan',
+                'Stok Akhir', 'Status'
+            ]
+        ]);
+    }
+
+    public function do($triwulanYear, $triwulanMonth)
+    {
         $procurements = Procurement::with([
             'user', 'procurementProducts', 'supplier'
         ])->latest('action_at')->get();
 
-        $products = Product::whereHas('peramalan', function (Builder $query) {
-            $query->where('peramalan', '>', 1);
-        })->get();
+        $startMonth = explode('-', $triwulanMonth)[0];
+        $endMonth = explode('-', $triwulanMonth)[1];
 
-        return view('pages.procurement.index', [
+        $products = ProcurementProduct::whereYear('action_at', $triwulanYear)
+            ->whereBetween(DB::raw('MONTH(action_at)'), [$startMonth, $endMonth])
+            ->with('product')->groupBy('product_id')->orderBy('action_at', 'ASC')->get();
+
+
+        return view('pages.procurement.do', [
             'ths' => [
-                'Tanggal Aktivitas', 'Supplier', 'QTY', 'Status', 'Detail'
+                'Kode Barang', 'Nama Barang', 'Satuan', 'Tanggal Aktivitas', 'Supplier',
             ],
             'products' => $products,
             'procurements' => $procurements,
             'suppliers' => Supplier::all(),
+        ]);
+    }
+
+    public function check($triwulanYear, $triwulanMonth)
+    {
+        $startMonth = explode('-', $triwulanMonth)[0];
+        $endMonth = explode('-', $triwulanMonth)[1];
+
+        $products = ProcurementProduct::whereYear('action_at', $triwulanYear)
+            ->whereBetween(DB::raw('MONTH(action_at)'), [$startMonth, $endMonth])
+            ->with('product')->groupBy('product_id')->orderBy('action_at', 'ASC')->get();
+
+
+        return view('pages.procurement.check', [
+            'products' => $products,
+            'ths' => [
+                'Kode Barang', 'Nama Barang', 'Satuan', 'Tanggal Aktivitas', 'Supplier', 'Status'
+            ],
+        ]);
+    }
+
+    public function action($triwulanYear, $triwulanMonth)
+    {
+        $startMonth = explode('-', $triwulanMonth)[0];
+        $endMonth = explode('-', $triwulanMonth)[1];
+
+        $products = ProcurementProduct::whereYear('action_at', $triwulanYear)
+            ->whereBetween(DB::raw('MONTH(action_at)'), [$startMonth, $endMonth])->groupBy('product_id')->orderBy('action_at', 'ASC')->get();
+
+
+        return view('pages.procurement.action', [
+            'products' => $products,
+            'ths' => [
+                'Kode Barang', 'Nama Barang', 'Satuan', 'Tanggal Aktivitas', 'Supplier', 'Status'
+            ],
         ]);
     }
 
@@ -58,7 +142,8 @@ class ProcurementController extends Controller
         foreach ($request->product_id as $index => $productId) {
             ProcurementProduct::create([
                 'product_id' => $productId,
-                'procurement_id' => $procurement->id
+                'procurement_id' => $procurement->id,
+                'action_at' => $request->action_at
             ]);
 
             $product = Product::where('kode_barang', $productId)->first();

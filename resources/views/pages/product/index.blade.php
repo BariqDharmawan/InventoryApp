@@ -67,6 +67,9 @@
                         <td class="px-6 py-4">
                             {{ number_format($item->qty) }}
                         </td>
+                        <td class="px-6 py-4">
+                            {{ number_format($item->max_capacity) }}
+                        </td>
                         <td class="px-6 py-4 uppercase">
                             {{ $item->unit }}
                         </td>
