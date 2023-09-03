@@ -76,6 +76,7 @@ class ProcurementController extends Controller
             ->whereBetween(DB::raw('MONTH(action_at)'), [$startMonth, $endMonth])
             ->with('product')->orderBy('action_at', 'ASC')->get();
 
+        $productsToAddProcurement = Product::all();
 
         return view('pages.procurement.do', [
             'ths' => [
@@ -84,6 +85,7 @@ class ProcurementController extends Controller
             'products' => $products,
             'procurements' => $procurements,
             'suppliers' => Supplier::all(),
+            'productsToAddProcurement' => $productsToAddProcurement
         ]);
     }
 

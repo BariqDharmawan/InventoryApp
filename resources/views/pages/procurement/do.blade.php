@@ -68,7 +68,7 @@
 
         @include('pages.procurement.popup-add', [
             'id' => 'addNewProcurement',
-            'products' => $products,
+            'productsToAddProcurement' => $productsToAddProcurement,
             'suppliers' => $suppliers,
         ])
 

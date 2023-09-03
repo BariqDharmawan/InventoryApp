@@ -30,10 +30,10 @@
                             required>
                             <option value="">Pilih Product</option>
 
-                            @foreach ($products as $product)
-                                @if ($product->product->penjualan()->count() > $product->product->procurementProducts()->count())
-                                    <option value="{{ $product->product->kode_barang }}">
-                                        {{ $product->product->name }}
+                            @foreach ($productsToAddProcurement as $productToAdd)
+                                @if ($productToAdd->penjualan()->count() > $productToAdd->procurementProducts()->count())
+                                    <option value="{{ $productToAdd->kode_barang }}">
+                                        {{ $productToAdd->name }}
                                     </option>
                                 @endif
                             @endforeach
