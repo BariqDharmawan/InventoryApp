@@ -35,7 +35,7 @@ if (pilihProdukPengadaan) {
                         qtySelectedProductNode.querySelector(".input-qty-selected-product").value =
                             res.data.product.peramalan.peramalan;
 
-                        labelSelectedQtyProduct.textContent = `Stok ${productNameSelected}`;
+                        labelSelectedQtyProduct.textContent = `Total pengadaan ${productNameSelected}`;
 
                         document.querySelector("#qty-selected-product").appendChild(qtySelectedProductNode);
                     });

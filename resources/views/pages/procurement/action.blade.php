@@ -29,7 +29,7 @@
                                     {{ $product->product->unit }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $product->procurement->action_at }}
+                                    {{ $product->procurement->action_at->format('d M Y') }}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $product->procurement->supplier->name }}

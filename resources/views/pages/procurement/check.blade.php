@@ -31,7 +31,7 @@
                                 {{ $product->product->peramalan->peramalan }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $product->procurement->action_at->format('d M Y H:i') }} WIB
+                                {{ $product->procurement->action_at->format('d M Y') }}
                             </td>
                             <td class="px-6 py-4">
                                 {{ $product->procurement->supplier->name }}
@@ -76,12 +76,18 @@
                                                 Lihat Tindakan
                                             </button>
                                         @else
-                                            <button class="text-red-500"
-                                                data-modal-show="input-cancel-info-{{ $product->procurement->id }}"
-                                                data-modal-target="input-cancel-info-{{ $product->procurement->id }}"
-                                                href="javascript:void(0)">
-                                                Input Keterangan Tidak Sesuai
-                                            </button>
+                                            @if (auth()->user()->role === 'qc')
+                                                <button class="text-red-500"
+                                                    data-modal-show="input-cancel-info-{{ $product->procurement->id }}"
+                                                    data-modal-target="input-cancel-info-{{ $product->procurement->id }}"
+                                                    href="javascript:void(0)">
+                                                    Input Keterangan Tidak Sesuai
+                                                </button>
+                                            @else
+                                                <p class="text-red-500">
+                                                    Menunggu QC menginput tindakan
+                                                </p>
+                                            @endif
                                         @endif
                                     @elseif($product->procurement->status !== 'ongoing')
                                         <a class="text-green-600 hover:underline"
@@ -117,23 +123,26 @@
                 </div>
             @endif
 
-            <div aria-hidden="true"
-                class="fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden p-4 md:inset-0"
-                id="input-cancel-info-{{ $procurementPopup->procurement->id }}" tabindex="-1">
-                <div class="relative max-h-full w-full max-w-sm">
-                    <form action="{{ route('procurement.cancelInfo', ['id' => $procurementPopup->procurement->id]) }}"
-                        class="relative rounded-lg bg-white shadow dark:bg-gray-700 p-6" method="POST">
-                        @csrf
-                        <input
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                            name="desc" placeholder="Tindakan" required type="text">
+            @if (auth()->user()->role === 'qc')
+                <div aria-hidden="true"
+                    class="fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden p-4 md:inset-0"
+                    id="input-cancel-info-{{ $procurementPopup->procurement->id }}" tabindex="-1">
+                    <div class="relative max-h-full w-full max-w-sm">
+                        <form
+                            action="{{ route('procurement.cancelInfo', ['id' => $procurementPopup->procurement->id]) }}"
+                            class="relative rounded-lg bg-white shadow dark:bg-gray-700 p-6" method="POST">
+                            @csrf
+                            <input
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                name="desc" placeholder="Tindakan" required type="text">
 
-                        <button class="bg-red-600 text-white p-2 rounded-lg mt-2 w-full" type="submit">
-                            Submit
-                        </button>
-                    </form>
+                            <button class="bg-red-600 text-white p-2 rounded-lg mt-2 w-full" type="submit">
+                                Submit
+                            </button>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            @endif
 
             <div aria-hidden="true"
                 class="fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden p-4 md:inset-0"
