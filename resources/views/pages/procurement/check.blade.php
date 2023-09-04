@@ -28,6 +28,9 @@
                                 {{ $product->product->unit }}
                             </td>
                             <td class="px-6 py-4">
+                                {{ $product->product->peramalan->peramalan }}
+                            </td>
+                            <td class="px-6 py-4">
                                 {{ $product->procurement->action_at }}
                             </td>
                             <td class="px-6 py-4">

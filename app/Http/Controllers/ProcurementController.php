@@ -102,7 +102,7 @@ class ProcurementController extends Controller
         return view('pages.procurement.check', [
             'products' => $products,
             'ths' => [
-                'Kode Barang', 'Nama Barang', 'Satuan', 'Tanggal Aktivitas', 'Supplier', 'Status'
+                'Kode Barang', 'Nama Barang', 'Satuan', 'Hasil Peramalan', 'Tanggal Aktivitas', 'Supplier', 'Status'
             ],
         ]);
     }
