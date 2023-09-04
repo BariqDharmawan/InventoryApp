@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::get('procurement/do/{triwulanYear}/{triwulanMonth}', [ProcurementController::class, 'do'])->name('procurement.do');
     Route::get('procurement/check/{triwulanYear}/{triwulanMonth}', [ProcurementController::class, 'check'])->name('procurement.check');
     Route::get('procurement/action/{triwulanYear}/{triwulanMonth}', [ProcurementController::class, 'action'])->name('procurement.action');
+    Route::post('procurement/{id}/cancel-info', [ProcurementController::class, 'cancelInfo'])->name('procurement.cancelInfo');
     Route::resource('procurement', ProcurementController::class);
     Route::resource('suppliers', SupplierController::class);
     Route::resource('contract-supplier', ContractSupplierController::class);

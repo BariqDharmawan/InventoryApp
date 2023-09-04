@@ -67,6 +67,22 @@
                                                 Tidak Sesuai
                                             </button>
                                         </form>
+                                    @elseif($product->procurement->status === 'tidak')
+                                        @if ($product->procurement->cancelInfo)
+                                            <button class="text-red-500 font-semibold"
+                                                data-modal-show="modal-cancelled-procurement-{{ $product->procurement->id }}"
+                                                data-modal-target="modal-cancelled-procurement-{{ $product->procurement->id }}"
+                                                href="javascript:void(0)">
+                                                Lihat Tindakan
+                                            </button>
+                                        @else
+                                            <button class="text-red-500"
+                                                data-modal-show="input-cancel-info-{{ $product->procurement->id }}"
+                                                data-modal-target="input-cancel-info-{{ $product->procurement->id }}"
+                                                href="javascript:void(0)">
+                                                Input Keterangan Tidak Sesuai
+                                            </button>
+                                        @endif
                                     @elseif($product->procurement->status !== 'ongoing')
                                         <a class="text-green-600 hover:underline"
                                             data-modal-show="qc-by-{{ $product->procurement->id }}"
@@ -88,6 +104,37 @@
         </div>
 
         @foreach ($products as $procurementPopup)
+            @if ($procurementPopup->procurement->cancelInfo)
+                <div aria-hidden="true"
+                    class="fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden p-4 md:inset-0"
+                    id="modal-cancelled-procurement-{{ $procurementPopup->procurement->id }}" tabindex="-1">
+                    <div class="relative max-h-full w-full max-w-sm">
+                        <div class="relative rounded-lg bg-white shadow dark:bg-gray-700 p-6">
+                            <p class="text-lg font-bold">Tindakan Tidak Sesuai</p>
+                            {{ $procurementPopup->procurement->cancelInfo->desc }}
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            <div aria-hidden="true"
+                class="fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden p-4 md:inset-0"
+                id="input-cancel-info-{{ $procurementPopup->procurement->id }}" tabindex="-1">
+                <div class="relative max-h-full w-full max-w-sm">
+                    <form action="{{ route('procurement.cancelInfo', ['id' => $procurementPopup->procurement->id]) }}"
+                        class="relative rounded-lg bg-white shadow dark:bg-gray-700 p-6" method="POST">
+                        @csrf
+                        <input
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            name="desc" placeholder="Tindakan" required type="text">
+
+                        <button class="bg-red-600 text-white p-2 rounded-lg mt-2 w-full" type="submit">
+                            Submit
+                        </button>
+                    </form>
+                </div>
+            </div>
+
             <div aria-hidden="true"
                 class="fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden p-4 md:inset-0"
                 id="qc-by-{{ $procurementPopup->procurement->id }}" tabindex="-1">

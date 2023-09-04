@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CancelProcurementInfo;
 use App\Models\ContractSupplier;
 use App\Models\LogStock;
 use App\Models\Procurement;
@@ -122,6 +123,17 @@ class ProcurementController extends Controller
                 'Kode Barang', 'Nama Barang', 'Satuan', 'Tanggal Aktivitas', 'Supplier', 'Status'
             ],
         ]);
+    }
+
+    public function cancelInfo(Request $request, $id)
+    {
+
+        $addInfoCancel = CancelProcurementInfo::create([
+            'desc' => $request->desc,
+            'procurement_id' => $id
+        ]);
+
+        return redirect()->back()->with('success', 'Berhasil memberikan keterangan');
     }
 
     public function create()

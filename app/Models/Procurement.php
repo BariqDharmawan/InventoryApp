@@ -44,4 +44,9 @@ class Procurement extends Model
     {
         return $this->belongsTo(Supplier::class, 'supplier_id', 'id');
     }
+
+    public function cancelInfo(): HasOne
+    {
+        return $this->hasOne(CancelProcurementInfo::class, 'procurement_id', 'id');
+    }
 }
