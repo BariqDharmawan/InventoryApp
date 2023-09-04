@@ -94,13 +94,10 @@
                         <span class="uppercase">
                             ({{ $procurementPopup->procurement->user->role }})
                         </span>
-                        <small>
-                            Tanggal:
-                            <time datetime="{{ $procurementPopup->procurement->updated_at }}">
-                                {{ $procurementPopup->procurement->updated_at->format('d M Y H:i') }}
-                                WIB
-                            </time>
-                        </small>
+                        <time class="block mt-3" datetime="{{ $procurementPopup->procurement->updated_at }}">
+                            {{ $procurementPopup->procurement->updated_at->format('d M Y H:i') }}
+                            WIB
+                        </time>
                     </div>
                 </div>
             </div>

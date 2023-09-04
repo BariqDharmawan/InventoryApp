@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('email')->unique();
-            $table->enum('role', ['superadmin', 'purchasing', 'qc'])->default('superadmin');
+            $table->enum('role', [
+                'superadmin', 'purchasing', 'qc', 'direktur'
+            ])->default('superadmin');
             $table->boolean('is_password_changed')->default(false);
             $table->boolean('is_active')->default(true);
             $table->string('password');

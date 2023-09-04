@@ -16,6 +16,11 @@ class UserSeeder extends Seeder
     {
         User::insert([
             [
+                'email' => 'direktur@inventoryapp.com',
+                'role' => 'direktur',
+                'password' => Hash::make('direkturinventoryapp')
+            ],
+            [
                 'email' => 'admin@inventoryapp.com',
                 'role' => 'superadmin',
                 'password' => Hash::make('admininventoryapp')
@@ -31,5 +36,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('qcinventoryapp')
             ]
         ]);
+
+        User::factory()->qc()->count(9)->create();
     }
 }

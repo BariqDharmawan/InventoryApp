@@ -43,7 +43,7 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="flex gap-3 items-center">
-                                        @if ($product->procurement->status === 'tidak')
+                                        @if ($product->procurement->status === 'tidak' && auth()->user()->role !== 'direktur')
                                             <form action="{{ route('procurement.done', $product->procurement) }}"
                                                 method="post" onsubmit="return confirm('Apakah barang sudah sesuai?')">
                                                 @csrf

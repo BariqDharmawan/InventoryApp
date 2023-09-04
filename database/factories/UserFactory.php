@@ -27,4 +27,14 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
         ];
     }
+
+    public function qc()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'email' => 'qc.' . strtolower(fake()->lastName()) . '@inventoryapp.com',
+                'role' => 'qc'
+            ];
+        });
+    }
 }

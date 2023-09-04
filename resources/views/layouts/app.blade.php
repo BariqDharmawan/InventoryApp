@@ -31,7 +31,7 @@
                     ],
                 ],
             ];
-        } elseif (auth()->user()->role === 'purchasing') {
+        } elseif (auth()->user()->role === 'direktur') {
             $menus[] = [
                 'icon' => 'product',
                 'label' => 'Penjualan',
@@ -91,11 +91,70 @@
                     ],
                 ],
             ];
-        } elseif (auth()->user()->role === 'superadmin') {
+        } elseif (auth()->user()->role === 'purchasing') {
             $menus[] = [
                 'icon' => 'users',
                 'label' => 'Users',
                 'href' => route('admin.index'),
+            ];
+            $menus[] = [
+                'icon' => 'product',
+                'label' => 'Penjualan',
+                'href' => route('penjualan.index'),
+            ];
+            $menus[] = [
+                'icon' => 'supplier',
+                'label' => 'Supplier',
+                'href' => route('suppliers.index'),
+            ];
+            $menus[] = [
+                'icon' => 'product',
+                'label' => 'Stock Flow',
+                'href' => route('products.log'),
+            ];
+            $menus[] = [
+                'icon' => 'product',
+                'label' => 'Products',
+                'href' => route('products.index'),
+            ];
+            $menus[] = [
+                'icon' => 'procurement',
+                'label' => 'Pengadaan',
+                'href' => 'javascript:void(0);',
+                'dropdown' => [
+                    [
+                        'icon' => 'plan',
+                        'label' => 'Plan',
+                        'href' => route('procurement.plan', [
+                            'triwulanYear' => '2023',
+                            'triwulanMonth' => date('n') - 3 . '-' . date('n'),
+                        ]),
+                    ],
+                    [
+                        'icon' => 'plan',
+                        'label' => 'Do',
+                        'href' => route('procurement.do', [
+                            'triwulanYear' => '2023',
+                            'triwulanMonth' => date('n') - 3 . '-' . date('n'),
+                        ]),
+                    ],
+                    [
+                        'icon' => 'plan',
+                        'label' => 'Check',
+                        'href' => route('procurement.check', [
+                            'triwulanYear' => '2023',
+                            'triwulanMonth' => date('n') . '-' . date('n'),
+                        ]),
+                    ],
+                    [
+                        'icon' => 'plan',
+                        'label' => 'Action',
+                        'href' => route('procurement.action', [
+                            'triwulanYear' => '2023',
+                            'triwulanMonth' => date('n') . '-' . date('n'),
+                        ]),
+                    ],
+                ],
             ];
         }
         // dd($menus);
