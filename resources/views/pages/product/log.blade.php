@@ -20,7 +20,7 @@
                             {{ $log->activity_desc }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $log->action_at->format('d M Y H:i') }} WIB
+                            {{ $log->action_at->format('d M Y') }}
                         </td>
                         <td class="px-6 py-4">
                             <a class="font-medium text-blue-600 hover:underline"
