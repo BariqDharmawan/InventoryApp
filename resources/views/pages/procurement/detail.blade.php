@@ -4,7 +4,7 @@
             <p class="mb-2 font-bold text-2xl capitalize">
                 {{ $procurement->description }}
             </p>
-            <time class="font-bold">{{ $procurement->action_at->format('d M Y H:i') }}</time>
+            <time class="font-bold">{{ $procurement->action_at->format('d M Y') }}</time>
         </div>
 
         <ul class="space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400 mb-12">
