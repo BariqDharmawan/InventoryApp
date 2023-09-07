@@ -1,0 +1,5 @@
+@import "../../node_modules/tom-select/dist/css/tom-select.bootstrap4.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
