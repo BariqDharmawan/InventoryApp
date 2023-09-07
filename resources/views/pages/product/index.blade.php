@@ -82,11 +82,6 @@
                         <td class="px-6 py-4">
                             {{ $item->penjualan->pluck('penjualan')->sum() . 'PCS' }}
                         </td>
-                        <td class="px-6 py-4">
-                            <a class="font-medium text-blue-600 hover:underline" href="">
-                                Lihat
-                            </a>
-                        </td>
                         @if (auth()->user()->role !== 'direktur')
                             <td class="px-6 py-4">
                                 <a class="font-medium text-blue-600 hover:underline"

@@ -37,7 +37,7 @@ class ProductController extends Controller
         $products = Product::latest('created_at')->with('penjualan')->get();
 
         return view('pages.product.index', [
-            'ths' => Product::THS,
+            'ths' => ['Nama barang', 'QTY', 'Max Capacity', 'Unit', 'Harga Satuan', 'Penjualan'],
             'units' => Product::UNIT,
             'products' => $products,
         ]);
@@ -79,5 +79,5 @@ class ProductController extends Controller
     {
         Artisan::call('app:create-peramalan');
         return "ok";
-    } 
+    }
 }
