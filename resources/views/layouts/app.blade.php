@@ -23,10 +23,34 @@
                 'dropdown' => [
                     [
                         'icon' => 'plan',
-                        'label' => 'Check',
+                        'label' => 'Check Januari',
                         'href' => route('procurement.check', [
                             'triwulanYear' => '2023',
-                            'triwulanMonth' => date('n') . '-' . date('n'),
+                            'triwulanMonth' => 1 . '-' . 1,
+                        ]),
+                    ],
+                    [
+                        'icon' => 'plan',
+                        'label' => 'Check April',
+                        'href' => route('procurement.check', [
+                            'triwulanYear' => '2023',
+                            'triwulanMonth' => 4 . '-' . 4,
+                        ]),
+                    ],
+                    [
+                        'icon' => 'plan',
+                        'label' => 'Check July',
+                        'href' => route('procurement.check', [
+                            'triwulanYear' => '2023',
+                            'triwulanMonth' => 7 . '-' . 7,
+                        ]),
+                    ],
+                    [
+                        'icon' => 'plan',
+                        'label' => 'Check Oktober',
+                        'href' => route('procurement.check', [
+                            'triwulanYear' => '2023',
+                            'triwulanMonth' => 10 . '-' . 10,
                         ]),
                     ],
                 ],
@@ -174,35 +198,35 @@
     <aside aria-label="Sidebar"
         class="fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform sm:translate-x-0"
         id="logo-sidebar">
-        <div class="h-full overflow-y-auto bg-gray-50 px-3 py-4  flex flex-col">
+        <div class="flex h-full flex-col overflow-y-auto bg-gray-50 px-3 py-4">
             <a class="mb-5 flex items-center pl-2.5" href="{{ url('/') }}">
-                <span class="self-center whitespace-nowrap font-semibold  w-full">
+                <span class="w-full self-center whitespace-nowrap font-semibold">
                     {{ env('APP_NAME') }}
                 </span>
             </a>
 
-            <ul class="space-y-2 font-medium mb-auto">
+            <ul class="mb-auto space-y-2 font-medium">
                 @foreach ($menus as $menu)
                     <li>
                         @if (isset($menu['dropdown']))
                             <button aria-controls="dropdown-example"
-                                class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 "
+                                class="group flex w-full items-center rounded-lg p-2 text-base text-gray-900 transition duration-75 hover:bg-gray-100"
                                 data-collapse-toggle="dropdown-example" type="button">
                                 <x-dynamic-component :component="'icon.' . $menu['icon']" />
 
-                                <span class="flex-1 ml-3 text-left whitespace-nowrap">
+                                <span class="ml-3 flex-1 whitespace-nowrap text-left">
                                     {{ $menu['label'] }}
                                 </span>
-                                <svg aria-hidden="true" class="w-3 h-3" fill="none" viewBox="0 0 10 6"
+                                <svg aria-hidden="true" class="h-3 w-3" fill="none" viewBox="0 0 10 6"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path d="m1 1 4 4 4-4" stroke-linecap="round" stroke-linejoin="round"
                                         stroke-width="2" stroke="currentColor" />
                                 </svg>
                             </button>
-                            <ul class="hidden pl-4 py-2 space-y-2" id="dropdown-example">
+                            <ul class="hidden space-y-2 py-2 pl-4" id="dropdown-example">
                                 @foreach ($menu['dropdown'] as $dropdown)
                                     <li>
-                                        <a class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 "
+                                        <a class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100"
                                             href="{{ $dropdown['href'] }}">
                                             <x-dynamic-component :component="'icon.' . $dropdown['icon']" />
                                             <span class="ml-3">{{ $dropdown['label'] }}</span>
@@ -222,7 +246,7 @@
                 <li>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 "
+                        <button class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100"
                             type="submit">
                             <x-icon.logout />
                             <span class="ml-3 flex-1 whitespace-nowrap">Sign Out</span>
@@ -230,7 +254,7 @@
                     </form>
                 </li>
             </ul>
-            <span class="capitalize font-bold">{{ auth()->user()->role }}</span>
+            <span class="font-bold capitalize">{{ auth()->user()->role }}</span>
         </div>
     </aside>
 

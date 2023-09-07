@@ -27,7 +27,7 @@ class ProcurementFactory extends Factory
             'price' => fake()->numberBetween(1000000, 100000000),
             'users_id' => fake()->randomElement(User::where('role', 'qc')->get()->pluck('id')->toArray()),
             'supplier_id' => fake()->randomElement(Supplier::all()->pluck('id')->toArray()),
-            'action_at' => fake()->dateTimeThisYear('+3 months')
+            'action_at' => fake()->randomElement(['2023-01-10 00:00:00', '2023-04-17 00:00:00', '2023-07-17 00:00:00', '2023-10-17 00:00:00'])
         ];
     }
 

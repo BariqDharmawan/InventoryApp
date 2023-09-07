@@ -17,6 +17,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "air-datepicker": "^3.4.0",
         "cli": "^1.0.1",
         "highlight.js": "^11.4.0",
         "tailwindcss-transforms": "^2.2.0",

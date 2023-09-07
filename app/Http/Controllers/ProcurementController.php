@@ -143,6 +143,7 @@ class ProcurementController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $procurement = Procurement::create([
             'supplier_id' => $request->supplier_id,
             'description' => $request->description,
@@ -210,7 +211,7 @@ class ProcurementController extends Controller
     public function makeDone(Request $request, Procurement $procurement)
     {
         $procurement->update([
-            'status' => $request->status,
+            'status' => $request->jumlah_diterima === $request->correct_total ? "sesuai" : "tidak",
             'users_id' => auth()->id()
         ]);
 
