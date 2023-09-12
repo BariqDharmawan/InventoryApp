@@ -143,7 +143,7 @@
                         'label' => 'Check',
                         'href' => route('procurement.check', [
                             'triwulanYear' => '2023',
-                            'triwulanMonth' => date('n') . '-' . date('n'),
+                            'triwulanMonth' => 1 . '-' . 12,
                         ]),
                     ],
                     [
@@ -151,7 +151,7 @@
                         'label' => 'Action',
                         'href' => route('procurement.action', [
                             'triwulanYear' => '2023',
-                            'triwulanMonth' => date('n') . '-' . date('n'),
+                            'triwulanMonth' => 1 . '-' . 12,
                         ]),
                     ],
                 ],
