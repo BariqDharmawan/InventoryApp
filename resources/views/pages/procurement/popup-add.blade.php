@@ -62,7 +62,8 @@
                     </label>
                     <input
                         class="disable-date-triwulan block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-sm focus:border-blue-600 focus:ring-blue-600"
-                        id="action-at" name="action_at" required type="text" value="{{ date('Y-m-d H:i') }}">
+                        id="action-at" name="action_at" required type="text" placeholder="Pilih tanggal pengadaan"
+                        autocomplete="off">
                 </div>
 
                 <div class="mb-6">

@@ -97,7 +97,7 @@ class ProcurementController extends Controller
 
         $products = ProcurementProduct::whereYear('action_at', $triwulanYear)
             ->whereBetween(DB::raw('MONTH(action_at)'), [$startMonth, $endMonth])
-            ->with('product')->orderBy('action_at', 'ASC')->get();
+            ->with('product')->orderBy('id', 'ASC')->get();
 
 
         return view('pages.procurement.check', [

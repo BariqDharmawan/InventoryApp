@@ -23,34 +23,10 @@
                 'dropdown' => [
                     [
                         'icon' => 'plan',
-                        'label' => 'Check Januari',
+                        'label' => 'Check',
                         'href' => route('procurement.check', [
                             'triwulanYear' => '2023',
-                            'triwulanMonth' => 1 . '-' . 1,
-                        ]),
-                    ],
-                    [
-                        'icon' => 'plan',
-                        'label' => 'Check April',
-                        'href' => route('procurement.check', [
-                            'triwulanYear' => '2023',
-                            'triwulanMonth' => 4 . '-' . 4,
-                        ]),
-                    ],
-                    [
-                        'icon' => 'plan',
-                        'label' => 'Check July',
-                        'href' => route('procurement.check', [
-                            'triwulanYear' => '2023',
-                            'triwulanMonth' => 7 . '-' . 7,
-                        ]),
-                    ],
-                    [
-                        'icon' => 'plan',
-                        'label' => 'Check Oktober',
-                        'href' => route('procurement.check', [
-                            'triwulanYear' => '2023',
-                            'triwulanMonth' => 10 . '-' . 10,
+                            'triwulanMonth' => 1 . '-' . 12,
                         ]),
                     ],
                 ],
